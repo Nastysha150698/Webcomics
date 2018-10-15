@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  text: MyString
+  x: 1
+  'y': 1
+  width: 1
+  height: 1
+  font-family: MyString
+  font-size: 1
+  font-style: MyString
+  font-color: MyString
+
+two:
+  text: MyString
+  x: 1
+  'y': 1
+  width: 1
+  height: 1
+  font-family: MyString
+  font-size: 1
+  font-style: MyString
+  font-color: MyString

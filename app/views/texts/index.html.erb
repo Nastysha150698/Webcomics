@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Texts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Text</th>
+      <th>X</th>
+      <th>Y</th>
+      <th>Width</th>
+      <th>Height</th>
+      <th>Font-family</th>
+      <th>Font-size</th>
+      <th>Font-style</th>
+      <th>Font-color</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @texts.each do |text| %>
+      <tr>
+        <td><%= text.text %></td>
+        <td><%= text.x %></td>
+        <td><%= text.y %></td>
+        <td><%= text.width %></td>
+        <td><%= text.height %></td>
+        <td><%= text.font-family %></td>
+        <td><%= text.font-size %></td>
+        <td><%= text.font-style %></td>
+        <td><%= text.font-color %></td>
+        <td><%= link_to 'Show', text %></td>
+        <td><%= link_to 'Edit', edit_text_path(text) %></td>
+        <td><%= link_to 'Destroy', text, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Text', new_text_path %>

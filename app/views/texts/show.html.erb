@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @text.text %>
+</p>
+
+<p>
+  <strong>X:</strong>
+  <%= @text.x %>
+</p>
+
+<p>
+  <strong>Y:</strong>
+  <%= @text.y %>
+</p>
+
+<p>
+  <strong>Width:</strong>
+  <%= @text.width %>
+</p>
+
+<p>
+  <strong>Height:</strong>
+  <%= @text.height %>
+</p>
+
+<p>
+  <strong>Font-family:</strong>
+  <%= @text.font-family %>
+</p>
+
+<p>
+  <strong>Font-size:</strong>
+  <%= @text.font-size %>
+</p>
+
+<p>
+  <strong>Font-style:</strong>
+  <%= @text.font-style %>
+</p>
+
+<p>
+  <strong>Font-color:</strong>
+  <%= @text.font-color %>
+</p>
+
+<%= link_to 'Edit', edit_text_path(@text) %> |
+<%= link_to 'Back', texts_path %>

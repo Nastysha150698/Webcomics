@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  figure: MyString
+  x: 1
+  'y': 1
+  width: 1
+  height: 1
+  border-width: 1
+  border-color: MyString
+  background-color: MyString
+  shape: MyString
+
+two:
+  figure: MyString
+  x: 1
+  'y': 1
+  width: 1
+  height: 1
+  border-width: 1
+  border-color: MyString
+  background-color: MyString
+  shape: MyString

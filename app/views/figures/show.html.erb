@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Figure:</strong>
+  <%= @figure.figure %>
+</p>
+
+<p>
+  <strong>X:</strong>
+  <%= @figure.x %>
+</p>
+
+<p>
+  <strong>Y:</strong>
+  <%= @figure.y %>
+</p>
+
+<p>
+  <strong>Width:</strong>
+  <%= @figure.width %>
+</p>
+
+<p>
+  <strong>Height:</strong>
+  <%= @figure.height %>
+</p>
+
+<p>
+  <strong>Border-width:</strong>
+  <%= @figure.border-width %>
+</p>
+
+<p>
+  <strong>Border-color:</strong>
+  <%= @figure.border-color %>
+</p>
+
+<p>
+  <strong>Background-color:</strong>
+  <%= @figure.background-color %>
+</p>
+
+<%= link_to 'Edit', edit_figure_path(@figure) %> |
+<%= link_to 'Back', figures_path %>

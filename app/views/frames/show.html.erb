@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>X:</strong>
+  <%= @frame.x %>
+</p>
+
+<p>
+  <strong>Y:</strong>
+  <%= @frame.y %>
+</p>
+
+<p>
+  <strong>Width:</strong>
+  <%= @frame.width %>
+</p>
+
+<p>
+  <strong>Height:</strong>
+  <%= @frame.height %>
+</p>
+
+<p>
+  <strong>Border-width:</strong>
+  <%= @frame.border-width %>
+</p>
+
+<p>
+  <strong>Border-color:</strong>
+  <%= @frame.border-color %>
+</p>
+
+<p>
+  <strong>Background-color:</strong>
+  <%= @frame.background-color %>
+</p>
+
+<%= link_to 'Edit', edit_frame_path(@frame) %> |
+<%= link_to 'Back', frames_path %>

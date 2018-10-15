@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Frames</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>X</th>
+      <th>Y</th>
+      <th>Width</th>
+      <th>Height</th>
+      <th>Border-width</th>
+      <th>Border-color</th>
+      <th>Background-color</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @frames.each do |frame| %>
+      <tr>
+        <td><%= frame.x %></td>
+        <td><%= frame.y %></td>
+        <td><%= frame.width %></td>
+        <td><%= frame.height %></td>
+        <td><%= frame.border-width %></td>
+        <td><%= frame.border-color %></td>
+        <td><%= frame.background-color %></td>
+        <td><%= link_to 'Show', frame %></td>
+        <td><%= link_to 'Edit', edit_frame_path(frame) %></td>
+        <td><%= link_to 'Destroy', frame, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Frame', new_frame_path %>

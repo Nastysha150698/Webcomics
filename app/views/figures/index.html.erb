@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Figures</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Figure</th>
+      <th>X</th>
+      <th>Y</th>
+      <th>Width</th>
+      <th>Height</th>
+      <th>Border-width</th>
+      <th>Border-color</th>
+      <th>Background-color</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @figures.each do |figure| %>
+      <tr>
+        <td><%= figure.figure %></td>
+        <td><%= figure.x %></td>
+        <td><%= figure.y %></td>
+        <td><%= figure.width %></td>
+        <td><%= figure.height %></td>
+        <td><%= figure.border-width %></td>
+        <td><%= figure.border-color %></td>
+        <td><%= figure.background-color %></td>
+        <td><%= link_to 'Show', figure %></td>
+        <td><%= link_to 'Edit', edit_figure_path(figure) %></td>
+        <td><%= link_to 'Destroy', figure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Figure', new_figure_path %>

@@ -1,0 +1,52 @@
+<%= form_with(model: frame, local: true) do |form| %>
+  <% if frame.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(frame.errors.count, "error") %> prohibited this frame from being saved:</h2>
+
+      <ul>
+      <% frame.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :x %>
+    <%= form.number_field :x %>
+  </div>
+
+  <div class="field">
+    <%= form.label :y %>
+    <%= form.number_field :y %>
+  </div>
+
+  <div class="field">
+    <%= form.label :width %>
+    <%= form.number_field :width %>
+  </div>
+
+  <div class="field">
+    <%= form.label :height %>
+    <%= form.number_field :height %>
+  </div>
+
+  <div class="field">
+    <%= form.label :border-width %>
+    <%= form.number_field :border-width %>
+  </div>
+
+  <div class="field">
+    <%= form.label :border-color %>
+    <%= form.number_field :border-color %>
+  </div>
+
+  <div class="field">
+    <%= form.label :background-color %>
+    <%= form.number_field :background-color %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
