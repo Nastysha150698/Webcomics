@@ -5,5 +5,21 @@
   <%= @comic.name %>
 </p>
 
+<% Frame.all.each do |frame| %>
+  <% frame_style = "position: absolute; top: " + frame.y.to_s + "px; left: " + frame.x.to_s + "px; width: " + frame.width.to_s + "px; height: " + frame.height.to_s + "px; background-color: grey;" %>
+
+  <div class="frame" style="<%= frame_style %>">
+    <%# Text.all.each do |text| %>
+      <%# text_style = "position: absolute; top: " + text.y.to_s + "px; left: " + text.x.to_s + "px; width: " + text.width.to_s + "px; height: " + text.height.to_s + "px; color: red;" + text.color %>
+      <!-- <p style="<%#= text_style %>"><%#= text.text %></p> -->
+    <%# end %>
+
+    <% Figure.all.each do |figure| %>
+      <% figure_style = "position: absolute; top: " + figure.y.to_s + "px; left: " + figure.x.to_s + "px; width: " + figure.width.to_s + "px; height: " + figure.height.to_s + "px; background-color: " + figure.background_color + " ; border-width: " + figure.border_width.to_s + "px; border-color: " + figure.border_color + "; border-style: solid; " %>
+      <div style="<%= figure_style %>"></div>
+    <% end %>
+  </div>
+<% end %>
+
 <%= link_to 'Edit', edit_comic_path(@comic) %> |
 <%= link_to 'Back', comics_path %>
