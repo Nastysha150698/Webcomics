@@ -6,18 +6,29 @@
 </p>
 
 <% Frame.all.each do |frame| %>
-  <% frame_style = "position: absolute; top: " + frame.y.to_s + "px; left: " + frame.x.to_s + "px; width: " + frame.width.to_s + "px; height: " + frame.height.to_s + "px; background-color: grey;" %>
+  <% frame_style = "position: absolute; top: " + frame.y.to_s + "px; left: " + frame.x.to_s + "px; width: " + frame.width.to_s + "px; height: " + frame.height.to_s + "px; border-width: " + frame.border_width.to_s + "px; border-color: " + frame.border_color + "; border-style: solid; background-color: " + frame.background_color + "; " %>
+  <div style="<%= frame_style %>"></div>
+<% end %>
 
-  <div class="frame" style="<%= frame_style %>">
-    <%# Text.all.each do |text| %>
-      <%# text_style = "position: absolute; top: " + text.y.to_s + "px; left: " + text.x.to_s + "px; width: " + text.width.to_s + "px; height: " + text.height.to_s + "px; color: red;" + text.color %>
-      <!-- <p style="<%#= text_style %>"><%#= text.text %></p> -->
-    <%# end %>
+<% Figure.all.each do |figure| %>
+  <% figure_style = "position: absolute; top: " + figure.y.to_s + "px; left: " + figure.x.to_s + "px; width: " + figure.width.to_s + "px; height: " + figure.height.to_s + "px; background-color: " + figure.background_color + " ; border-width: " + figure.border_width.to_s + "px; border-color: " + figure.border_color + "; border-style: solid; " %>
+  <div style="<%= figure_style %>"></div>
+<% end %>
 
-    <% Figure.all.each do |figure| %>
-      <% figure_style = "position: absolute; top: " + figure.y.to_s + "px; left: " + figure.x.to_s + "px; width: " + figure.width.to_s + "px; height: " + figure.height.to_s + "px; background-color: " + figure.background_color + " ; border-width: " + figure.border_width.to_s + "px; border-color: " + figure.border_color + "; border-style: solid; " %>
-      <div style="<%= figure_style %>"></div>
-    <% end %>
+<% Bubble.all.each do |bubble| %>
+  <% bubble_style = "position: absolute; top: " + bubble.y.to_s + "px; left: " + bubble.x.to_s + "px; width: " + bubble.width.to_s + "px; height: " + bubble.height.to_s + "px; background-color: " + bubble.background_color + " ; border-width: " + bubble.border_width.to_s + "px; border-color: " + bubble.border_color + "; border-style: solid; " %>
+  <div style="<%= bubble_style %>"></div>
+<% end %>
+
+<% Image.all.each do |image| %>
+  <% image_style = "position: absolute; top: " + image.y.to_s + "px; left: " + image.x.to_s + "px; width: " + image.width.to_s + "px; height: " + image.height.to_s + "px; " %>
+  <div style="<%= image_style %>"></div>
+<% end %>
+
+<% ::Text.all.each do |text| %>
+  <% text_style = "position: absolute; top: " + text.y.to_s + "px; left: " + text.x.to_s + "px; width: " + text.width.to_s + "px; height: " + text.height.to_s + "px; font-color: " + text.font_color + " ; " %>
+  <div style="<%= text_style %>">
+    <font color = "<%= text.font_color %>"><%= text.text %></font>
   </div>
 <% end %>
 

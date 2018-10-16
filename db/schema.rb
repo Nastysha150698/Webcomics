@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_16_092843) do
+ActiveRecord::Schema.define(version: 2018_10_16_143725) do
 
   create_table "bubbles", force: :cascade do |t|
     t.string "figure"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2018_10_16_092843) do
   end
 
   create_table "frames", force: :cascade do |t|
+    t.string "frame"
     t.integer "x"
     t.integer "y"
     t.integer "width"

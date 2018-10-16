@@ -1,6 +1,7 @@
 class CreateFrames < ActiveRecord::Migration[5.2]
   def change
     create_table :frames do |t|
+      t.string :frame
       t.integer :x
       t.integer :y
       t.integer :width

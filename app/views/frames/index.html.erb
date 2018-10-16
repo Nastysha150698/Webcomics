@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Frame</th>
       <th>X</th>
       <th>Y</th>
       <th>Width</th>
@@ -19,6 +20,7 @@
   <tbody>
     <% @frames.each do |frame| %>
       <tr>
+        <td><%= frame.frame %></td>
         <td><%= frame.x %></td>
         <td><%= frame.y %></td>
         <td><%= frame.width %></td>
