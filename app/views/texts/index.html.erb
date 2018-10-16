@@ -14,6 +14,7 @@
       <th>Font size</th>
       <th>Font style</th>
       <th>Font color</th>
+      <th>Background color</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -30,6 +31,7 @@
         <td><%= text.font_size %></td>
         <td><%= text.font_style %></td>
         <td><%= text.font_color %></td>
+        <td><%= text.background_color %></td>
         <td><%= link_to 'Show', text %></td>
         <td><%= link_to 'Edit', edit_text_path(text) %></td>
         <td><%= link_to 'Destroy', text, method: :delete, data: { confirm: 'Are you sure?' } %></td>
