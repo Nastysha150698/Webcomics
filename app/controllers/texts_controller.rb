@@ -69,6 +69,6 @@ class TextsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def text_params
-      params.require(:text).permit(:text, :x, :y, :width, :height, :font-family, :font-size, :font-style, :font-color)
+      params.require(:text).permit(:text, :x, :y, :width, :height, :font_family, :font_size, :font_style, :font_color)
     end
 end
