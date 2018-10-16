@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :comics
   resources :bubbles
   resources :figures
   resources :texts
