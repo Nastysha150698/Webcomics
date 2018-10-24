@@ -14,9 +14,10 @@ class FramesTest < ApplicationSystemTestCase
     visit frames_url
     click_on "New Frame"
 
-    fill_in "Background Color", with: @frame.background-color
-    fill_in "Border Color", with: @frame.border-color
-    fill_in "Border Width", with: @frame.border-width
+    fill_in "Background Color", with: @frame.background_color
+    fill_in "Border Color", with: @frame.border_color
+    fill_in "Border Width", with: @frame.border_width
+    fill_in "Frame", with: @frame.frame
     fill_in "Height", with: @frame.height
     fill_in "Width", with: @frame.width
     fill_in "X", with: @frame.x
@@ -31,9 +32,10 @@ class FramesTest < ApplicationSystemTestCase
     visit frames_url
     click_on "Edit", match: :first
 
-    fill_in "Background Color", with: @frame.background-color
-    fill_in "Border Color", with: @frame.border-color
-    fill_in "Border Width", with: @frame.border-width
+    fill_in "Background Color", with: @frame.background_color
+    fill_in "Border Color", with: @frame.border_color
+    fill_in "Border Width", with: @frame.border_width
+    fill_in "Frame", with: @frame.frame
     fill_in "Height", with: @frame.height
     fill_in "Width", with: @frame.width
     fill_in "X", with: @frame.x

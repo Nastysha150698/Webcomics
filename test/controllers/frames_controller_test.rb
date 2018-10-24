@@ -17,7 +17,7 @@ class FramesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create frame" do
     assert_difference('Frame.count') do
-      post frames_url, params: { frame: { background-color: @frame.background-color, border-color: @frame.border-color, border-width: @frame.border-width, height: @frame.height, width: @frame.width, x: @frame.x, y: @frame.y } }
+      post frames_url, params: { frame: { background_color: @frame.background_color, border_color: @frame.border_color, border_width: @frame.border_width, frame: @frame.frame, height: @frame.height, width: @frame.width, x: @frame.x, y: @frame.y } }
     end
 
     assert_redirected_to frame_url(Frame.last)
@@ -34,7 +34,7 @@ class FramesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update frame" do
-    patch frame_url(@frame), params: { frame: { background-color: @frame.background-color, border-color: @frame.border-color, border-width: @frame.border-width, height: @frame.height, width: @frame.width, x: @frame.x, y: @frame.y } }
+    patch frame_url(@frame), params: { frame: { background_color: @frame.background_color, border_color: @frame.border_color, border_width: @frame.border_width, frame: @frame.frame, height: @frame.height, width: @frame.width, x: @frame.x, y: @frame.y } }
     assert_redirected_to frame_url(@frame)
   end
 

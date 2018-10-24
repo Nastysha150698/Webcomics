@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="field">
+    <%= form.label :frame %>
+    <%= form.text_field :frame %>
+  </div>
+
+  <div class="field">
     <%= form.label :x %>
     <%= form.number_field :x %>
   </div>
@@ -38,12 +43,12 @@
 
   <div class="field">
     <%= form.label :border_color %>
-    <%= form.number_field :border_color %>
+    <%= form.text_field :border_color %>
   </div>
 
   <div class="field">
     <%= form.label :background_color %>
-    <%= form.number_field :background_color %>
+    <%= form.text_field :background_color %>
   </div>
 
   <div class="actions">

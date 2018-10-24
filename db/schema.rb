@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2018_10_16_092843) do
+=======
+ActiveRecord::Schema.define(version: 2018_10_16_215017) do
+>>>>>>> master
 
   create_table "bubbles", force: :cascade do |t|
     t.string "figure"
@@ -46,6 +50,7 @@ ActiveRecord::Schema.define(version: 2018_10_16_092843) do
   end
 
   create_table "frames", force: :cascade do |t|
+    t.string "frame"
     t.integer "x"
     t.integer "y"
     t.integer "width"
@@ -77,8 +82,10 @@ ActiveRecord::Schema.define(version: 2018_10_16_092843) do
     t.integer "font_size"
     t.string "font_style"
     t.string "font_color"
+    t.string "background_color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "background_color"
   end
 
 end
