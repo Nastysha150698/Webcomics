@@ -39,6 +39,7 @@
   <div class="field">
     <%= form.label :font_family %>
     <%= form.text_field :font_family %>
+    <%#= select("text", "font_family", Text.all.collect {|t| [ t.name, t.family ] }, { include_blank: true }) %>
   </div>
 
   <div class="field">
