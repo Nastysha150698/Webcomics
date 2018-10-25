@@ -1,10 +1,10 @@
-<%= form_with(model: text, local: true) do |form| %>
-  <% if text.errors.any? %>
+<%= form_with(model: speech, local: true) do |form| %>
+  <% if speech.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(text.errors.count, "error") %> prohibited this text from being saved:</h2>
+      <h2><%= pluralize(speech.errors.count, "error") %> prohibited this speech from being saved:</h2>
 
       <ul>
-      <% text.errors.full_messages.each do |message| %>
+      <% speech.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= form.label :text %>
-    <%= form.text_field :text %>
+    <%= form.text_area :text %>
   </div>
 
   <div class="field">
@@ -39,7 +39,6 @@
   <div class="field">
     <%= form.label :font_family %>
     <%= form.text_field :font_family %>
-    <%#= select("text", "font_family", Text.all.collect {|t| [ t.name, t.family ] }, { include_blank: true }) %>
   </div>
 
   <div class="field">

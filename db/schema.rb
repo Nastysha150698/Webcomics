@@ -68,7 +68,7 @@ ActiveRecord::Schema.define(version: 2018_10_16_215017) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "texts", force: :cascade do |t|
+  create_table "speeches", force: :cascade do |t|
     t.string "text"
     t.integer "x"
     t.integer "y"

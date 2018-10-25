@@ -53,8 +53,8 @@
 
   <div class="field">
     <%= form.label :shape %>
-    <%= form.text_field :shape %>
-    <%#= select("shape", "shape", Shape.all.collect {|s| [ s.name ] }, { include_blank: true }) %>
+    <%#= form.text_field :bubble_id %>
+    <%= select("shape", "bubble_id", Bubble.all.collect {|b| [ b.name, b.id ] }, { include_blank: true }) %>
   </div>
 
   <div class="actions">
