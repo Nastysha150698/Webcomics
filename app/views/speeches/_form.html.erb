@@ -39,6 +39,7 @@
   <div class="field">
     <%= form.label :font_family %>
     <%= form.text_field :font_family %>
+    <%#= select("speeches", "font_family", Speech.all.collect {|s| [ s.name, s.id ] }, { include_blank: true }) %>
   </div>
 
   <div class="field">
@@ -49,6 +50,7 @@
   <div class="field">
     <%= form.label :font_style %>
     <%= form.text_field :font_style %>
+    <%#= select("speeches", "font_style", Speech.all.collect {|s| [ s.name, s.id ] }, { include_blank: true }) %>
   </div>
 
   <div class="field">
