@@ -5,35 +5,3 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-Speech.create([
-  {
-    text: 'Yo',
-    x: 200,
-    y: 200,
-    width: 300,
-    height: 300,
-    font_family: 'Reenie Beanie',
-    font_size: 24,
-    font_style: 'bold',
-    font_color: 'black',
-    background_color: 'red'
-  }, {
-    text: 'Rap',
-    x: 100,
-    y: 100,
-    width: 200,
-    height: 200,
-    font_family: 'Reenie Beanie',
-    font_size: 36,
-    font_style: 'bold',
-    font_color: 'black',
-    background_color: 'red'
-  }
-])
-
-Bubble.create([
-  {
-    shape: 'Star'
-  }
-])
