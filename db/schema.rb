@@ -83,19 +83,4 @@ ActiveRecord::Schema.define(version: 2018_10_25_200625) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "texts", force: :cascade do |t|
-    t.string "text"
-    t.integer "x"
-    t.integer "y"
-    t.integer "width"
-    t.integer "height"
-    t.string "font_family"
-    t.integer "font_size"
-    t.string "font_style"
-    t.string "font_color"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "background_color"
-  end
-
 end
