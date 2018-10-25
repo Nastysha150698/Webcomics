@@ -1,7 +1,7 @@
-class CreateTexts < ActiveRecord::Migration[5.2]
+class CreateSpeeches < ActiveRecord::Migration[5.2]
   def change
-    create_table :texts do |t|
-      t.string :text
+    create_table :speeches do |t|
+      t.text :text
       t.integer :x
       t.integer :y
       t.integer :width
@@ -10,6 +10,7 @@ class CreateTexts < ActiveRecord::Migration[5.2]
       t.integer :font_size
       t.string :font_style
       t.string :font_color
+      t.string :background_color
 
       t.timestamps
     end
