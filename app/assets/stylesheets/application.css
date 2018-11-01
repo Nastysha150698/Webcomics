@@ -13,15 +13,3 @@
  *= require_tree .
  *= require_self
  */
-
- @font-face {
-   font-family: 'Gloria Hallelujah', cursive;
-   src: url('../vendor/assets/fonts/Gloria_Hallelujah/GloriaHallelujah.ttf') format('truetype');
-
-   font-family: 'Reenie Beanie', cursive;
-   src: url('../vendor/assets/fonts/Reenie_Beanie/ReenieBeanie.ttf') format('truetype');
-
-   font-family: 'Walter Turncoat', cursive;
-   src: url('../vendor/assets/fonts/Walter_Turncoat/WalterTurncoat.ttf') format('truetype');
-
- }
