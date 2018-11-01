@@ -25,7 +25,7 @@
   <div style="<%= image_style %>"></div>
 <% end %>
 
-<% ::Text.all.each do |text| %>
+<% ::Speech.all.each do |text| %>
   <% text_style = "position: absolute; top: " + text.y.to_s + "px; left: " + text.x.to_s + "px; width: " + text.width.to_s + "px; height: " + text.height.to_s + "px; font-color: " + text.font_color + " ; font-size: " + text.font_size.to_s + "px; font-family: " + text.font_family + " ; font-style: " + text.font_style + " ; background-color: " + text.background_color + " ; " %>
   <div style="<%= text_style %>">
     <font color = "<%= text.font_color %>"><%= text.text %></font>
