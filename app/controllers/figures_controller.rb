@@ -24,11 +24,12 @@ class FiguresController < ApplicationController
   # POST /figures
   # POST /figures.json
   def create
+
     @figure = Figure.new(figure_params)
 
     respond_to do |format|
       if @figure.save
-        format.html { redirect_to @figure, notice: 'Figure was successfully created.' }
+        format.html { redirect_to @comic, notice: 'Figure was successfully created.' }
         format.json { render :show, status: :created, location: @figure }
       else
         format.html { render :new }
