@@ -1,10 +1,17 @@
 Rails.application.routes.draw do
-  resources :comics
-  resources :frames
-  resources :speeches
-  resources :bubbles
-  resources :figures
-  resources :images
+  # resources :frames
+  # resources :speeches
+  # resources :bubbles
+  # resources :figures
+  # resources :images
+
+  resources :comics do
+    resources :frames
+    resources :speeches
+    resources :bubbles
+    resources :figures
+    resources :images
+  end
 
   root 'comics#index'
 end

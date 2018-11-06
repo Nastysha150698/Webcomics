@@ -5,14 +5,19 @@
   <%= link_to 'Back', comics_path %>
 </p>
 
+<nav>
+  <%= link_to "Create figure", new_comic_figure_path(@comic) %>
+  <%= link_to "Create bubble", new_comic_bubble_path(@comic) %>
+  <%= link_to "Create frame", new_comic_frame_path(@comic) %>
+  <%= link_to "Create image", new_comic_image_path(@comic) %>
+  <%= link_to "Create text", new_comic_speech_path(@comic) %>
+</nav>
+
+<%= render @comic.figures %>
+
 <% Frame.all.each do |frame| %>
   <% frame_style = "position: absolute; top: " + frame.y.to_s + "px; left: " + frame.x.to_s + "px; width: " + frame.width.to_s + "px; height: " + frame.height.to_s + "px; border-width: " + frame.border_width.to_s + "px; border-color: " + frame.border_color + "; border-style: solid; background-color: " + frame.background_color + "; " %>
   <div style="<%= frame_style %>"></div>
-<% end %>
-
-<% Figure.all.each do |figure| %>
-  <% figure_style = "position: absolute; top: " + figure.y.to_s + "px; left: " + figure.x.to_s + "px; width: " + figure.width.to_s + "px; height: " + figure.height.to_s + "px; background-color: " + figure.background_color + " ; border-width: " + figure.border_width.to_s + "px; border-color: " + figure.border_color + "; border-style: solid; " %>
-  <div style="<%= figure_style %>"></div>
 <% end %>
 
 <% Bubble.all.each do |bubble| %>
@@ -31,21 +36,3 @@
     <font color = "<%= text.font_color %>"><%= text.text %></font>
   </div>
 <% end %>
-
-<table>
-  <div class="button">
-    <%= link_to "Create figure", new_figure_path %>
-  </div>
-  <div class="button">
-    <%= link_to "Create bubble", new_bubble_path %>
-  </div>
-  <div class="button">
-    <%= link_to "Create frame", new_frame_path %>
-  </div>
-  <div class="button">
-    <%= link_to "Create image", new_image_path %>
-  </div>
-  <div class="button">
-    <%= link_to "Create text", new_speech_path %>
-  </div>
-</table>

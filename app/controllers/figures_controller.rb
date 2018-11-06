@@ -14,21 +14,25 @@ class FiguresController < ApplicationController
 
   # GET /figures/new
   def new
-    @figure = Figure.new
+    @comic = Comic.find(params[:comic_id])
+    @figure = @comic.figures.new
+    # @figure = Figure.new
   end
 
   # GET /figures/1/edit
   def edit
+    @comic = @figure.comic
   end
 
   # POST /figures
   # POST /figures.json
   def create
-
     @figure = Figure.new(figure_params)
+    @figure.comic_id = params[:comic_id]
 
     respond_to do |format|
       if @figure.save
+        @comic = @figure.comic
         format.html { redirect_to @comic, notice: 'Figure was successfully created.' }
         format.json { render :show, status: :created, location: @figure }
       else
@@ -41,9 +45,11 @@ class FiguresController < ApplicationController
   # PATCH/PUT /figures/1
   # PATCH/PUT /figures/1.json
   def update
+    @comic = @figure.comic
+
     respond_to do |format|
       if @figure.update(figure_params)
-        format.html { redirect_to @figure, notice: 'Figure was successfully updated.' }
+        format.html { redirect_to @comic, notice: 'Figure was successfully updated.' }
         format.json { render :show, status: :ok, location: @figure }
       else
         format.html { render :edit }
@@ -70,6 +76,6 @@ class FiguresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def figure_params
-      params.require(:figure).permit(:figure, :x, :y, :width, :height, :border_width, :border_color, :background_color)
+      params.require(:figure).permit(:figure, :x, :y, :width, :height, :border_width, :border_color, :background_color, :comic_id)
     end
 end
