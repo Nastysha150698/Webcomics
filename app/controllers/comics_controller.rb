@@ -10,6 +10,7 @@ class ComicsController < ApplicationController
   # GET /comics/1
   # GET /comics/1.json
   def show
+    @comics = Comic.find(params[:id])
   end
 
   # GET /comics/new
