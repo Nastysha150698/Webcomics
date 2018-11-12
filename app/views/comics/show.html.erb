@@ -30,11 +30,9 @@
   <div style="<%= image_style %>"></div>
 <% end %>
 
-<<<<<<< HEAD
-<% ::Speech.all.each do |speech| %>
+<% Speech.all.each do |speech| %>
   <% speech_style = "position: absolute; top: " + speech.y.to_s + "px; left: " + speech.x.to_s + "px; width: " + speech.width.to_s + "px; height: " + speech.height.to_s + "px; font-color: " + speech.font_color + " ; font-size: " + speech.font_size.to_s + "px; font-family: " + speech.font_family + " ; font-style: " + speech.font_style + " ; background-color: " + speech.background_color + " ; " %>
   <div style="<%= speech_style %>">
     <font color = "<%= speech.font_color %>"><%= speech.speech %></font>
-=======
   </div>
 <% end %>
