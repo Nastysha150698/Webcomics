@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_13_113237) do
+ActiveRecord::Schema.define(version: 2018_11_13_120826) do
 
   create_table "bubbles", force: :cascade do |t|
     t.string "figure"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2018_11_13_113237) do
     t.string "background_color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "comic_id"
   end
 
   create_table "images", force: :cascade do |t|
@@ -84,6 +85,7 @@ ActiveRecord::Schema.define(version: 2018_11_13_113237) do
     t.string "background_color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "comic_id"
   end
 
 end

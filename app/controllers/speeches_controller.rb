@@ -14,21 +14,25 @@ class SpeechesController < ApplicationController
 
   # GET /speeches/new
   def new
-    @speech = Speech.new
+    @comic = Comic.find(params[:comic_id])
+    @speech = @comic.speeches.new
   end
 
   # GET /speeches/1/edit
   def edit
+    @comic = @speech.comic
   end
 
   # POST /speeches
   # POST /speeches.json
   def create
     @speech = Speech.new(speech_params)
+    @speech.comic_id = params[:comic_id]
 
     respond_to do |format|
       if @speech.save
-        format.html { redirect_to @speech, notice: 'Speech was successfully created.' }
+        @comic = @speech.comic
+        format.html { redirect_to @comic, notice: 'Speech was successfully created.' }
         format.json { render :show, status: :created, location: @speech }
       else
         format.html { render :new }
@@ -40,9 +44,11 @@ class SpeechesController < ApplicationController
   # PATCH/PUT /speeches/1
   # PATCH/PUT /speeches/1.json
   def update
+    @comic = @speech.comic
+
     respond_to do |format|
       if @speech.update(speech_params)
-        format.html { redirect_to @speech, notice: 'Speech was successfully updated.' }
+        format.html { redirect_to @comic, notice: 'Speech was successfully updated.' }
         format.json { render :show, status: :ok, location: @speech }
       else
         format.html { render :edit }
@@ -69,6 +75,6 @@ class SpeechesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def speech_params
-      params.require(:speech).permit(:text, :x, :y, :width, :height, :font_family, :font_size, :font_style, :font_color, :background_color)
+      params.require(:speech).permit(:text, :x, :y, :width, :height, :font_family, :font_size, :font_style, :font_color, :background_color, :comic_id)
     end
 end
