@@ -1,4 +1,4 @@
-<%= form_with(model: figure, local: true) do |form| %>
+<%= form_with(model: [@comic, figure], local: true) do |form| %>
   <% if figure.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(figure.errors.count, "error") %> prohibited this figure from being saved:</h2>
