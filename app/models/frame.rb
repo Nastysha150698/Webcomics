@@ -1,3 +1,3 @@
 class Frame < ApplicationRecord
-  belongs_to :comics
+  belongs_to :comic
 end
