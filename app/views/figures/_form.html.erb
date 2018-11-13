@@ -1,4 +1,4 @@
-<%= form_for :figure, url: comic_figures_path do |f| %>
+<%= form_for :figure, url: comic_figures_path do |form| %>
   <% if @figure.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@figure.errors.count, "error") %> prohibited this artwork from being saved:</h2>
