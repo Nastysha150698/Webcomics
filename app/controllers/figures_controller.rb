@@ -31,7 +31,7 @@ class FiguresController < ApplicationController
     @figure.comic_id = params[:comic_id]
 
     respond_to do |format|
-      if @figure.save
+      if @figure.save!
         @comic = @figure.comic
         format.html { redirect_to @comic, notice: 'Figure was successfully created.' }
         format.json { render :show, status: :created, location: @figure }
