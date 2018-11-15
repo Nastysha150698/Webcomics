@@ -28,9 +28,9 @@
         <td><%= frame.border_width %></td>
         <td><%= frame.border_color %></td>
         <td><%= frame.background_color %></td>
-        <td><%= link_to 'Show', frame %></td>
-        <td><%= link_to 'Edit', edit_frame_path(frame) %></td>
-        <td><%= link_to 'Destroy', frame, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', comic_frame_path(@comic, frame) %></td>
+        <td><%= link_to 'Edit', edit_comic_frame_path(@comic, frame) %></td>
+        <td><%= link_to 'Destroy', comic_frame_path(@comic, frame), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -38,4 +38,4 @@
 
 <br>
 
-<%= link_to 'New Frame', new_frame_path %>
+<%= link_to 'New Frame', new_comic_frame_path %>

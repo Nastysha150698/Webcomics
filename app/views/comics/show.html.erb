@@ -20,11 +20,6 @@
   <div style="<%= frame_style %>"></div>
 <% end %>
 
-<% Bubble.all.each do |bubble| %>
-  <% bubble_style = "position: absolute; top: " + bubble.y.to_s + "px; left: " + bubble.x.to_s + "px; width: " + bubble.width.to_s + "px; height: " + bubble.height.to_s + "px; background-color: " + bubble.background_color + " ; border-width: " + bubble.border_width.to_s + "px; border-color: " + bubble.border_color + "; border-style: solid; " %>
-  <div style="<%= bubble_style %>"></div>
-<% end %>
-
 <% Image.all.each do |image| %>
   <% image_style = "position: absolute; top: " + image.y.to_s + "px; left: " + image.x.to_s + "px; width: " + image.width.to_s + "px; height: " + image.height.to_s + "px; " %>
   <div style="<%= image_style %>"></div>
@@ -33,6 +28,6 @@
 <% Speech.all.each do |speech| %>
   <% speech_style = "position: absolute; top: " + speech.y.to_s + "px; left: " + speech.x.to_s + "px; width: " + speech.width.to_s + "px; height: " + speech.height.to_s + "px; font-color: " + speech.font_color + " ; font-size: " + speech.font_size.to_s + "px; font-family: " + speech.font_family + " ; font-style: " + speech.font_style + " ; background-color: " + speech.background_color + " ; " %>
   <div style="<%= speech_style %>">
-    <font color = "<%= speech.font_color %>"><%= speech.speech %></font>
+    <font color = "<%#= @speech.font_color %>"><%#= speech.speech %></font>
   </div>
 <% end %>
