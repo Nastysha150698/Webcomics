@@ -26,6 +26,7 @@ class ImagesController < ApplicationController
   # POST /images
   # POST /images.json
   def create
+    # @image = Image.new(image_params)
     @image = Image.new(image_params)
     @image.comic_id = params[:comic_id]
 
@@ -44,7 +45,11 @@ class ImagesController < ApplicationController
   # PATCH/PUT /images/1
   # PATCH/PUT /images/1.json
   def update
+<<<<<<< HEAD
     @comic = @image.comic
+=======
+    @comic = @figure.comic
+>>>>>>> image_uploader
 
     respond_to do |format|
       if @image.update(image_params)

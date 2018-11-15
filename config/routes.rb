@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :comics do
     resources :frames
     resources :speeches
