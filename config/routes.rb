@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  resources :comics, only: [:index, :show, :edit, :update, :destroy, :new] do
-    resources :frames, only: [:index, :new, :create, :show, :edit, :update, :destroy]
-    resources :speeches, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+  resources :comics do
+    resources :frames
+    resources :speeches
     resources :bubbles, only: [:index, :new, :create, :show, :edit, :update, :destroy]
     resources :figures, only: [:index, :new, :create, :show, :edit, :update, :destroy]
-    resources :images, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+    resources :images
   end
 
   root 'comics#index'

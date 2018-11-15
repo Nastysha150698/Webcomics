@@ -31,7 +31,7 @@ class BubblesController < ApplicationController
 
     respond_to do |format|
       if @bubble.save
-          @comic = @bubble.comic
+        @comic = @bubble.comic
         format.html { redirect_to @comic, notice: 'Bubble was successfully created.' }
         format.json { render :show, status: :created, location: @bubble }
       else
@@ -44,6 +44,8 @@ class BubblesController < ApplicationController
   # PATCH/PUT /bubbles/1
   # PATCH/PUT /bubbles/1.json
   def update
+    @comic = @bubble.comic
+
     respond_to do |format|
       if @bubble.update(bubble_params)
         format.html { redirect_to @comic, notice: 'Bubble was successfully updated.' }

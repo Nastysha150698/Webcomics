@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 2018_11_13_100948) do
     t.string "background_color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "comic_id"
   end
 
   create_table "images", force: :cascade do |t|
@@ -68,6 +69,7 @@ ActiveRecord::Schema.define(version: 2018_11_13_100948) do
     t.integer "height"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "comic_id"
   end
 
   create_table "speeches", force: :cascade do |t|
@@ -83,6 +85,7 @@ ActiveRecord::Schema.define(version: 2018_11_13_100948) do
     t.string "background_color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "comic_id"
   end
 
 end

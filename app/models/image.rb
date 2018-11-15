@@ -1,4 +1,4 @@
 class Image < ApplicationRecord
-  belongs_to :comics
-  belongs_to :frames, optional: true
+  belongs_to :comic
+  # belongs_to :frames, optional: true
 end
