@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-<%= form_for :bubble, url: comic_figures_path do |form| %>
-=======
 <%= form_for :bubble, url: comic_bubbles_path do |form| %>
->>>>>>> fixes
   <% if @bubble.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@bubble.errors.count, "error") %> prohibited this artwork from being saved:</h2>

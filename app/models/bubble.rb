@@ -1,5 +1,4 @@
 class Bubble < ApplicationRecord
-<<<<<<< HEAD
   belongs_to :comic
   belongs_to :frames, optional: true
 

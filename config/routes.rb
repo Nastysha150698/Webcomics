@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   resources :comics do
     resources :frames
     resources :speeches
-    resources :bubbles, only: [:index, :new, :create, :show, :edit, :update, :destroy]
-    resources :figures, only: [:index, :new, :create, :show, :edit, :update, :destroy]
+    resources :bubbles
+    resources :figures
     resources :images
   end
 
