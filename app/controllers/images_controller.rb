@@ -45,11 +45,7 @@ class ImagesController < ApplicationController
   # PATCH/PUT /images/1
   # PATCH/PUT /images/1.json
   def update
-<<<<<<< HEAD
     @comic = @image.comic
-=======
-    @comic = @figure.comic
->>>>>>> image_uploader
 
     respond_to do |format|
       if @image.update(image_params)
