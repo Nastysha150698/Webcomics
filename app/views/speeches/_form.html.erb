@@ -63,6 +63,12 @@
     <%= form.text_field :background_color %>
   </div>
 
+  <div class="field">
+    <%= form.label :font_id %>
+    <%#= form.text_field :font_id %>
+    <%= select("speech", "font_id", Font.all.collect { |a| [a.title, a.id] }, { include_blank: true }) %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

@@ -1,3 +1,10 @@
+<%# @fonts = Font.all %>
+<%# content_for :head do %>
+  <%# @fonts.each do |f| %>
+    <%#= '<plink href="' + f.link + '" rel="stylesheet">'%>
+  <%# end %>
+<%# end %>
+
 <p>
   <strong>Name:</strong>
   <%= @comic.name %>
@@ -10,7 +17,8 @@
   <%= link_to "Create bubble", new_comic_bubble_path(@comic) %>
   <%= link_to "Create frame", new_comic_frame_path(@comic) %>
   <%= link_to "Create image", new_comic_image_path(@comic) %>
-  <%= link_to "Create text", new_comic_speech_path(@comic) %>
+  <%= link_to "Create speech", new_comic_speech_path(@comic) %> |
+  <%= link_to "Add font", new_font_path %>
 </nav>
 
 <%= render @comic.figures %>
