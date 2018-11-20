@@ -1,4 +1,4 @@
-<%= form_for :frame, url: comic_frames_path do |form| %>
+<%= form_with(model: [@comic, @frame]) do |form| %>
   <% if @frame.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@frame.errors.count, "error") %> prohibited this artwork from being saved:</h2>
