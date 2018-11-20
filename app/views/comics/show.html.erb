@@ -1,17 +1,19 @@
-<p>
-  <strong>Name:</strong>
-  <%= @comic.name %>
-  <%= link_to 'Edit', edit_comic_path(@comic) %> |
-  <%= link_to 'Back', comics_path %>
-</p>
+<div class="comicsNav">
+  <p>
+    <strong>Name:</strong>
+    <%= @comic.name %>
+    <%= link_to 'Edit', edit_comic_path(@comic) %> |
+    <%= link_to 'Back', comics_path %>
+  </p>
 
-<nav>
-  <%= link_to "Create figure", new_comic_figure_path(@comic) %>
-  <%= link_to "Create bubble", new_comic_bubble_path(@comic) %>
-  <%= link_to "Create frame", new_comic_frame_path(@comic) %>
-  <%= link_to "Create image", new_comic_image_path(@comic) %>
-  <%= link_to "Create text", new_comic_speech_path(@comic) %>
-</nav>
+  <nav>
+    <%= link_to "Create figure", new_comic_figure_path(@comic) %>
+    <%= link_to "Create bubble", new_comic_bubble_path(@comic) %>
+    <%= link_to "Create frame", new_comic_frame_path(@comic) %>
+    <%= link_to "Create image", new_comic_image_path(@comic) %>
+    <%= link_to "Create text", new_comic_speech_path(@comic) %>
+  </nav>
+</div>
 
 <%= render @comic.figures %>
 <%= render @comic.bubbles %>
