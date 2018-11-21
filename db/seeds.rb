@@ -65,4 +65,59 @@ end
   end
 end
 
+@fonts = [
+  {
+    title: 'Roboto',
+    link: 'https://fonts.googleapis.com/css?family=Roboto'
+  },
+  {
+    title: 'Montserrat',
+    link: 'https://fonts.googleapis.com/css?family=Montserrat'
+  },
+  {
+    title: 'Oswald',
+    link: 'https://fonts.googleapis.com/css?family=Oswald'
+  },
+  {
+    title: 'Merriweather',
+    link: 'https://fonts.googleapis.com/css?family=Merriweather'
+  },
+  {
+    title: 'Playfair Display',
+    link: 'https://fonts.googleapis.com/css?family=Playfair Display'
+  },
+  {
+    title: 'Rubik',
+    link: 'https://fonts.googleapis.com/css?family=Rubik'
+  },
+  {
+    title: 'Amatic SC',
+    link: 'https://fonts.googleapis.com/css?family=Amatic SC'
+  },
+  {
+    title: 'Pacifico',
+    link: 'https://fonts.googleapis.com/css?family=Pacifico'
+  },
+  {
+    title: 'Old Standard TT',
+    link: 'https://fonts.googleapis.com/css?family=Old Standard TT'
+  },
+  {
+    title: 'Press Start 2P',
+    link: 'https://fonts.googleapis.com/css?family=Press Start 2P'
+  }
+]
+
+def create_font(font)
+  Font.create(
+    title: font[:title],
+    link: font[:link]
+  )
+end
+
+@fonts.each do |font|
+  f = create_font(font)
+  puts "font #{f.title} created"
+end
+
 #<Figure id: 1, figure: "wefdgvc", x: 123, y: 432, width: 234, height: 542, border_width: 12, border_color: "orange", background_color: "red", created_at: "2018-11-06 08:16:51", updated_at: "2018-11-06 08:16:51", comic_id: 1>, #<Figure id: 2, figure: "wefdgvc", x: 123, y: 432, width: 234, height: 542, border_width: 12, border_color: "orange", background_color: "red", created_at: "2018-11-06 08:17:30", updated_at: "2018-11-06 08:17:30", comic_id: 1>, #<Figure id: 3, figure: "asdfd", x: 123, y: 213, width: 123, height: 2143, border_width: 23, border_color: "yellow", background_color: "orange", created_at: "2018-11-06 08:28:18", updated_at: "2018-11-06 08:55:29", comic_id: 3>, #<Figure id: 4, figure: "asdasd", x: 123, y: 352, width: 234, height: 123, border_width: 23, border_color: "red", background_color: "green", created_at: "2018-11-06 08:28:35", updated_at: "2018-11-06 08:28:35", comic_id: 3>, #<Figure id: 5, figure: "sdfsdf", x: 827, y: 263, width: 726, height: 235, border_width: 32, border_color: "ddeeff", background_color: "orange", created_at: "2018-11-06 08:46:16", updated_at: "2018-11-06 08:56:51", comic_id: 3>

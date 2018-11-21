@@ -49,6 +49,13 @@ ActiveRecord::Schema.define(version: 2018_11_19_080656) do
     t.integer "z_index"
   end
 
+  create_table "fonts", force: :cascade do |t|
+    t.string "title"
+    t.string "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "frames", force: :cascade do |t|
     t.string "frame"
     t.integer "x"
@@ -88,6 +95,7 @@ ActiveRecord::Schema.define(version: 2018_11_19_080656) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "comic_id"
+    t.integer "font_id"
   end
 
 end
