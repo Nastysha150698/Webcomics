@@ -26,3 +26,22 @@
 <%= render @comic.speeches %>
 <%= render @comic.frames %>
 <%= render @comic.images %>
+
+________________________
+
+<% objects = [] %>
+<% @comic.figures.all.each do |f|%>
+  <%
+  if f.z_index.nil?
+    f.z_index = 0
+  end
+  objects.push([f.z_index, ('figure ' + f.id.to_s)])
+  %>
+<% end %>
+
+<%
+  objects = objects.sort_by {|elem| elem[0]}
+  layers_amount = objects.size
+%>
+
+<p><%= objects %> | All: <%= layers_amount %></p>

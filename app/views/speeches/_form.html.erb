@@ -1,4 +1,4 @@
-<%= form_with (model: [@comic, @speech]) do |form| %>
+<%= form_with(model: [@comic, @speech]) do |form| %>
   <% if @speech.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@speech.errors.count, "error") %> prohibited this artwork from being saved:</h2>
@@ -13,27 +13,27 @@
 
   <div class="field">
     <%= form.label :text %>
-    <%= form.text_area :text %>
+    <%= form.text_area :text%>
   </div>
 
   <div class="field">
     <%= form.label :x %>
-    <%= form.number_field :x %>
+    <%= form.number_field :x%>
   </div>
 
   <div class="field">
     <%= form.label :y %>
-    <%= form.number_field :y %>
+    <%= form.number_field :y%>
   </div>
 
   <div class="field">
     <%= form.label :width %>
-    <%= form.number_field :width %>
+    <%= form.number_field :width%>
   </div>
 
   <div class="field">
     <%= form.label :height %>
-    <%= form.number_field :height %>
+    <%= form.number_field :height%>
   </div>
 
   <div class="field">
@@ -44,7 +44,7 @@
 
   <div class="field">
     <%= form.label :font_size %>
-    <%= form.number_field :font_size %>
+    <%= form.number_field :font_size%>
   </div>
 
   <!-- <div class="field">
@@ -55,7 +55,7 @@
 
   <div class="field">
     <%= form.label :font_color %>
-    <%= form.text_field :font_color %>
+    <%= form.text_field :font_color%>
   </div>
 
   <div class="field">

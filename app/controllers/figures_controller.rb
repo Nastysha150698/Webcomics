@@ -7,6 +7,11 @@ class FiguresController < ApplicationController
     @figures = Figure.all
   end
 
+  def new_figure_z_index
+    @comic = Comic.find(params[:comic_id])
+    @comic.figures.all.count
+  end
+
   # GET /figures/1
   # GET /figures/1.json
   def show
@@ -22,6 +27,7 @@ class FiguresController < ApplicationController
   # GET /figures/1/edit
   def edit
     @comic = @figure.comic
+    # @figure.z_index = 1234
   end
 
   # POST /figures
@@ -29,6 +35,7 @@ class FiguresController < ApplicationController
   def create
     @figure = Figure.new(figure_params)
     @figure.comic_id = params[:comic_id]
+    @figure.z_index = new_figure_z_index
 
     respond_to do |format|
       if @figure.save
@@ -63,7 +70,7 @@ class FiguresController < ApplicationController
   def destroy
     @figure.destroy
     respond_to do |format|
-      format.html { redirect_to figures_url, notice: 'Figure was successfully destroyed.' }
+      format.html { redirect_to @figure.comic, notice: 'Figure was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

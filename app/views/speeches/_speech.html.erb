@@ -33,4 +33,5 @@
 <%= content_tag :div, class: 'speech', style: style do %>
   <%= speech.text %> <br>
   <%= link_to "Edit", edit_comic_speech_path(@comic, speech), class: 'editButton' %>
+  <%= link_to 'Destroy', comic_speech_path(@comic, speech), method: :delete, data: { confirm: 'Are you sure?' }, class: 'editButton' %>
 <% end %>

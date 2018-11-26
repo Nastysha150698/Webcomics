@@ -62,7 +62,7 @@ class SpeechesController < ApplicationController
   def destroy
     @speech.destroy
     respond_to do |format|
-      format.html { redirect_to speeches_url, notice: 'Speech was successfully destroyed.' }
+      format.html { redirect_to @speech.comic, notice: 'Speech was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
