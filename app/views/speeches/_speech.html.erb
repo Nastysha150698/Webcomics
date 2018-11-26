@@ -8,6 +8,7 @@
   font_style = speech.font_style
   font_size = speech.font_size
   font_color = speech.font_color
+  font_title = speech.font.title
 
 
 
@@ -17,9 +18,9 @@
   width = "width: #{ width }px;" if width != ""
   height = "height: #{ height }px;" if height != ""
   background_color = "background-color: #{ bg_color };" if bg_color != ""
-  font_family = "font-family: #{ font_family };" if font_family != ""
+  font_family = "font-family: #{ font_title };" if font_title != ""
   font_style = "font-style: #{ font_style };" if font_style != "" && font_family != ""
-  font_size = "font-size: #{ font_size };" if font_size != "" && font_family != ""
+  font_size = "font-size: #{ font_size }px;" if font_size != "" && font_family != ""
   font_color = "font-color: #{ font_color };" if font_color != "" && font_family != ""
 
 
@@ -30,5 +31,6 @@
 %>
 
 <%= content_tag :div, class: 'speech', style: style do %>
+  <%= speech.text %> <br>
   <%= link_to "Edit", edit_comic_speech_path(@comic, speech), class: 'editButton' %>
 <% end %>

@@ -35,40 +35,86 @@ def random_color
   ['red', 'green', 'blue', 'orange', 'black', 'yellow', 'magenta', 'cyan'].sample
 end
 
+# Create fonts
+@fonts = [
+  {
+    title: 'Roboto',
+    link: 'https://fonts.googleapis.com/css?family=Roboto'
+  },
+  {
+    title: 'Montserrat',
+    link: 'https://fonts.googleapis.com/css?family=Montserrat'
+  },
+  {
+    title: 'Oswald',
+    link: 'https://fonts.googleapis.com/css?family=Oswald'
+  },
+  {
+    title: 'Merriweather',
+    link: 'https://fonts.googleapis.com/css?family=Merriweather'
+  },
+  {
+    title: 'Playfair Display',
+    link: 'https://fonts.googleapis.com/css?family=Playfair Display'
+  },
+  {
+    title: 'Rubik',
+    link: 'https://fonts.googleapis.com/css?family=Rubik'
+  },
+  {
+    title: 'Amatic SC',
+    link: 'https://fonts.googleapis.com/css?family=Amatic SC'
+  },
+  {
+    title: 'Pacifico',
+    link: 'https://fonts.googleapis.com/css?family=Pacifico'
+  },
+  {
+    title: 'Old Standard TT',
+    link: 'https://fonts.googleapis.com/css?family=Old Standard TT'
+  },
+  {
+    title: 'Press Start 2P',
+    link: 'https://fonts.googleapis.com/css?family=Press Start 2P'
+  }
+]
 
-# # Create random Text
-# def random_text
-#   ['yo, rap', 'wow!', 'kawabunga', 'she might be little upset about this...', 'Эта бабушка что-то подозревает', 'knock-knock'].sample
-# end
-#
-# def random_font_family
-#   ['Roboto', 'Montserrat', 'Oswald', 'Merriweather', 'Playfair Display', 'Rubik', 'Amatic SC', 'Pacifico', 'Old Standard TT', 'Press Start 2P'].sample
-# end
-#
-# def random_font_size
-#   rand(60)
-# end
-#
-# 30.times do
-#   name = random_name
-#   comic = @comics.sample
-#   s = comic.speeches.new(
-#     text: random_text,
-#     x:                random_size,
-#     y:                random_size,
-#     width:            random_size,
-#     height:           random_size,
-#     font_family:      random_font_family,
-#     font_size:        random_font_size,
-#     font_color:       random_color
-#   )
-#
-#   if s.save
-#     puts "Text #{name} created"
-#   else
-#     puts "Text #{name} not created"
-#   end
-# end
+def create_font(font)
+  Font.create(
+    title: font[:title],
+    link: font[:link]
+  )
+end
+
+@fonts.each do |font|
+  f = create_font(font)
+  puts "font #{f.title} created"
+end
+
+
+# Create random Text
+@speeches = [ { text: 'kawabunga' }, { text: 'она наблюдает за мной' }, { text: 'у бабки нехилые пушки' } ]
+
+30.times do
+  name = random_name
+  comic = @comics.sample
+  s = comic.speeches.new(
+    text:             @speeches.sample,
+    x:                random_size,
+    y:                random_size,
+    width:            random_size,
+    height:           random_size,
+    font_id:          @fonts.sample,
+    font_size:        random_size,
+    font_color:       random_color
+  )
+
+  if s.save
+    puts "Text #{name} created"
+  else
+    puts "Text #{name} not created"
+  end
+end
 
 
 # Create random Images
@@ -117,7 +163,6 @@ end
     puts "Error. Figure #{name} not created"
   end
 end
-
 
 # Create real Comic
 c = Comic.create(name: 'Nonstop Bar')

@@ -1,4 +1,5 @@
-<%= form_for :figure, url: comic_figures_path do |form| %>
+<%= form_with(model: [@comic, @figure]) do |form| %>
+<%#= form_for([@comic, @figure]) do |form| %>
   <% if @figure.errors.any? %>
 
     <div id="error_explanation">
