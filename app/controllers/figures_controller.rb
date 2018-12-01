@@ -12,6 +12,10 @@ class FiguresController < ApplicationController
     @comic.figures.all.count
   end
 
+  # def old_z_index
+  #   @figure.z_index
+  # end
+
   # GET /figures/1
   # GET /figures/1.json
   def show
@@ -27,7 +31,8 @@ class FiguresController < ApplicationController
   # GET /figures/1/edit
   def edit
     @comic = @figure.comic
-    # @figure.z_index = 1234
+    # @figure.z_index = Figure.find(params[:id]).z_index + 1000 new z_index based on old
+    @@old_z_index = @figure.z_index
   end
 
   # POST /figures
@@ -53,6 +58,7 @@ class FiguresController < ApplicationController
   # PATCH/PUT /figures/1.json
   def update
     @comic = @figure.comic
+    # @new_z_index = params[:layer]
 
     respond_to do |format|
       if @figure.update(figure_params)
@@ -63,6 +69,16 @@ class FiguresController < ApplicationController
         format.json { render json: @figure.errors, status: :unprocessable_entity }
       end
     end
+
+    @new_z_index = @figure.z_index
+
+    @comic.figures.all.each do |f|
+      if (f.z_index >= @new_z_index) && (f !=@figure)
+        f.update_attribute(:z_index, f.z_index + 1)
+      end
+    end
+    #@figure.update_attribute(:z_index, @new_z_index)
+
   end
 
   # DELETE /figures/1
@@ -73,6 +89,10 @@ class FiguresController < ApplicationController
       format.html { redirect_to @figure.comic, notice: 'Figure was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def increment_z_index
+    @figure.update_attribute(:z_index, index + 1)
   end
 
   private
