@@ -15,7 +15,10 @@ class FiguresController < ApplicationController
   # GET /figures/new
   def new
     @comic = Comic.find(params[:comic_id])
+    # @frame = Frame.find(params[:frame_id])
+
     @figure = @comic.figures.new
+    # @figure = @frame.figures.new
     # @figure = Figure.new
   end
 
@@ -29,6 +32,13 @@ class FiguresController < ApplicationController
   def create
     @figure = Figure.new(figure_params)
     @figure.comic_id = params[:comic_id]
+    # @figure.frame_id = params[:frame_id]
+
+    # @figure.frame_id = params[:frame_id]
+    # if @figure.frame_id == frame.id
+    #   @figure = @frame.figures.new(add_frame_id(figure_params))
+    #   # @figure = @comic.frames.figures.new(add_frame_id(figure_params))
+    # end
 
     respond_to do |format|
       if @figure.save
@@ -76,6 +86,6 @@ class FiguresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def figure_params
-      params.require(:figure).permit(:figure, :x, :y, :width, :height, :border_width, :border_radius, :border_color, :background_color, :comic_id, :z_index)
+      params.require(:figure).permit(:figure, :x, :y, :width, :height, :border_width, :border_radius, :border_color, :background_color, :comic_id, :frame_id, :z_index)
     end
 end

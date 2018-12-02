@@ -25,4 +25,5 @@
 
 <%= content_tag :div, class: 'frame', style: style do %>
   <%= link_to "Edit", edit_comic_frame_path(@comic, frame), class: 'editButton' %>
+  <%= render @comic.figures.all %>
 <% end %>

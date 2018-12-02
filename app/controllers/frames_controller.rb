@@ -10,6 +10,7 @@ class FramesController < ApplicationController
   # GET /frames/1
   # GET /frames/1.json
   def show
+    @frames = Frame.find(params[:id])
   end
 
   # GET /frames/new
