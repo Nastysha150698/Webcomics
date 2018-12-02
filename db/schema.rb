@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 2018_11_19_081212) do
     t.string "font_family"
     t.integer "font_size"
     t.string "font_style"
-    t.string "font_color"
+    t.string "color"
     t.string "background_color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
