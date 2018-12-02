@@ -93,28 +93,28 @@ end
 
 
 # Create random Text
-@speeches = [ { text: 'kawabunga' }, { text: 'она наблюдает за мной' }, { text: 'у бабки нехилые пушки' } ]
-
-30.times do
-  name = random_name
-  comic = @comics.sample
-  s = comic.speeches.new(
-    text:             @speeches.sample,
-    x:                random_size,
-    y:                random_size,
-    width:            random_size,
-    height:           random_size,
-    font_id:          @fonts.sample,
-    font_size:        random_size,
-    font_color:       random_color
-  )
-
-  if s.save
-    puts "Text #{name} created"
-  else
-    puts "Text #{name} not created"
-  end
-end
+# @speeches = [ { text: 'kawabunga' }, { text: 'она наблюдает за мной' }, { text: 'у бабки нехилые пушки' } ]
+#
+# 30.times do
+#   name = random_name
+#   comic = @comics.sample
+#   s = comic.speeches.new(
+#     text:             @speeches.sample,
+#     x:                random_size,
+#     y:                random_size,
+#     width:            random_size,
+#     height:           random_size,
+#     font_id:          @fonts.sample,
+#     font_size:        random_size,
+#     font_color:       random_color
+#   )
+#
+#   if s.save
+#     puts "Text #{name} created"
+#   else
+#     puts "Text #{name} not created"
+#   end
+# end
 
 
 # Create random Images
