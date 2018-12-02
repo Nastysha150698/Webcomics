@@ -10,7 +10,7 @@ end
 
 @comics = Comic.all
 
-# Create Comics
+# Create random Comics
 10.times do
   name = random_name
   c = Comic.new(name: name)
@@ -22,7 +22,7 @@ end
   end
 end
 
-# Create random Figures
+# Create fake data
 def random_size
   rand(1000)
 end
@@ -34,6 +34,56 @@ end
 def random_color
   ['red', 'green', 'blue', 'orange', 'black', 'yellow', 'magenta', 'cyan'].sample
 end
+
+
+# Create random Images
+def upload_fake_image
+  uploader = ImageUploader.new(Image.new, :image)
+  uploader.cache!(File.open(Dir.glob(File.join(Rails.root, 'lib/tasks/images', '*')).sample))
+  uploader
+end
+
+50.times do
+  name = random_name
+  comic = @comics.sample
+  i = comic.images.new(
+    image:            upload_fake_image,
+    x:                random_size,
+    y:                random_size,
+    width:            random_size,
+    height:           random_size
+  )
+
+  if i.save
+    puts "Image #{name} created"
+  else
+    puts "Error. Image #{name} not created"
+  end
+end
+
+
+# Create random figures
+100.times do
+  name = random_name
+  comic = @comics.sample
+  f = comic.figures.new(
+    figure:           name,
+    x:                random_size,
+    y:                random_size,
+    width:            random_size,
+    height:           random_size,
+    border_width:     random_border,
+    border_color:     random_color,
+    background_color: random_color
+  )
+
+  if f.save
+    puts "Figure #{name} created"
+  else
+    puts "Error. Figure #{name} not created"
+  end
+end
+
 
 # Create fonts
 @fonts = [
@@ -88,85 +138,43 @@ end
 
 @fonts.each do |font|
   f = create_font(font)
-  puts "font #{f.title} created"
+  puts "Font #{f.title} created"
 end
 
 
-# Create random Text
-# @speeches = [ { text: 'kawabunga' }, { text: 'она наблюдает за мной' }, { text: 'у бабки нехилые пушки' } ]
-#
-# 30.times do
-#   name = random_name
-#   comic = @comics.sample
-#   s = comic.speeches.new(
-#     text:             @speeches.sample,
-#     x:                random_size,
-#     y:                random_size,
-#     width:            random_size,
-#     height:           random_size,
-#     font_id:          @fonts.sample,
-#     font_size:        random_size,
-#     font_color:       random_color
-#   )
-#
-#   if s.save
-#     puts "Text #{name} created"
-#   else
-#     puts "Text #{name} not created"
-#   end
-# end
+# Create random texts
+@texts = [ { text: 'kawabunga' }, { text: 'она наблюдает за мной' }, { text: 'у бабки нехилые пушки' } ].sample
 
-
-# Create random Images
-def upload_fake_image
-  uploader = ImageUploader.new(Image.new, :image)
-  uploader.cache!(File.open(Dir.glob(File.join(Rails.root, 'lib/tasks/images', '*')).sample))
-  uploader
-end
-
-50.times do
+30.times do
   name = random_name
   comic = @comics.sample
-  i = comic.images.new(
-    image:            upload_fake_image,
-    x:                random_size,
-    y:                random_size,
-    width:            random_size,
-    height:           random_size
-  )
-
-  if i.save
-    puts "Image #{name} created"
-  else
-    puts "Error. Image #{name} not created"
-  end
-end
-
-# Fake comic data
-100.times do
-  name = random_name
-  comic = @comics.sample
-  f = comic.figures.new(
-    figure:           name,
+  s = comic.speeches.new(
+    text:             @texts,
     x:                random_size,
     y:                random_size,
     width:            random_size,
     height:           random_size,
-    border_width:     random_border,
-    border_color:     random_color,
-    background_color: random_color
+    font_id:          Font.all.sample.id,
+    font_size:        random_size,
+    color:            random_color
   )
 
-  if f.save
-    puts "Figure #{name} created"
+  if s.save
+    puts "Text #{name} created"
   else
-    puts "Error. Figure #{name} not created"
+    puts "Text #{name} not created"
   end
 end
+
+
+
+
 
 # Create real Comic
 c = Comic.create(name: 'Nonstop Bar')
 
+
+#Create figures
 def create_comic(comic, figure)
   comic.figures.create(
     comic_id:         figure[:comic_id],
@@ -194,6 +202,7 @@ figures = [
 figures.each do |f|
   create_comic(c, f)
 end
+
 
 # Create Image uploader
 def upload_image(image)
@@ -257,6 +266,7 @@ images = [
 images.each do |i|
   create_comic(c, i)
 end
+
 
 # Create Frames
 # def create_comic(comic, frame)

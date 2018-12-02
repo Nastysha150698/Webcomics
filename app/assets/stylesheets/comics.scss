@@ -2,9 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-// .comicsNav {
-//   display: block;
-//   padding: 10px 0;
-//   background-color: white;
-//   z-index: 999;
-// }
+.controls {
+  position: absolute;
+  padding: 30px;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background-color: white;
+}
+
+.objects {
+  position: absolute;
+  margin-top: 200px;
+}

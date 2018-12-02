@@ -5,24 +5,28 @@
   <%# end %>
 <%# end %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @comic.name %>
-  <%= link_to 'Edit', edit_comic_path(@comic) %> |
-  <%= link_to 'Back', comics_path %>
-</p>
+<div class="controls">
+  <p>
+    <strong>Name:</strong>
+    <%= @comic.name %>
+    <%= link_to 'Edit', edit_comic_path(@comic) %> |
+    <%= link_to 'Back', comics_path %>
+  </p>
 
-<nav>
-  <%= link_to "Create figure", new_comic_figure_path(@comic) %>
-  <%= link_to "Create bubble", new_comic_bubble_path(@comic) %>
-  <%= link_to "Create frame", new_comic_frame_path(@comic) %>
-  <%= link_to "Create image", new_comic_image_path(@comic) %>
-  <%= link_to "Create speech", new_comic_speech_path(@comic) %> |
-  <%= link_to "Add font", new_font_path %>
-</nav>
+  <nav>
+    <%= link_to "Create figure", new_comic_figure_path(@comic) %>
+    <%= link_to "Create bubble", new_comic_bubble_path(@comic) %>
+    <%= link_to "Create frame", new_comic_frame_path(@comic) %>
+    <%= link_to "Create image", new_comic_image_path(@comic) %>
+    <%= link_to "Create speech", new_comic_speech_path(@comic) %> |
+    <%= link_to "Add font", new_font_path %>
+  </nav>
+</div>
 
-<%= render @comic.figures %>
-<%= render @comic.bubbles %>
-<%= render @comic.speeches %>
-<%= render @comic.frames %>
-<%= render @comic.images %>
+<div class="objects">
+  <%= render @comic.figures %>
+  <%= render @comic.bubbles %>
+  <%= render @comic.speeches %>
+  <%= render @comic.frames %>
+  <%= render @comic.images %>
+  </div>
