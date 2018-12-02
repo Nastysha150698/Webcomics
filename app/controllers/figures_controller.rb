@@ -9,7 +9,7 @@ class FiguresController < ApplicationController
 
   def new_figure_z_index
     @comic = Comic.find(params[:comic_id])
-    @comic.figures.all.count
+    (@comic.figures.all.count + 1)
   end
 
   # def old_z_index
@@ -40,7 +40,7 @@ class FiguresController < ApplicationController
   def create
     @figure = Figure.new(figure_params)
     @figure.comic_id = params[:comic_id]
-    @figure.z_index = new_figure_z_index
+    @figure.z_index = objects_quantity(@figure.comic) + 1
 
     respond_to do |format|
       if @figure.save
@@ -72,11 +72,25 @@ class FiguresController < ApplicationController
 
     @new_z_index = @figure.z_index
 
-    @comic.figures.all.each do |f|
-      if (f.z_index >= @new_z_index) && (f !=@figure)
-        f.update_attribute(:z_index, f.z_index + 1)
-      end
-    end
+    change_z_indexes(@comic.figures, @figure, @new_z_index, @@old_z_index)
+    change_z_indexes(@comic.speeches, @figure, @new_z_index, @@old_z_index)
+    change_z_indexes(@comic.images, @figure, @new_z_index, @@old_z_index)
+
+
+
+    # if @new_z_index < @@old_z_index
+    #   @comic.figures.all.each do |f|
+    #     if (f.z_index >= @new_z_index) && (f !=@figure) && (f.z_index < @@old_z_index)
+    #       f.update_attribute(:z_index, f.z_index + 1)
+    #     end
+    #   end
+    # else
+    #   @comic.figures.all.each do |f|
+    #     if (f.z_index <= @new_z_index) && (f !=@figure) && (f.z_index > @@old_z_index)
+    #       f.update_attribute(:z_index, f.z_index - 1)
+    #     end
+    #   end
+    # end
     #@figure.update_attribute(:z_index, @new_z_index)
 
   end

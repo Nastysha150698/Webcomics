@@ -63,6 +63,12 @@
     <%= form.text_field :background_color %>
   </div>
 
+  <div class="field">
+    <%= form.label :layer %>
+    <%= form.number_field :z_index, in: 1..(@comic.figures.count + @comic.speeches.count + @comic.images.count) %>
+    max value: <%= @comic.figures.count + @comic.speeches.count + @comic.images.count %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

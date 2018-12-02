@@ -21,6 +21,7 @@ class SpeechesController < ApplicationController
   # GET /speeches/1/edit
   def edit
     @comic = @speech.comic
+    @@old_z_index = @speech.z_index
   end
 
   # POST /speeches
@@ -28,6 +29,7 @@ class SpeechesController < ApplicationController
   def create
     @speech = Speech.new(speech_params)
     @speech.comic_id = params[:comic_id]
+    @speech.z_index = objects_quantity(@speech.comic) + 1
 
     respond_to do |format|
       if @speech.save
@@ -55,6 +57,13 @@ class SpeechesController < ApplicationController
         format.json { render json: @speech.errors, status: :unprocessable_entity }
       end
     end
+
+    @new_z_index = @speech.z_index
+
+    change_z_indexes(@comic.figures, @speech, @new_z_index, @@old_z_index)
+    change_z_indexes(@comic.speeches, @speech, @new_z_index, @@old_z_index)
+    change_z_indexes(@comic.images, @speech, @new_z_index, @@old_z_index)
+
   end
 
   # DELETE /speeches/1
@@ -75,6 +84,6 @@ class SpeechesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def speech_params
-      params.require(:speech).permit(:text, :x, :y, :width, :height, :font_family, :font_size, :font_style, :font_color, :background_color, :comic_id, :font_id)
+      params.require(:speech).permit(:text, :x, :y, :width, :height, :font_family, :font_size, :font_style, :font_color, :background_color, :comic_id, :font_id, :z_index)
     end
 end

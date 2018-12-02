@@ -29,17 +29,23 @@
 
 ________________________
 
-<% objects = [] %>
-<% @comic.figures.all.each do |f|%>
-  <%
-  if f.z_index.nil?
-    f.z_index = 0
-  end
-  objects.push([f.z_index, ('figure ' + f.id.to_s)])
-  %>
-<% end %>
-
 <%
+  objects = []
+
+  def push_things_to_array(things, array)
+    things.all.each do |thing|
+      if thing.z_index.nil?
+        thing.z_index = 0
+      end
+      array.push([thing.z_index, (things.model_name.to_s + ' ' + thing.id.to_s)])
+    end
+    return array
+  end
+
+  objects = push_things_to_array(@comic.figures, objects)
+  objects = push_things_to_array(@comic.speeches, objects)
+  objects = push_things_to_array(@comic.images, objects)
+
   objects = objects.sort_by {|elem| elem[0]}
   layers_amount = objects.size
 %>

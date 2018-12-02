@@ -4,6 +4,7 @@
   width = image.width.to_s
   height = image.height.to_s
   bg_image = image.image.url
+  z_index = image.z_index.to_s
 
   position = "position: absolute;"
   top = "top: #{ y }px;" if y != ""
@@ -11,9 +12,12 @@
   width = "width: #{ width }px;" if width != ""
   height = "height: #{ height }px;" if height != ""
   bg_image = "background-image: url(#{ bg_image });"
+  bg_size = "background-size: cover;"
+  z_index = "z-index: #{ z_index };" if z_index != ""
+
 
   style = [
-    position, top, left, width, height, bg_image
+    position, top, left, width, height, bg_image, bg_size, z_index
   ].join(" ")
 %>
 
