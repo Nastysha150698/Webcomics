@@ -1,4 +1,4 @@
-<%= form_with (model: [@comic, @speech]) do |form| %>
+<%= form_with(model: [@comic, @speech]) do |form| %>
   <% if @speech.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@speech.errors.count, "error") %> prohibited this artwork from being saved:</h2>
@@ -54,8 +54,8 @@
   </div> -->
 
   <div class="field">
-    <%= form.label :font_color %>
-    <%= form.text_field :font_color %>
+    <%= form.label :color %>
+    <%= form.text_field :color %>
   </div>
 
   <div class="field">
