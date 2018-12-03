@@ -22,13 +22,12 @@
 </nav>
 
 <%#= render @comic.figures %>
-<%
-  @comic.figures.all.each do |f|
-    if f.frame_id.nil?
-      render f
-    end
-  end
-%>
+<% @comic.figures.each do |f| %>
+  <% if f.frame_id.blank? %>
+    <%= render f %>
+  <% end %>
+<% end %>
+
 <%= render @comic.bubbles %>
 <%= render @comic.speeches %>
 <%= render @comic.frames %>
