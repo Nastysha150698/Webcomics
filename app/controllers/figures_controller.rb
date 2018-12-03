@@ -12,10 +12,6 @@ class FiguresController < ApplicationController
     (@comic.figures.all.count + 1)
   end
 
-  # def old_z_index
-  #   @figure.z_index
-  # end
-
   # GET /figures/1
   # GET /figures/1.json
   def show
@@ -25,13 +21,11 @@ class FiguresController < ApplicationController
   def new
     @comic = Comic.find(params[:comic_id])
     @figure = @comic.figures.new
-    # @figure = Figure.new
   end
 
   # GET /figures/1/edit
   def edit
     @comic = @figure.comic
-    # @figure.z_index = Figure.find(params[:id]).z_index + 1000 new z_index based on old
     @@old_z_index = @figure.z_index
   end
 
@@ -58,7 +52,6 @@ class FiguresController < ApplicationController
   # PATCH/PUT /figures/1.json
   def update
     @comic = @figure.comic
-    # @new_z_index = params[:layer]
 
     respond_to do |format|
       if @figure.update(figure_params)
@@ -75,24 +68,6 @@ class FiguresController < ApplicationController
     change_z_indexes(@comic.figures, @figure, @new_z_index, @@old_z_index)
     change_z_indexes(@comic.speeches, @figure, @new_z_index, @@old_z_index)
     change_z_indexes(@comic.images, @figure, @new_z_index, @@old_z_index)
-
-
-
-    # if @new_z_index < @@old_z_index
-    #   @comic.figures.all.each do |f|
-    #     if (f.z_index >= @new_z_index) && (f !=@figure) && (f.z_index < @@old_z_index)
-    #       f.update_attribute(:z_index, f.z_index + 1)
-    #     end
-    #   end
-    # else
-    #   @comic.figures.all.each do |f|
-    #     if (f.z_index <= @new_z_index) && (f !=@figure) && (f.z_index > @@old_z_index)
-    #       f.update_attribute(:z_index, f.z_index - 1)
-    #     end
-    #   end
-    # end
-    #@figure.update_attribute(:z_index, @new_z_index)
-
   end
 
   # DELETE /figures/1
