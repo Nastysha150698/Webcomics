@@ -18,6 +18,12 @@
   </div>
 
   <div class="field">
+    <%= form.label :frame_id %>
+    <%#= form.text_field :frame_id %>
+    <%= select("image", "frame_id", @comic.frames.all.collect { |a| [a.frame, a.id] }, { include_blank: true }) %>
+  </div>
+
+  <div class="field">
     <%= form.label :x %>
     <%= form.number_field :x%>
   </div>

@@ -21,17 +21,27 @@
   <%= link_to "Add font", new_font_path %>
 </nav>
 
-<%#= render @comic.figures %>
+<%= render @comic.frames %>
+
 <% @comic.figures.each do |f| %>
-  <% if f.frame_id.blank? %>
+  <% if f.frame_id.nil? %>
     <%= render f %>
   <% end %>
 <% end %>
 
+<% @comic.images.each do |i| %>
+  <% if i.frame_id.nil? %>
+    <%= render i %>
+  <% end %>
+<% end %>
+
+<% @comic.speeches.each do |s| %>
+  <% if s.frame_id.nil? %>
+    <%= render s %>
+  <% end %>
+<% end %>
+
 <%= render @comic.bubbles %>
-<%= render @comic.speeches %>
-<%= render @comic.frames %>
-<%= render @comic.images %>
 
 ________________________
 
