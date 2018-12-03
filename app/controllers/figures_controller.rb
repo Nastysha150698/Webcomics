@@ -15,11 +15,8 @@ class FiguresController < ApplicationController
   # GET /figures/new
   def new
     @comic = Comic.find(params[:comic_id])
-    # @frame = Frame.find(params[:frame_id])
 
     @figure = @comic.figures.new
-    # @figure = @frame.figures.new
-    # @figure = Figure.new
   end
 
   # GET /figures/1/edit
@@ -32,13 +29,6 @@ class FiguresController < ApplicationController
   def create
     @figure = Figure.new(figure_params)
     @figure.comic_id = params[:comic_id]
-    # @figure.frame_id = params[:frame_id]
-
-    # @figure.frame_id = params[:frame_id]
-    # if @figure.frame_id == frame.id
-    #   @figure = @frame.figures.new(add_frame_id(figure_params))
-    #   # @figure = @comic.frames.figures.new(add_frame_id(figure_params))
-    # end
 
     respond_to do |format|
       if @figure.save

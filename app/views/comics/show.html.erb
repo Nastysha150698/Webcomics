@@ -21,7 +21,14 @@
   <%= link_to "Add font", new_font_path %>
 </nav>
 
-<%= render @comic.figures %>
+<%#= render @comic.figures %>
+<%
+  @comic.figures.all.each do |f|
+    if f.frame_id.nil?
+      render f
+    end
+  end
+%>
 <%= render @comic.bubbles %>
 <%= render @comic.speeches %>
 <%= render @comic.frames %>

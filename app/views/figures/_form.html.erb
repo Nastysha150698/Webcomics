@@ -1,4 +1,4 @@
-<%= form_with(model: [@comic, @frame, @figure]) do |form| %>
+<%= form_with(model: [@comic, @figure]) do |form| %>
 <%#= form_for([@comic, @figure]) do |form| %>
   <% if @figure.errors.any? %>
 
@@ -21,7 +21,7 @@
   <div class="field">
     <%= form.label :frame_id %>
     <%#= form.text_field :frame_id %>
-    <%= select("figure", "frame_id", Frame.all.collect { |a| [a.frame, a.id] }, { include_blank: true }) %>
+    <%= select("figure", "frame_id", @comic.frames.all.collect { |a| [a.frame, a.id] }, { include_blank: true }) %>
   </div>
 
   <div class="field">
