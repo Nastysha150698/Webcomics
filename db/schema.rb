@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(version: 2018_12_02_204211) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "comic_id"
+    t.integer "z_index"
   end
 
   create_table "speeches", force: :cascade do |t|
@@ -97,6 +98,7 @@ ActiveRecord::Schema.define(version: 2018_12_02_204211) do
     t.datetime "updated_at", null: false
     t.integer "comic_id"
     t.integer "font_id"
+    t.integer "z_index"
   end
 
 end

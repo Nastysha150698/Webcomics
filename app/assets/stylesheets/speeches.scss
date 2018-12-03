@@ -2,8 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .speech {
+
   &:hover {
-    border: 1px solid;
+    &:after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    bottom: -5px;
+    right: -5px;
+    border: 1px rgba(0,0,0,.2) solid;
+    z-index: -1;
+    }
+
     .editButton {
       display: block;
     }
@@ -16,7 +27,7 @@
     line-height: 30px;
     text-align: center;
     font-family: Arial;
-    font-size: 18px;
-    margin-top: 50px;
+    font-size: 12px;
+    // margin-top: 50px;
   }
 }
