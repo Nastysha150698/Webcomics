@@ -5,7 +5,6 @@
   <%# end %>
 <%# end %>
 
-<<<<<<< HEAD
 <div class="controls">
   <p>
     <strong>Name:</strong>
@@ -24,37 +23,13 @@
   </nav>
 </div>
 
-<div class="objects">
-  <%= render @comic.figures %>
-  <%= render @comic.bubbles %>
-  <%= render @comic.speeches %>
-  <%= render @comic.frames %>
-  <%= render @comic.images %>
-</div>
-=======
-<p>
-  <strong>Name:</strong>
-  <%= @comic.name %>
-  <%= link_to 'Edit', edit_comic_path(@comic) %> |
-  <%= link_to 'Back', comics_path %>
-</p>
-
-<nav>
-  <%= link_to "Create figure", new_comic_figure_path(@comic) %>
-  <%= link_to "Create bubble", new_comic_bubble_path(@comic) %>
-  <%= link_to "Create frame", new_comic_frame_path(@comic) %>
-  <%= link_to "Create image", new_comic_image_path(@comic) %>
-  <%= link_to "Create speech", new_comic_speech_path(@comic) %> |
-  <%= link_to "Add font", new_font_path %>
-</nav>
-
-<%= render @comic.frames %>
-
 <% @comic.figures.each do |f| %>
   <% if f.frame_id.nil? %>
     <%= render f %>
   <% end %>
 <% end %>
+
+<%= render @comic.frames %>
 
 <% @comic.images.each do |i| %>
   <% if i.frame_id.nil? %>
@@ -70,7 +45,6 @@
 
 <%= render @comic.bubbles %>
 
->>>>>>> frames_as_groups
 ________________________
 
 <%

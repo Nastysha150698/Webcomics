@@ -27,13 +27,13 @@ class SpeechesController < ApplicationController
   # POST /speeches
   # POST /speeches.json
   def create
+    @comic = Comic.find(params[:comic_id])
     @speech = Speech.new(speech_params)
     @speech.comic_id = params[:comic_id]
     @speech.z_index = objects_quantity(@speech.comic) + 1
 
     respond_to do |format|
       if @speech.save
-        @comic = @speech.comic
         format.html { redirect_to @comic, notice: 'Speech was successfully created.' }
         format.json { render :show, status: :created, location: @speech }
       else
@@ -84,6 +84,6 @@ class SpeechesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def speech_params
-      params.require(:speech).permit(:text, :x, :y, :width, :height, :font_family, :font_size, :font_style, :font_color, :background_color, :comic_id, :frame_id, :font_id, :z_index)
+      params.require(:speech).permit(:text, :x, :y, :width, :height, :font_style, :font_size, :color, :background_color, :comic_id, :frame_id, :font_id, :z_index)
     end
 end

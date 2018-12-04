@@ -51,7 +51,8 @@ end
     x:                random_size,
     y:                random_size,
     width:            random_size,
-    height:           random_size
+    height:           random_size,
+    z_index:          0
   )
 
   if i.save
@@ -74,7 +75,8 @@ end
     height:           random_size,
     border_width:     random_border,
     border_color:     random_color,
-    background_color: random_color
+    background_color: random_color,
+    z_index:          0
   )
 
   if f.save
@@ -132,7 +134,7 @@ end
 def create_font(font)
   Font.create(
     title: font[:title],
-    link: font[:link]
+    link: font[:link],
   )
 end
 
@@ -156,7 +158,8 @@ end
     height:           random_size,
     font_id:          Font.all.sample.id,
     font_size:        random_size,
-    color:            random_color
+    color:            random_color,
+    z_index:          0
   )
 
   if s.save
@@ -173,7 +176,6 @@ end
 # Create real Comic
 c = Comic.create(name: 'Nonstop Bar')
 
-
 #Create figures
 def create_comic(comic, figure)
   comic.figures.create(
@@ -183,7 +185,8 @@ def create_comic(comic, figure)
     y:                figure[:y],
     width:            figure[:width],
     height:           figure[:height],
-    background_color: figure[:background_color]
+    background_color: figure[:background_color],
+    z_index:          figure[:z_index]
   )
 end
 
@@ -194,13 +197,107 @@ figures = [
     x:                 0,
     y:                 0,
     width:             1300,
-    height:            850,
-    background_color: 'black'
+    height:            950,
+    background_color: 'black',
+    z_index:           0
   }
 ]
 
 figures.each do |f|
   create_comic(c, f)
+end
+
+
+# Create Frames
+def create_comic(comic, frame)
+  comic.frames.create(
+    comic_id:         frame[:comic_id],
+    frame:            frame[:frame],
+    x:                frame[:x],
+    y:                frame[:y],
+    width:            frame[:width],
+    height:           frame[:height],
+    border_width:     frame[:border_width],
+    border_color:     frame[:border_color]
+  )
+end
+
+frames = [
+  {
+    comic_id:       1,
+    frame:         '1',
+    # x:              198,
+    # y:              118,
+    # width:          422,
+    # height:         605,
+    x:              208,
+    y:              220,
+    width:          414,
+    height:         605,
+
+    border_width:   2,
+    border_color:  'blue'
+  }, {
+    comic_id:       1,
+    frame:         '2',
+    # x:              638,
+    # y:              118,
+    # width:          426,
+    # height:         137,
+
+    x:              640,
+    y:              220,
+    width:          426,
+    height:         137,
+    border_width:   2,
+    border_color:  'blue'
+  }, {
+    comic_id:       1,
+    frame:         '3',
+    # x:              638,
+    # y:              275,
+    # width:          426,
+    # height:         136,
+
+    x:              640,
+    y:              377,
+    width:          426,
+    height:         136,
+    border_width:   2,
+    border_color:  'blue'
+  }, {
+    comic_id:       1,
+    frame:         '4',
+    # x:              638,
+    # y:              430,
+    # width:          426,
+    # height:         136,
+
+    x:              639,
+    y:              532,
+    width:          426,
+    height:         136,
+    border_width:   2,
+    border_color:  'blue'
+  }, {
+    comic_id:       1,
+    frame:         '5',
+    # x:              638,
+    # y:              586,
+    # width:          426,
+    # height:         137,
+
+    x:              640,
+    y:              688,
+    width:          426,
+    height:         137,
+    border_width:   2,
+    border_color:  'blue'
+  }
+]
+
+frames.each do |frame|
+  create_comic(c, frame)
 end
 
 
@@ -216,121 +313,65 @@ end
 def create_comic(comic, image)
   comic.images.create(
     comic_id:         image[:comic_id],
+    frame_id:         image[:frame_id],
     image:            image[:image],
     x:                image[:x],
     y:                image[:y],
     width:            image[:width],
-    height:           image[:height]
+    height:           image[:height],
+    z_index:          image[:z_index]
   )
 end
 
 images = [
   {
     comic_id: 1,
-    image: upload_image("big_fr.png"),
-    x: 208,
-    y: 120,
-    width: 414,
-    height: 605
+    frame_id: 1,
+    image:    upload_image("big_fr.png"),
+    x:        208,
+    y:        220,
+    width:    414,
+    height:   605,
+    z_index:  0
   }, {
     comic_id: 1,
-    image: upload_image("1_fr.png"),
-    x: 640,
-    y: 120,
-    width: 426,
-    height: 137
+    frame_id: 2,
+    image:    upload_image("1_fr.png"),
+    x:        640,
+    y:        220,
+    width:    426,
+    height:   137,
+    z_index:  0
   }, {
     comic_id: 1,
-    image: upload_image("2_fr.png"),
-    x: 640,
-    y: 277,
-    width: 426,
-    height: 136
+    # frame_id: '3',
+    image:    upload_image("2_fr.png"),
+    x:        640,
+    y:        377,
+    width:    426,
+    height:   136,
+    z_index:  0
   }, {
     comic_id: 1,
-    image: upload_image("3_fr.png"),
-    x: 640,
-    y: 432,
-    width: 426,
-    height: 136
+    # frame_id: '4',
+    image:    upload_image("3_fr.png"),
+    x:        640,
+    y:        532,
+    width:    426,
+    height:   136,
+    z_index:  0
   }, {
     comic_id: 1,
-    image: upload_image("4_fr.png"),
-    x: 640,
-    y: 588,
-    width: 426,
-    height: 137
+    # frame_id: '5',
+    image:    upload_image("4_fr.png"),
+    x:        640,
+    y:        688,
+    width:    426,
+    height:   137,
+    z_index:  0
   }
 ]
 
 images.each do |i|
   create_comic(c, i)
 end
-
-
-# Create Frames
-# def create_comic(comic, frame)
-#   comic.frames.create(
-#     comic_id:         frame[:comic_id],
-#     frame:            frame[:frame],
-#     x:                frame[:x],
-#     y:                frame[:y],
-#     width:            frame[:width],
-#     height:           frame[:height],
-#     border_width:     frame[:border_width],
-#     border_color:     frame[:border_color]
-#   )
-# end
-#
-# frames = [
-#   {
-#     comic_id:       1,
-#     frame:         'big frame',
-#     x:              198,
-#     y:              118,
-#     width:          422,
-#     height:         605,
-#     border_width:   2,
-#     border_color:  'white'
-#   }, {
-#     comic_id:       1,
-#     frame:         '1 frame',
-#     x:              638,
-#     y:              118,
-#     width:          426,
-#     height:         137,
-#     border_width:   2,
-#     border_color:  'white'
-#   }, {
-#     comic_id:       1,
-#     frame:         '2 frame',
-#     x:              638,
-#     y:              275,
-#     width:          426,
-#     height:         136,
-#     border_width:   2,
-#     border_color:  'white'
-#   }, {
-#     comic_id:       1,
-#     frame:         '3 frame',
-#     x:              638,
-#     y:              430,
-#     width:          426,
-#     height:         136,
-#     border_width:   2,
-#     border_color:  'white'
-#   }, {
-#     comic_id:       1,
-#     frame:         '4 frame',
-#     x:              638,
-#     y:              586,
-#     width:          426,
-#     height:         137,
-#     border_width:   2,
-#     border_color:  'white'
-#   }
-# ]
-#
-# frames.each do |frame|
-#   create_comic(c, frame)
-# end
