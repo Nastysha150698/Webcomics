@@ -18,6 +18,12 @@
   </div>
 
   <div class="field">
+    <%= form.label :frame_id %>
+    <%#= form.text_field :frame_id %>
+    <%= select("speech", "frame_id", @comic.frames.all.collect { |a| [a.frame, a.id] }, { include_blank: true }) %>
+  </div>
+
+  <div class="field">
     <%= form.label :x %>
     <%= form.number_field :x%>
   </div>
@@ -48,20 +54,9 @@
     <%= form.number_field :font_size%>
   </div>
 
-  <!-- <div class="field">
-    <%= form.label :font_style %>
-    <%= form.text_field :font_style %>
-    <%#= select("speeches", "font_style", Speech.all.collect {|s| [ s.name, s.id ] }, { include_blank: true }) %>
-  </div> -->
-
   <div class="field">
-<<<<<<< HEAD
-    <%= form.label :font_color %>
-    <%= form.text_field :font_color%>
-=======
     <%= form.label :color %>
     <%= form.text_field :color %>
->>>>>>> master
   </div>
 
   <div class="field">

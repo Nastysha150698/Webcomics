@@ -20,6 +20,7 @@ class FiguresController < ApplicationController
   # GET /figures/new
   def new
     @comic = Comic.find(params[:comic_id])
+
     @figure = @comic.figures.new
   end
 
@@ -92,6 +93,6 @@ class FiguresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def figure_params
-      params.require(:figure).permit(:figure, :x, :y, :width, :height, :border_width, :border_radius, :border_color, :background_color, :comic_id, :z_index)
+      params.require(:figure).permit(:figure, :x, :y, :width, :height, :border_width, :border_radius, :border_color, :background_color, :comic_id, :frame_id, :z_index)
     end
 end
