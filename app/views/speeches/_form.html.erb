@@ -1,6 +1,6 @@
-<%= form_with(model: [@comic, @speech]) do |form| %>
+<%= form_with(model: [@comic, @speech], local: true) do |form| %>
   <% if @speech.errors.any? %>
-  
+
     <div id="error_explanation">
       <h2><%= pluralize(@speech.errors.count, "error") %> prohibited this artwork from being saved:</h2>
 
