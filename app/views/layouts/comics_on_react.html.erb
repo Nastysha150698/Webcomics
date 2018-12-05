@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Inkie</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'T_ComicsEditor' %>
+</head>
+
+<body data-figures="<%= @comic.figures.as_json.to_json %>">
+  <!-- Здесь будет React -->
+</body>
+</html>

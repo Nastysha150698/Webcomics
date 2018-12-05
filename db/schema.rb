@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2018_12_01_221500) do
-=======
 ActiveRecord::Schema.define(version: 2018_12_02_180958) do
->>>>>>> master
 
   create_table "bubbles", force: :cascade do |t|
     t.string "figure"

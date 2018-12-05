@@ -55,7 +55,8 @@ end
     height:           random_size,
     border_width:     random_border,
     border_color:     random_color,
-    background_color: random_color
+    background_color: random_color,
+    z_index:          0
   )
 
   if f.save
