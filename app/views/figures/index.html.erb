@@ -28,9 +28,11 @@
         <td><%= figure.border_width %></td>
         <td><%= figure.border_color %></td>
         <td><%= figure.background_color %></td>
-        <td><%= link_to 'Show', figure %></td>
-        <td><%= link_to 'Edit', edit_figure_path(figure) %></td>
-        <td><%= link_to 'Destroy', figure, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= figure.z_index %></td>
+        <td><%= link_to 'Show', comic_figure_path %></td>
+        <td><%#= link_to 'Show', comic_figure_path(@comic, comic_id, figure) %></td>
+        <td><%#= link_to 'Edit', edit_comic_figure_path(@comic, figure) %></td>
+        <td><%#= link_to 'Destroy', comic_figure_path(@comic, figure), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -38,4 +40,4 @@
 
 <br>
 
-<%= link_to 'New Figure', new_figure_path %>
+<%= link_to 'New Figure', new_comic_figure_path %>

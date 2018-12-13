@@ -31,6 +31,11 @@
 </p>
 
 <p>
+  <strong>Border radius:</strong>
+  <%= @figure.border_radius %>
+</p>
+
+<p>
   <strong>Border color:</strong>
   <%= @figure.border_color %>
 </p>
@@ -40,5 +45,10 @@
   <%= @figure.background_color %>
 </p>
 
-<%= link_to 'Edit', edit_figure_path(@figure) %> |
-<%= link_to 'Back', figures_path %>
+<p>
+  <strong>Layer:</strong>
+  <%= @figure.z_index %>
+</p>
+
+<%#= link_to 'Edit', edit_figure_path(@figure) %> |
+<%#= link_to 'Back', figures_path %>

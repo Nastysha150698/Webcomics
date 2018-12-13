@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
-  # resources :frames
-  # resources :speeches
-  # resources :bubbles
-  # resources :figures
-  # resources :images
 
+  resources :fonts
   resources :comics do
     resources :frames
     resources :speeches

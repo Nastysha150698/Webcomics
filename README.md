@@ -22,3 +22,11 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+* ...
+
+* font_appender
+font.title + font.link
+font has_many speeches, speech belongs_to font :font_id
+font.title -> speech font-family style
+font.link -> application.html.erb head

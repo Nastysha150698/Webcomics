@@ -1,10 +1,12 @@
-<%= form_with(model: [@comic, figure], local: true) do |form| %>
-  <% if figure.errors.any? %>
+<%= form_with(model: [@comic, @figure]) do |form| %>
+<%#= form_for([@comic, @figure]) do |form| %>
+  <% if @figure.errors.any? %>
+
     <div id="error_explanation">
-      <h2><%= pluralize(figure.errors.count, "error") %> prohibited this figure from being saved:</h2>
+      <h2><%= pluralize(@figure.errors.count, "error") %> prohibited this artwork from being saved:</h2>
 
       <ul>
-      <% figure.errors.full_messages.each do |message| %>
+      <% @figure.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -12,7 +14,7 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :figure %>
+    <%= form.label :name %>
     <%= form.text_field :figure %>
   </div>
 
@@ -42,6 +44,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :border_radius %>
+    <%= form.number_field :border_radius %>
+  </div>
+
+  <div class="field">
     <%= form.label :border_color %>
     <%= form.text_field :border_color %>
   </div>
@@ -49,6 +56,13 @@
   <div class="field">
     <%= form.label :background_color %>
     <%= form.text_field :background_color %>
+  </div>
+
+  <div class="field">
+    <%= form.label :layer %>
+    <!-- <%= form.number_field :z_index %> -->
+    <%= form.number_field :z_index, in: 1..(@comic.figures.count + @comic.speeches.count + @comic.images.count) %>
+    max value: <%= @comic.figures.count + @comic.speeches.count + @comic.images.count %>
   </div>
 
   <div class="actions">

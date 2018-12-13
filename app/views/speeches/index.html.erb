@@ -30,16 +30,16 @@
         <td><%= speech.font_family %></td>
         <td><%= speech.font_size %></td>
         <td><%= speech.font_style %></td>
-        <td><%= speech.font_color %></td>
+        <td><%= speech.color %></td>
         <td><%= speech.background_color %></td>
-        <td><%= link_to 'Show', speech %></td>
-        <td><%= link_to 'Edit', edit_speech_path(speech) %></td>
-        <td><%= link_to 'Destroy', speech, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <td><%#= link_to 'Show', comic_speech_path(@comic, speech) %></td>
+        <td><%#= link_to 'Edit', edit_comic_speech_path(@comic, speech) %></td>
+        <td><%#= link_to 'Destroy', comic_speech_path(@comic, speech), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Speech', new_speech_path %>
+<%= link_to 'New Speech', new_comic_speech_path %>

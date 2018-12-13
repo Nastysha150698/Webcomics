@@ -14,21 +14,25 @@ class FramesController < ApplicationController
 
   # GET /frames/new
   def new
-    @frame = Frame.new
+    @comic = Comic.find(params[:comic_id])
+    @frame = @comic.frames.new
   end
 
   # GET /frames/1/edit
   def edit
+    @comic = @frame.comic
   end
 
   # POST /frames
   # POST /frames.json
   def create
     @frame = Frame.new(frame_params)
+    @frame.comic_id = params[:comic_id]
 
     respond_to do |format|
       if @frame.save
-        format.html { redirect_to @frame, notice: 'Frame was successfully created.' }
+        @comic = @frame.comic
+        format.html { redirect_to @comic, notice: 'Frame was successfully created.' }
         format.json { render :show, status: :created, location: @frame }
       else
         format.html { render :new }
@@ -40,9 +44,11 @@ class FramesController < ApplicationController
   # PATCH/PUT /frames/1
   # PATCH/PUT /frames/1.json
   def update
+    @comic = @frame.comic
+
     respond_to do |format|
       if @frame.update(frame_params)
-        format.html { redirect_to @frame, notice: 'Frame was successfully updated.' }
+        format.html { redirect_to @comic, notice: 'Frame was successfully updated.' }
         format.json { render :show, status: :ok, location: @frame }
       else
         format.html { render :edit }
@@ -69,6 +75,6 @@ class FramesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def frame_params
-      params.require(:frame).permit(:frame, :x, :y, :width, :height, :border_width, :border_color, :background_color)
+      params.require(:frame).permit(:frame, :x, :y, :width, :height, :border_width, :border_color, :background_color, :comic_id)
     end
 end

@@ -42,7 +42,7 @@
 
 <p>
   <strong>Font color:</strong>
-  <%= @speech.font_color %>
+  <%= @speech.color %>
 </p>
 
 <p>
@@ -50,5 +50,10 @@
   <%= @speech.background_color %>
 </p>
 
-<%= link_to 'Edit', edit_speech_path(@speech) %> |
-<%= link_to 'Back', speeches_path %>
+<p>
+  <strong>font:</strong>
+  <%= @speech.font.title %>
+</p>
+
+<%#= link_to 'Edit', edit_speech_path(@speech) %> |
+<%#= link_to 'Back', speeches_path %>

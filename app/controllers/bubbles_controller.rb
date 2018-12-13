@@ -14,21 +14,25 @@ class BubblesController < ApplicationController
 
   # GET /bubbles/new
   def new
-    @bubble = Bubble.new
+    @comic = Comic.find(params[:comic_id])
+    @bubble = @comic.bubbles.new
   end
 
   # GET /bubbles/1/edit
   def edit
+    @comic = @bubble.comic
   end
 
   # POST /bubbles
   # POST /bubbles.json
   def create
     @bubble = Bubble.new(bubble_params)
+    @bubble.comic_id = params[:comic_id]
 
     respond_to do |format|
       if @bubble.save
-        format.html { redirect_to @bubble, notice: 'Bubble was successfully created.' }
+        @comic = @bubble.comic
+        format.html { redirect_to @comic, notice: 'Bubble was successfully created.' }
         format.json { render :show, status: :created, location: @bubble }
       else
         format.html { render :new }
@@ -40,9 +44,11 @@ class BubblesController < ApplicationController
   # PATCH/PUT /bubbles/1
   # PATCH/PUT /bubbles/1.json
   def update
+    @comic = @bubble.comic
+
     respond_to do |format|
       if @bubble.update(bubble_params)
-        format.html { redirect_to @bubble, notice: 'Bubble was successfully updated.' }
+        format.html { redirect_to @comic, notice: 'Bubble was successfully updated.' }
         format.json { render :show, status: :ok, location: @bubble }
       else
         format.html { render :edit }
@@ -69,6 +75,6 @@ class BubblesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bubble_params
-      params.require(:bubble).permit(:figure, :x, :y, :width, :height, :border_width, :border_color, :background_color, :shape)
+      params.require(:bubble).permit(:figure, :x, :y, :width, :height, :border_width, :border_color, :background_color, :shape, :comic_id)
     end
 end
