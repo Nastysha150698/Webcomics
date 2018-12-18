@@ -5,6 +5,11 @@
   <%= @bubble.figure %>
 </p>
 
+<!-- <p>
+  <strong>Text:</strong>
+  <%#= @speech.text %>
+</p> -->
+
 <p>
   <strong>X:</strong>
   <%= @bubble.x %>
@@ -17,33 +22,18 @@
 
 <p>
   <strong>Width:</strong>
-  <%= @bubble.width %>
+  <%= @bubble.shape_width %>
 </p>
 
 <p>
   <strong>Height:</strong>
-  <%= @bubble.height %>
+  <%= @bubble.shape_height %>
 </p>
 
 <p>
-  <strong>Border width:</strong>
-  <%= @bubble.border_width %>
-</p>
-
-<p>
-  <strong>Border color:</strong>
-  <%= @bubble.border_color %>
-</p>
-
-<p>
-  <strong>Background color:</strong>
-  <%= @bubble.background_color %>
-</p>
-
-<p>
-  <strong>Shape:</strong>
-  <%= @bubble.shape_id %>
-</p>
+   <strong>shape:</strong>
+   <%= @bubble.shape.title %>
+ </p>
 
 <%= link_to 'Edit', edit_bubble_path(@bubble) %> |
 <%= link_to 'Back', bubbles_path %>

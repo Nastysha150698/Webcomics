@@ -75,6 +75,6 @@ class BubblesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bubble_params
-      params.require(:bubble).permit(:figure, :x, :y, :width, :height, :border_width, :border_color, :background_color, :shape, :comic_id)
+      params.require(:bubble).permit(:figure, :text, :x, :y, :shape_width, :shape_height, :shape, :shape_id, :z_index, :comic_id, :rotate, :opacity)
     end
 end

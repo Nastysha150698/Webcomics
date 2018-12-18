@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="field">
+    <%#= form.label :text %>
+    <%#= form.text_area :text %>
+  </div>
+
+  <div class="field">
     <%= form.label :name %>
     <%= form.text_field :figure %>
   </div>
@@ -27,6 +32,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :rotate %>
+    <%= form.number_field :rotate %>
+  </div>
+
+  <div class="field">
     <%= form.label :width %>
     <%= form.number_field :width %>
   </div>
@@ -37,24 +47,39 @@
   </div>
 
   <div class="field">
-    <%= form.label :border_width %>
-    <%= form.number_field :border_width %>
+    <%#= form.label :border_width %>
+    <%#= form.number_field :border_width %>
   </div>
 
   <div class="field">
-    <%= form.label :border_color %>
-    <%= form.text_field :border_color %>
+    <%#= form.label :border_color %>
+    <%#= form.text_field :border_color %>
   </div>
 
   <div class="field">
-    <%= form.label :background_color %>
-    <%= form.text_field :background_color %>
+    <%#= form.label :background_color %>
+    <%#= form.text_field :background_color %>
   </div>
 
   <div class="field">
-    <%= form.label :shape %>
-    <%#= form.text_field :bubble_id %>
-    <%#= select("shape", "bubble_id", Bubble.all.collect {|b| [ b.name, b.id ] }, { include_blank: true }) %>
+    <%#= form.label :border_radius %>
+    <%#= form.number_field :border_radius %>
+  </div>
+
+  <div class="field">
+    <%= form.label :opacity %>
+    <%= form.number_field :opacity %>
+  </div>
+
+  <div class="field">
+    <%= form.label :layer %>
+    <%= form.text_field :z_index %>
+  </div>
+
+  <div class="field">
+    <%= form.label :shape_id %>
+    <%#= form.text_field :shape_id %>
+    <%= select("bubble", "shape_id", Shape.all.collect { |a| [a.title, a.id] }, { include_blank: true }) %>
   </div>
 
   <div class="actions">

@@ -1,19 +1,25 @@
 <%
   y = image.y.to_s
   x = image.x.to_s
+  rotate = image.rotate.to_s
   width = image.width.to_s
   height = image.height.to_s
   bg_image = image.image.url
+  opacity = image.opacity
+  z_index = image.z_index.to_s
 
   position = "position: absolute;"
   top = "top: #{ y }px;" if y != ""
   left = "left: #{ x }px;" if x != ""
+  rotate = "transform: rotate(#{ rotate }deg);" if rotate != ""
   width = "width: #{ width }px;" if width != ""
   height = "height: #{ height }px;" if height != ""
   bg_image = "background-image: url(#{ bg_image });"
+  opacity = "opacity: #{ opacity/100 };" if opacity != ""
+  z_index = "z-index: #{ z_index };" if z_index != ""
 
   style = [
-    position, top, left, width, height, bg_image
+    position, top, left, width, height, opacity, rotate, bg_image, z_index
   ].join(" ")
 %>
 

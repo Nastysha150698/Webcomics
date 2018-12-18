@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_19_080656) do
+ActiveRecord::Schema.define(version: 2018_12_18_205224) do
 
   create_table "bubbles", force: :cascade do |t|
     t.string "figure"
@@ -25,6 +25,13 @@ ActiveRecord::Schema.define(version: 2018_11_19_080656) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "comic_id"
+    t.integer "z_index"
+    t.integer "border_radius"
+    t.string "text"
+    t.integer "form_id"
+    t.integer "shape_id"
+    t.integer "rotate"
+    t.integer "opacity"
   end
 
   create_table "comics", force: :cascade do |t|
@@ -47,6 +54,8 @@ ActiveRecord::Schema.define(version: 2018_11_19_080656) do
     t.integer "comic_id"
     t.integer "border_radius"
     t.integer "z_index"
+    t.integer "rotate"
+    t.float "opacity"
   end
 
   create_table "frames", force: :cascade do |t|
@@ -61,6 +70,9 @@ ActiveRecord::Schema.define(version: 2018_11_19_080656) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "comic_id"
+    t.integer "z_index"
+    t.integer "rotate"
+    t.integer "opacity"
   end
 
   create_table "images", force: :cascade do |t|
@@ -72,6 +84,16 @@ ActiveRecord::Schema.define(version: 2018_11_19_080656) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "comic_id"
+    t.integer "z_index"
+    t.integer "opacity"
+    t.integer "rotate"
+  end
+
+  create_table "shapes", force: :cascade do |t|
+    t.string "title"
+    t.string "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "speeches", force: :cascade do |t|
@@ -88,6 +110,7 @@ ActiveRecord::Schema.define(version: 2018_11_19_080656) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "comic_id"
+    t.integer "z_index"
   end
 
 end

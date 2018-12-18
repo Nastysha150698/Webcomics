@@ -75,6 +75,6 @@ class FramesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def frame_params
-      params.require(:frame).permit(:frame, :x, :y, :width, :height, :border_width, :border_color, :background_color, :comic_id)
+      params.require(:frame).permit(:frame, :x, :y, :width, :height, :border_width, :border_color, :background_color, :comic_id, :rotate, :opacity)
     end
 end

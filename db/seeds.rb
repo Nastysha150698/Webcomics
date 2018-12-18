@@ -65,4 +65,27 @@ end
   end
 end
 
+@forms = [
+  {
+    title: 'star',
+    link: '../public/uploads/images/bubbles/1.svg'
+  },
+  {
+    title: 'just',
+    link: '../public/uploads/images/bubbles/2.svg'
+  }
+]
+
+def create_form(form)
+   Form.create(
+     title: form[:title],
+     link: form[:link]
+   )
+ end
+
+ @forms.each do |form|
+   v = create_form(form)
+   puts "form #{v.title} created"
+ end
+
 #<Figure id: 1, figure: "wefdgvc", x: 123, y: 432, width: 234, height: 542, border_width: 12, border_color: "orange", background_color: "red", created_at: "2018-11-06 08:16:51", updated_at: "2018-11-06 08:16:51", comic_id: 1>, #<Figure id: 2, figure: "wefdgvc", x: 123, y: 432, width: 234, height: 542, border_width: 12, border_color: "orange", background_color: "red", created_at: "2018-11-06 08:17:30", updated_at: "2018-11-06 08:17:30", comic_id: 1>, #<Figure id: 3, figure: "asdfd", x: 123, y: 213, width: 123, height: 2143, border_width: 23, border_color: "yellow", background_color: "orange", created_at: "2018-11-06 08:28:18", updated_at: "2018-11-06 08:55:29", comic_id: 3>, #<Figure id: 4, figure: "asdasd", x: 123, y: 352, width: 234, height: 123, border_width: 23, border_color: "red", background_color: "green", created_at: "2018-11-06 08:28:35", updated_at: "2018-11-06 08:28:35", comic_id: 3>, #<Figure id: 5, figure: "sdfsdf", x: 827, y: 263, width: 726, height: 235, border_width: 32, border_color: "ddeeff", background_color: "orange", created_at: "2018-11-06 08:46:16", updated_at: "2018-11-06 08:56:51", comic_id: 3>

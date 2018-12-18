@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :bubbles
     resources :figures
     resources :images
+    resources :shapes
   end
 
   root 'comics#index'

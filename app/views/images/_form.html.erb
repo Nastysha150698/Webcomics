@@ -28,6 +28,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :rotate %>
+    <%= form.number_field :rotate %>
+  </div>
+
+  <div class="field">
     <%= form.label :width %>
     <%= form.number_field :width %>
   </div>
@@ -35,6 +40,16 @@
   <div class="field">
     <%= form.label :height %>
     <%= form.number_field :height %>
+  </div>
+
+  <div class="field">
+    <%= form.label :opacity %>
+    <%= form.number_field :opacity %>
+  </div>
+
+  <div class="field">
+    <%= form.label :layer %>
+    <%= form.text_field :z_index %>
   </div>
 
   <div class="actions">

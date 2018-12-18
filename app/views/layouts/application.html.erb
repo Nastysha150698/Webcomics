@@ -9,6 +9,11 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
+  <% @shapes = Shape.all %>
+    <% @shapes.each do |s| %>
+      <link href=' <%= s.link %> ' rel="stylesheet">
+  <% end %>
+
   <body>
     <nav>
       <%#= link_to 'Comics',   comics_url  %>
