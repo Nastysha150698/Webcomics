@@ -69,11 +69,11 @@ end
 @forms = [
   {
     title: 'star',
-    link: '../public/uploads/images/bubbles/1.svg'
+    link: '../lib/tasks/bubbles/1.svg'
   },
   {
     title: 'just',
-    link: '../public/uploads/images/bubbles/2.svg'
+    link: '../lib/tasks/bubbles/2.svg'
   }
 ]
 
@@ -88,7 +88,7 @@ def create_form(form)
    v = create_form(form)
    puts "form #{v.title} created"
  end
- 
+
 
 @fonts = [
   {
