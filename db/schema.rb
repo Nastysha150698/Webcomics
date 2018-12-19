@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_18_205224) do
+ActiveRecord::Schema.define(version: 2018_12_02_180958) do
 
   create_table "bubbles", force: :cascade do |t|
     t.string "figure"
@@ -56,6 +56,13 @@ ActiveRecord::Schema.define(version: 2018_12_18_205224) do
     t.integer "z_index"
     t.integer "rotate"
     t.float "opacity"
+  end
+
+  create_table "fonts", force: :cascade do |t|
+    t.string "title"
+    t.string "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "frames", force: :cascade do |t|
@@ -105,11 +112,12 @@ ActiveRecord::Schema.define(version: 2018_12_18_205224) do
     t.string "font_family"
     t.integer "font_size"
     t.string "font_style"
-    t.string "font_color"
+    t.string "color"
     t.string "background_color"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "comic_id"
+    t.integer "font_id"
     t.integer "z_index"
   end
 

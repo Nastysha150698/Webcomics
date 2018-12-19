@@ -21,6 +21,7 @@ class ImagesController < ApplicationController
   # GET /images/1/edit
   def edit
     @comic = @image.comic
+    @@old_z_index = @image.z_index
   end
 
   # POST /images
@@ -29,6 +30,7 @@ class ImagesController < ApplicationController
     # @image = Image.new(image_params)
     @image = Image.new(image_params)
     @image.comic_id = params[:comic_id]
+    @image.z_index = objects_quantity(@image.comic) + 1
 
     respond_to do |format|
       if @image.save
@@ -56,6 +58,13 @@ class ImagesController < ApplicationController
         format.json { render json: @image.errors, status: :unprocessable_entity }
       end
     end
+
+    @new_z_index = @image.z_index
+
+    change_z_indexes(@comic.figures, @image, @new_z_index, @@old_z_index)
+    change_z_indexes(@comic.speeches, @image, @new_z_index, @@old_z_index)
+    change_z_indexes(@comic.images, @image, @new_z_index, @@old_z_index)
+
   end
 
   # DELETE /images/1
@@ -63,7 +72,7 @@ class ImagesController < ApplicationController
   def destroy
     @image.destroy
     respond_to do |format|
-      format.html { redirect_to images_url, notice: 'Image was successfully destroyed.' }
+      format.html { redirect_to @image.comic, notice: 'Image was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -76,6 +85,6 @@ class ImagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def image_params
-      params.require(:image).permit(:image, :x, :y, :width, :height, :comic_id, :rotate, :opacity)
+      params.require(:image).permit(:image, :x, :y, :width, :height, :comic_id, :z_index, :rotate, :opacity)
     end
 end

@@ -1,7 +1,11 @@
 .figure {
   &:hover {
+    box-shadow: 0px 5px 21px -10px rgba(0,0,0,1);
+    transition: .1s ease;
+
     .editButton {
       display: block;
+      transition: .2s ease;
     }
   }
 
@@ -11,5 +15,6 @@
     height: 30px;
     line-height: 30px;
     text-align: center;
+    font-family: Arial;
   }
 }

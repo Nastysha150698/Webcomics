@@ -32,5 +32,7 @@
 %>
 
 <%= content_tag :div, class: 'figure', style: style do %>
+  <%= figure.id.to_s %>
   <%= link_to "Edit", edit_comic_figure_path(@comic, figure), class: 'editButton' %>
+  <%= link_to 'Destroy', comic_figure_path(@comic, figure), method: :delete, data: { confirm: 'Are you sure?' }, class: 'editButton' %>
 <% end %>

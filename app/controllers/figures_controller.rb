@@ -7,6 +7,11 @@ class FiguresController < ApplicationController
     @figures = Figure.all
   end
 
+  def new_figure_z_index
+    @comic = Comic.find(params[:comic_id])
+    (@comic.figures.all.count + 1)
+  end
+
   # GET /figures/1
   # GET /figures/1.json
   def show
@@ -16,12 +21,12 @@ class FiguresController < ApplicationController
   def new
     @comic = Comic.find(params[:comic_id])
     @figure = @comic.figures.new
-    # @figure = Figure.new
   end
 
   # GET /figures/1/edit
   def edit
     @comic = @figure.comic
+    @@old_z_index = @figure.z_index
   end
 
   # POST /figures
@@ -29,6 +34,7 @@ class FiguresController < ApplicationController
   def create
     @figure = Figure.new(figure_params)
     @figure.comic_id = params[:comic_id]
+    @figure.z_index = objects_quantity(@figure.comic) + 1
 
     respond_to do |format|
       if @figure.save
@@ -56,6 +62,12 @@ class FiguresController < ApplicationController
         format.json { render json: @figure.errors, status: :unprocessable_entity }
       end
     end
+
+    @new_z_index = @figure.z_index
+
+    change_z_indexes(@comic.figures, @figure, @new_z_index, @@old_z_index)
+    change_z_indexes(@comic.speeches, @figure, @new_z_index, @@old_z_index)
+    change_z_indexes(@comic.images, @figure, @new_z_index, @@old_z_index)
   end
 
   # DELETE /figures/1
@@ -63,9 +75,13 @@ class FiguresController < ApplicationController
   def destroy
     @figure.destroy
     respond_to do |format|
-      format.html { redirect_to figures_url, notice: 'Figure was successfully destroyed.' }
+      format.html { redirect_to @figure.comic, notice: 'Figure was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def increment_z_index
+    @figure.update_attribute(:z_index, index + 1)
   end
 
   private

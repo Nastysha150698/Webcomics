@@ -1,4 +1,5 @@
-<%= form_for :figure, url: comic_figures_path do |form| %>
+<%= form_with(model: [@comic, @figure]) do |form| %>
+<%#= form_for([@comic, @figure]) do |form| %>
   <% if @figure.errors.any? %>
 
     <div id="error_explanation">
@@ -69,7 +70,9 @@
 
   <div class="field">
     <%= form.label :layer %>
-    <%= form.text_field :z_index %>
+    <!-- <%= form.number_field :z_index %> -->
+    <%= form.number_field :z_index, in: 1..(@comic.figures.count + @comic.speeches.count + @comic.images.count) %>
+    max value: <%= @comic.figures.count + @comic.speeches.count + @comic.images.count %>
   </div>
 
   <div class="actions">

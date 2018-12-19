@@ -17,12 +17,14 @@
   bg_image = "background-image: url(#{ bg_image });"
   opacity = "opacity: #{ opacity/100 };" if opacity != ""
   z_index = "z-index: #{ z_index };" if z_index != ""
+  bg_size = "background-size: cover;"
 
   style = [
-    position, top, left, width, height, opacity, rotate, bg_image, z_index
+    position, top, left, width, height, opacity, rotate, bg_image, z_index, bg_size
   ].join(" ")
 %>
 
 <%= content_tag :div, class: 'image', style: style do %>
   <%= link_to "Edit", edit_comic_image_path(@comic, image), class: 'editButton' %>
+  <%= link_to 'Destroy', comic_image_path(@comic, image), method: :delete, data: { confirm: 'Are you sure?' }, class: 'editButton' %>
 <% end %>

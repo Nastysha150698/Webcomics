@@ -7,7 +7,8 @@
   font_family = speech.font_family
   font_style = speech.font_style
   font_size = speech.font_size
-  font_color = speech.font_color
+  color = speech.color
+  font_title = speech.font.title
   z_index = speech.z_index.to_s
 
   position = "position: absolute;"
@@ -16,18 +17,19 @@
   width = "width: #{ width }px;" if width != ""
   height = "height: #{ height }px;" if height != ""
   background_color = "background-color: #{ bg_color };" if bg_color != ""
-  font_family = "font-family: #{ font_family };" if font_family != ""
+  font_family = "font-family: #{ font_title };" if font_title != ""
   font_style = "font-style: #{ font_style };" if font_style != "" && font_family != ""
-  font_size = "font-size: #{ font_size };" if font_size != "" && font_family != ""
-  font_color = "font-color: #{ font_color };" if font_color != "" && font_family != ""
-  z_index = "z-index: #{ z_index };" if z_index != ""
+  font_size = "font-size: #{ font_size }px;" if font_size != "" && font_family != ""
+  color = "color: #{ color };" if color != "" && font_family != ""
 
   style = [
-    position, top, left, width, height,
-    background_color, font_family, font_style, font_size, font_color, z_index
+    position, top, left, width, height, background_color,
+    font_family, font_style, font_size, color, z_index
   ].join(" ")
 %>
 
 <%= content_tag :div, class: 'speech', style: style do %>
+  <%= speech.text %> <br>
   <%= link_to "Edit", edit_comic_speech_path(@comic, speech), class: 'editButton' %>
+  <%= link_to 'Destroy', comic_speech_path(@comic, speech), method: :delete, data: { confirm: 'Are you sure?' }, class: 'editButton' %>
 <% end %>
