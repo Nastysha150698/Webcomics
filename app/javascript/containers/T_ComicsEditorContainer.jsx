@@ -44,9 +44,9 @@ export default class T_ComicsEditorContainer extends React.Component {
       }
     })
 
-    this.setState({
-      figures: nextFigures
-    })
+    // this.setState({
+    //   figures: nextFigures
+    // })
   }
 
   handleDrop(id) {
@@ -56,6 +56,13 @@ export default class T_ComicsEditorContainer extends React.Component {
     let movingElementIndex
     let dropzoneElementIndex
 
+    console.log(figures)
+
+    console.log(
+      "currentDraggableId", currentDraggableId,
+      "currentDropzoneId", currentDropzoneId
+    )
+
     figures.map((figure, i) => {
       if (figure.id === currentDraggableId) {
         movingElementIndex = i
@@ -64,19 +71,32 @@ export default class T_ComicsEditorContainer extends React.Component {
       }
     })
 
+    console.log(
+      "movingElementIndex", movingElementIndex,
+      "dropzoneElementIndex", dropzoneElementIndex
+    )
+
     const movingElement = figures[movingElementIndex]
+
+    console.log("movingElement", movingElement.id)
 
     if (dropzoneElementIndex > movingElementIndex) {
       dropzoneElementIndex = movingElementIndex - 1
     }
 
-    figures.splice(movingElementIndex - 1, 1)
-    figures.splice(dropzoneElementIndex, 0, movingElement)
-    figures = this.setZIndexOnElements(figures)
+    console.log(figures)
+    // 
+    // figures.splice(movingElementIndex - 1, 1)
+    // console.log(figures)
 
-    this.setState({
-      figures: figures
-    })
+    // figures.splice(dropzoneElementIndex, 0, movingElement)
+    // console.log(figures)
+    //
+    // figures = this.setZIndexOnElements(figures)
+
+    // this.setState({
+    //   figures: figures
+    // })
   }
 
   setZIndexOnElements(items) {

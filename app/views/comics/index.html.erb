@@ -1,6 +1,6 @@
-<h1>Comics</h1>
 
-<table>
+
+<!-- <table>
   <thead>
     <tr>
       <th>Name</th>
@@ -18,8 +18,19 @@
       </tr>
     <% end %>
   </tbody>
-</table>
+</table> -->
 
-<br>
+<div class="comicPreviews">
+  <div class="logo"></div>
+  <div class="comicPreviewsHeaders">
+    <h1>S Inkie vi smozhete delat animirovanniye comicsi v vebe.</h1>
+    <h2>Version 0.1. You can create and edit objects.</h2>
+  </div>
+
+  <% @comics.each do |comic| %>
+    <%= render "comics/comicPreview", comic: comic %>
+  <% end %>
+</div>
+
 
 <%= link_to 'New Comic', new_comic_path %>

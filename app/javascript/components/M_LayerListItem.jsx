@@ -28,7 +28,7 @@ export default class M_LayerListItem extends React.Component {
   }
 
   render() {
-    console.log('M_LayerListItem', this.props.figure)
+    // console.log('M_LayerListItem', this.props.figure)
 
     return(
       <div
@@ -39,7 +39,7 @@ export default class M_LayerListItem extends React.Component {
         onDragOver={ (e)=>this.handleDragOver(e) }
         onDrop={ this.handleDrop }
       >
-        Layer Name { this.props.index }
+        {this.props.index }  |  Layer Name { this.props.figure.id}
       </div>
     )
   }

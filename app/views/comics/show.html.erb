@@ -4,50 +4,58 @@
     <%#= '<plink href="' + f.link + '" rel="stylesheet">'%>
   <%# end %>
 <%# end %>
+<section class="Sidebar">
+  <div class="comicsHeader">
+    <div class="comicsHeaderBacklink"><%= link_to '< To comics', comics_path %></div>
+    <div class="comicsHeaderName"><%= link_to @comic.name, edit_comic_path(@comic) %></div>
+  </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @comic.name %>
-  <%= link_to 'Edit', edit_comic_path(@comic) %> |
-  <%= link_to 'Back', comics_path %>
-</p>
+  <% @comic.figures.all.each do |figure|%>
+    <%= render "figures/figureListItem", figure: figure %>
+  <% end  %>
 
-<nav>
-  <%= link_to "Create figure", new_comic_figure_path(@comic) %>
-  <%= link_to "Create bubble", new_comic_bubble_path(@comic) %>
-  <%= link_to "Create frame", new_comic_frame_path(@comic) %>
-  <%= link_to "Create image", new_comic_image_path(@comic) %>
-  <%= link_to "Create speech", new_comic_speech_path(@comic) %> |
-  <%= link_to "Add font", new_font_path %>
-</nav>
+  <% @comic.images.all.each do |image|%>
+    <%= render "images/imageListItem",image: image %>
+  <% end  %>
 
-<%= render @comic.figures %>
-<%= render @comic.bubbles %>
-<%= render @comic.speeches %>
-<%= render @comic.frames %>
-<%= render @comic.images %>
+  <%#
+    objects = []
 
-________________________
-
-<%
-  objects = []
-
-  def push_things_to_array(things, array)
-    things.all.each do |thing|
-      if thing.z_index.nil?
-        thing.z_index = 0
+    def push_things_to_array(things, array)
+      things.all.each do |thing|
+        if thing.z_index.nil?
+          thing.z_index = 0
+        end
+        array.push([thing.z_index, (things.model_name.to_s + ' ' + thing.id.to_s)])
       end
-      array.push([thing.z_index, (things.model_name.to_s + ' ' + thing.id.to_s)])
+      return array
     end
-    return array
-  end
 
-  objects = push_things_to_array(@comic.figures, objects)
-  objects = push_things_to_array(@comic.speeches, objects)
-  objects = push_things_to_array(@comic.images, objects)
+    objects = push_things_to_array(@comic.figures, objects)
+    objects = push_things_to_array(@comic.speeches, objects)
+    objects = push_things_to_array(@comic.images, objects)
 
-  objects = objects.sort_by {|elem| elem[0]}
-  layers_amount = objects.size
-%>
+    objects = objects.sort_by {|elem| elem[0]}
+    layers_amount = objects.size
+  %>
 
-<p><%= objects %> | All: <%= layers_amount %></p>
+  <!-- <p><%#= objects %> | All: <%#= layers_amount %></p> -->
+</section>
+
+<section class="ComicsArtbord">
+  <div class="newComicItem">
+    <div class="newComicItemButton"></div>
+    <div class="newComicItemMenu">
+      <a class="newComicItemMenuItem" href="<%= url_for new_comic_figure_path(@comic) %>"><div class="icon newComicFigureIcon"></div>Figure</a>
+      <a class="newComicItemMenuItem" href="<%= url_for new_comic_bubble_path(@comic) %>"><div class="icon newComicBubbleIcon"></div>Bubble</a>
+      <a class="newComicItemMenuItem" href="<%= url_for new_comic_image_path(@comic) %>"><div class="icon newComicPictureIcon"></div>Image</a>
+      <a class="newComicItemMenuItem" href="<%= url_for new_comic_speech_path(@comic) %>"><div class="icon newComicTextIcon"></div>Text</a>
+      <a class="newComicItemMenuItem newComicItemMenuItemLine" href="<%= url_for new_font_path %>"><div class="icon"></div>Add font</a>
+    </div>
+  </div>
+  <%= render @comic.figures %>
+  <%= render @comic.bubbles %>
+  <%= render @comic.speeches %>
+  <%= render @comic.frames %>
+  <%= render @comic.images %>
+</section>

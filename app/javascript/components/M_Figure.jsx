@@ -29,7 +29,9 @@ export default class M_Figure extends React.Component {
     }
 
     return(
-      <div className="M_Figure" style={ styles } />
+      <div className="M_Figure" style={ styles }>
+        {this.props.figure.id}
+      </div>
     )
   }
 }

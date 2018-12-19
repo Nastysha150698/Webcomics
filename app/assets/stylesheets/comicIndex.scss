@@ -1,0 +1,78 @@
+.comicPreviews {
+  width: 784px;
+  margin: 100px auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: flex-start;
+
+
+
+  .comicPreview {
+    width: 248px;
+    height: 216px;
+    margin-bottom: 20px;
+    // padding: 16px;
+
+    border-radius: 4px;
+    background-color: #FBFAFA;
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.20);
+
+    &:hover {
+      box-shadow: 0 3px 8px 0 rgba(0,0,0,0.30);
+      transition: .2s ease-in;
+    }
+
+    overflow: hidden;
+
+    .comicPreviewImage {
+      width: 100%;
+      height: 150px;
+      background-image: url(gradient.png);
+      background-size: cover;
+      background-color: #292C3F;
+
+    }
+
+    .comicPrewiewName {
+      margin: 14px;
+      font-family: AvenirNext-Bold;
+      font-size: 14px;
+      line-height: 18px;
+      color: #111111;
+      letter-spacing: 0;
+    }
+  }
+}
+
+.comicPreviewsHeaders {
+  margin-bottom: 88px;
+  h1 {
+    font-family: AvenirNext-Bold;
+    font-size: 46px;
+    line-height: 58px;
+    color: #111111;
+    letter-spacing: 0;
+    line-height: 58px;
+
+    margin-bottom: 32px;
+  }
+
+  h2 {
+    opacity: 0.49;
+    font-family: AvenirNext-Medium;
+    font-size: 26px;
+    color: #111111;
+    letter-spacing: 0;
+  }
+}
+
+.logo {
+  width: 124px;
+  height: 70px;
+  background-image: url(logo.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-bottom: 64px;
+
+}

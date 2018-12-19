@@ -1,0 +1,10 @@
+<!-- <div class="LayerListItem">
+  <%= figure.model_name.to_s%>
+  <%= figure.id%>
+</div> -->
+
+<a class="LayerListItem" href="<%= url_for edit_comic_figure_path(@comic, figure) %>">
+  <div class="icon newComicFigureIcon"></div>
+  <%= figure.model_name.to_s%>
+  <%= figure.id%>
+</a>
