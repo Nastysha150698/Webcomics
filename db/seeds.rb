@@ -128,8 +128,16 @@ end
   {
     title: 'Press Start 2P',
     link: 'https://fonts.googleapis.com/css?family=Press Start 2P'
+  },
+  {
+    title: 'Chakra Petch',
+    link: 'https://fonts.googleapis.com/css?family=Chakra Petch'
+  }, {
+    title: 'Faster One',
+    link: 'https://fonts.googleapis.com/css?family=Faster One'
   }
 ]
+
 
 def create_font(font)
   Font.create(
@@ -226,73 +234,49 @@ frames = [
   {
     comic_id:       1,
     frame:         '1',
-    # x:              198,
-    # y:              118,
-    # width:          422,
-    # height:         605,
     x:              208,
-    y:              220,
+    y:              270,
     width:          414,
     height:         605,
 
     border_width:   2,
-    border_color:  'blue'
+    border_color:  'white'
   }, {
     comic_id:       1,
     frame:         '2',
-    # x:              638,
-    # y:              118,
-    # width:          426,
-    # height:         137,
-
     x:              640,
-    y:              220,
+    y:              270,
     width:          426,
     height:         137,
     border_width:   2,
-    border_color:  'blue'
+    border_color:  'white'
   }, {
     comic_id:       1,
     frame:         '3',
-    # x:              638,
-    # y:              275,
-    # width:          426,
-    # height:         136,
-
     x:              640,
-    y:              377,
+    y:              427,
     width:          426,
     height:         136,
     border_width:   2,
-    border_color:  'blue'
+    border_color:  'white'
   }, {
     comic_id:       1,
     frame:         '4',
-    # x:              638,
-    # y:              430,
-    # width:          426,
-    # height:         136,
-
     x:              639,
-    y:              532,
+    y:              582,
     width:          426,
     height:         136,
     border_width:   2,
-    border_color:  'blue'
+    border_color:  'white'
   }, {
     comic_id:       1,
     frame:         '5',
-    # x:              638,
-    # y:              586,
-    # width:          426,
-    # height:         137,
-
     x:              640,
-    y:              688,
+    y:              738,
     width:          426,
     height:         137,
     border_width:   2,
-    border_color:  'blue'
+    border_color:  'white'
   }
 ]
 
@@ -328,8 +312,8 @@ images = [
     comic_id: 1,
     frame_id: 1,
     image:    upload_image("big_fr.png"),
-    x:        208,
-    y:        220,
+    x:        0,
+    y:        0,
     width:    414,
     height:   605,
     z_index:  0
@@ -337,35 +321,35 @@ images = [
     comic_id: 1,
     frame_id: 2,
     image:    upload_image("1_fr.png"),
-    x:        640,
-    y:        220,
+    x:        0,
+    y:        0,
     width:    426,
     height:   137,
     z_index:  0
   }, {
     comic_id: 1,
-    # frame_id: '3',
+    frame_id: 3,
     image:    upload_image("2_fr.png"),
-    x:        640,
-    y:        377,
+    x:        0,
+    y:        0,
     width:    426,
     height:   136,
     z_index:  0
   }, {
     comic_id: 1,
-    # frame_id: '4',
+    frame_id: 4,
     image:    upload_image("3_fr.png"),
-    x:        640,
-    y:        532,
+    x:        0,
+    y:        0,
     width:    426,
     height:   136,
     z_index:  0
   }, {
     comic_id: 1,
-    # frame_id: '5',
+    frame_id: 5,
     image:    upload_image("4_fr.png"),
-    x:        640,
-    y:        688,
+    x:        0,
+    y:        0,
     width:    426,
     height:   137,
     z_index:  0
@@ -374,4 +358,52 @@ images = [
 
 images.each do |i|
   create_comic(c, i)
+end
+
+# Create Text
+def create_comic(comic, speech)
+  comic.speeches.create(
+    comic_id:         speech[:comic_id],
+    frame_id:         speech[:frame_id],
+    text:             speech[:text],
+    x:                speech[:x],
+    y:                speech[:y],
+    width:            speech[:width],
+    height:           speech[:height],
+    font_id:          speech[:font_id],
+    font_size:        speech[:font_size],
+    color:            speech[:color],
+    z_index:          speech[:z_index]
+  )
+end
+
+speeches = [
+  {
+    comic_id: 1,
+    frame_id: 1,
+    text: '925653',
+    x: 175,
+    y: 51,
+    width: 200,
+    height: 200,
+    font_id: 11,
+    font_size: 23,
+    color: 'white',
+    z_index: 0
+  }, {
+    comic_id: 1,
+    text: 'Nonstop Bar',
+    x: 465,
+    y: 181,
+    width: 400,
+    height: 200,
+    font_id: 6,
+    font_size: 53,
+    color: 'white',
+    z_index: 0
+  }
+]
+
+speeches.each do |s|
+  create_comic(c, s)
 end
