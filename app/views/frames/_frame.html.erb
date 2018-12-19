@@ -25,4 +25,24 @@
 
 <%= content_tag :div, class: 'frame', style: style do %>
   <%= link_to "Edit", edit_comic_frame_path(@comic, frame), class: 'editButton' %>
+  <%#= render @comic.figures.all %>
+  <% @comic.figures.each do |f| %>
+    <% if f.frame_id == frame.id %>
+      <%= render f %>
+    <% end %>
+  <% end %>
+
+  <%#= render @comic.images.all %>
+  <% @comic.images.each do |i| %>
+    <% if i.frame_id == frame.id %>
+      <%= render i %>
+    <% end %>
+  <% end %>
+
+  <%#= render @comic.speeches.all %>
+  <% @comic.speeches.each do |s| %>
+    <% if s.frame_id == frame.id %>
+      <%= render s %>
+    <% end %>
+  <% end %>
 <% end %>

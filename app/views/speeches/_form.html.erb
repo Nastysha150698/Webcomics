@@ -1,5 +1,6 @@
-<%= form_with(model: [@comic, @speech]) do |form| %>
+<%= form_with(model: [@comic, @speech], local: true) do |form| %>
   <% if @speech.errors.any? %>
+
     <div id="error_explanation">
       <h2><%= pluralize(@speech.errors.count, "error") %> prohibited this artwork from being saved:</h2>
 
@@ -14,6 +15,12 @@
   <div class="field">
     <%= form.label :text %>
     <%= form.text_area :text%>
+  </div>
+
+  <div class="field">
+    <%= form.label :frame_id %>
+    <%#= form.text_field :frame_id %>
+    <%= select("speech", "frame_id", @comic.frames.all.collect { |a| [a.frame, a.id] }, { include_blank: true }) %>
   </div>
 
   <div class="field">
@@ -46,12 +53,6 @@
     <%= form.label :font_size %>
     <%= form.number_field :font_size%>
   </div>
-
-  <!-- <div class="field">
-    <%= form.label :font_style %>
-    <%= form.text_field :font_style %>
-    <%#= select("speeches", "font_style", Speech.all.collect {|s| [ s.name, s.id ] }, { include_blank: true }) %>
-  </div> -->
 
   <div class="field">
     <%= form.label :color %>

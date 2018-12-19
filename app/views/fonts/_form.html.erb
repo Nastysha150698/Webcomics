@@ -1,10 +1,10 @@
-<%= form_with(model: font, local: true) do |form| %>
-  <% if font.errors.any? %>
+<%= form_with(model: [@comic, @font]) do |form| %>
+  <% if @font.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(font.errors.count, "error") %> prohibited this font from being saved:</h2>
+      <h2><%= pluralize(@font.errors.count, "error") %> prohibited this font from being saved:</h2>
 
       <ul>
-      <% font.errors.full_messages.each do |message| %>
+      <% @font.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
