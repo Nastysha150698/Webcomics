@@ -5,15 +5,17 @@ Rake::Task['db:migrate'].invoke
 
 # Basics
 def random_name
-  Random.new_seed
+  # Random.new_seed
+  [*('A'..'Z')].sample(13).join
 end
 
 @comics = Comic.all
 
 # Create random Comics
-10.times do
+1.times do
   name = random_name
   c = Comic.new(name: name)
+
 
   if c.save
     puts "Comics #{name} created"
@@ -281,7 +283,7 @@ frames = [
     comic_id:       1,
     frame:         '1',
     x:              208,
-    y:              270,
+    y:              190,
     width:          414,
     height:         605,
     border_width:   2,
@@ -290,7 +292,7 @@ frames = [
     comic_id:       1,
     frame:         '2',
     x:              640,
-    y:              270,
+    y:              190,
     width:          426,
     height:         137,
     border_width:   2,
@@ -299,7 +301,7 @@ frames = [
     comic_id:       1,
     frame:         '3',
     x:              640,
-    y:              427,
+    y:              347,
     width:          426,
     height:         136,
     border_width:   2,
@@ -308,7 +310,7 @@ frames = [
     comic_id:       1,
     frame:         '4',
     x:              639,
-    y:              582,
+    y:              502,
     width:          426,
     height:         136,
     border_width:   2,
@@ -317,7 +319,7 @@ frames = [
     comic_id:       1,
     frame:         '5',
     x:              640,
-    y:              738,
+    y:              658,
     width:          426,
     height:         137,
     border_width:   2,
@@ -361,7 +363,7 @@ images = [
     y:        0,
     width:    414,
     height:   605,
-    z_index:  1
+    z_index:  2
   }, {
     comic_id: 1,
     frame_id: 2,
@@ -370,7 +372,7 @@ images = [
     y:        0,
     width:    426,
     height:   137,
-    z_index:  1
+    z_index:  2
   }, {
     comic_id: 1,
     frame_id: 3,
@@ -379,7 +381,7 @@ images = [
     y:        0,
     width:    426,
     height:   136,
-    z_index:  1
+    z_index:  2
   }, {
     comic_id: 1,
     frame_id: 4,
@@ -388,7 +390,7 @@ images = [
     y:        0,
     width:    426,
     height:   136,
-    z_index:  1
+    z_index:  2
   }, {
     comic_id: 1,
     frame_id: 5,
@@ -397,25 +399,25 @@ images = [
     y:        0,
     width:    426,
     height:   137,
-    z_index:  1
+    z_index:  2
   },
 
   {
     comic_id: 1,
     image:    upload_image("777.png"),
     x:        492,
-    y:        388,
+    y:        308,
     width:    106,
     height:   87,
-    z_index:  3
+    z_index:  4
   }, {
     comic_id: 1,
     image:    upload_image("pong.png"),
     x:        235,
-    y:        367,
+    y:        287,
     width:    70,
     height:   32,
-    z_index:  3
+    z_index:  4
   }
 ]
 
@@ -455,7 +457,7 @@ images = [
     y:        100,
     width:    140,
     height:   160,
-    z_index:  2
+    z_index:  3
   }, {
     comic_id: 1,
     frame_id: 1,
@@ -464,7 +466,7 @@ images = [
     y:        60,
     width:    140,
     height:   120,
-    z_index:  2
+    z_index:  3
   }
 ]
 
@@ -504,19 +506,19 @@ speeches = [
     font_size: 23,
     line_height: 28,
     color: 'white',
-    z_index: 2
+    z_index: 3
   }, {
     comic_id: 1,
     text: 'Nonstop Bar',
     x: 465,
-    y: 171,
+    y: 91,
     width: 400,
     height: 200,
     font_id: 6,
     font_size: 53,
     line_height: 64,
     color: 'white',
-    z_index: 4
+    z_index: 1
   }
 ]
 
