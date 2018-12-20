@@ -24,7 +24,19 @@ end
 
 # Create fake data
 def random_size
-  rand(1000)
+  rand(500)
+end
+
+def random_distance
+  rand(2000)
+end
+
+def random_fontSize
+  rand(100)
+end
+
+def random_lineHeight
+  rand(20..110)
 end
 
 def random_border
@@ -48,8 +60,8 @@ end
   comic = @comics.sample
   i = comic.images.new(
     image:            upload_fake_image,
-    x:                random_size,
-    y:                random_size,
+    x:                random_distance,
+    y:                random_distance,
     width:            random_size,
     height:           random_size,
     z_index:          0
@@ -63,14 +75,41 @@ end
 end
 
 
+# Create random shapes
+def upload_fake_shape
+  uploader = ImageUploader.new(Image.new, :image)
+  uploader.cache!(File.open(Dir.glob(File.join(Rails.root, 'lib/tasks/bubbles', '*')).sample))
+  uploader
+end
+
+50.times do
+  name = random_name
+  comic = @comics.sample
+  i = comic.images.new(
+    image:            upload_fake_shape,
+    x:                random_distance,
+    y:                random_distance,
+    width:            random_size,
+    height:           random_size,
+    z_index:          0
+  )
+
+  if i.save
+    puts "Shape #{name} created"
+  else
+    puts "Error. Shape #{name} not created"
+  end
+end
+
+
 # Create random figures
 100.times do
   name = random_name
   comic = @comics.sample
   f = comic.figures.new(
     figure:           name,
-    x:                random_size,
-    y:                random_size,
+    x:                random_distance,
+    y:                random_distance,
     width:            random_size,
     height:           random_size,
     border_width:     random_border,
@@ -153,19 +192,36 @@ end
 
 
 # Create random texts
-@texts = [ { text: 'kawabunga' }, { text: 'она наблюдает за мной' }, { text: 'у бабки нехилые пушки' } ].sample
+# @texts = [
+#   {
+#     text: 'kawabunga'
+#   }, {
+#     text: 'она наблюдает за мной'
+#   }, {
+#     text: 'у бабки нехилые пушки'
+#   }
+# ]
+
+@texts = [
+  'kawabunga',
+  'она наблюдает за мной',
+  'у бабки нехилые пушки',
+  'грязные мыслишки, подлая душонка',
+  'Отличительной чертой революций является неправовой характер изменений — несоответствие правовой системе предшествующего строя или режима.'
+]
 
 30.times do
   name = random_name
   comic = @comics.sample
   s = comic.speeches.new(
-    text:             @texts,
-    x:                random_size,
-    y:                random_size,
+    text:             @texts.sample,
+    x:                random_distance,
+    y:                random_distance,
     width:            random_size,
     height:           random_size,
     font_id:          Font.all.sample.id,
-    font_size:        random_size,
+    font_size:        random_fontSize,
+    line_height:      random_lineHeight,
     color:            random_color,
     z_index:          0
   )
@@ -353,12 +409,80 @@ images = [
     width:    426,
     height:   137,
     z_index:  0
+  },
+
+  {
+    comic_id: 1,
+    image:    upload_image("777.png"),
+    x:        492,
+    y:        388,
+    width:    106,
+    height:   87,
+    z_index:  0
+  }, {
+    comic_id: 1,
+    image:    upload_image("pong.png"),
+    x:        235,
+    y:        367,
+    width:    70,
+    height:   32,
+    z_index:  0
   }
 ]
 
 images.each do |i|
   create_comic(c, i)
 end
+
+
+# Create Shape uploader
+def upload_shape(image)
+  uploader = ImageUploader.new(Image.new, :image)
+  uploader.cache!(File.open(File.join(Rails.root, 'lib/tasks/bubbles', image )))
+  uploader
+end
+
+
+# Create Bubble shapes
+def create_comic(comic, image)
+  comic.images.create(
+    comic_id:         image[:comic_id],
+    frame_id:         image[:frame_id],
+    image:            image[:image],
+    x:                image[:x],
+    y:                image[:y],
+    width:            image[:width],
+    height:           image[:height],
+    z_index:          image[:z_index]
+  )
+end
+
+images = [
+  {
+    comic_id: 1,
+    frame_id: 1,
+    image:    upload_shape("granny_bubble.png"),
+    x:        270,
+    y:        100,
+    width:    140,
+    height:   160,
+    z_index:  0
+  }, {
+    comic_id: 1,
+    frame_id: 1,
+    image:    upload_shape("man_bubble.png"),
+    x:        -3,
+    y:        60,
+    width:    140,
+    height:   120,
+    z_index:  0
+  }
+]
+
+images.each do |i|
+  create_comic(c, i)
+end
+
 
 # Create Text
 def create_comic(comic, speech)
@@ -372,6 +496,7 @@ def create_comic(comic, speech)
     height:           speech[:height],
     font_id:          speech[:font_id],
     font_size:        speech[:font_size],
+    line_height:      speech[:line_height],
     color:            speech[:color],
     z_index:          speech[:z_index]
   )
@@ -383,22 +508,24 @@ speeches = [
     frame_id: 1,
     text: '925653',
     x: 175,
-    y: 51,
+    y: 46,
     width: 200,
     height: 200,
     font_id: 11,
     font_size: 23,
+    line_height: 28,
     color: 'white',
     z_index: 0
   }, {
     comic_id: 1,
     text: 'Nonstop Bar',
     x: 465,
-    y: 181,
+    y: 171,
     width: 400,
     height: 200,
     font_id: 6,
     font_size: 53,
+    line_height: 64,
     color: 'white',
     z_index: 0
   }

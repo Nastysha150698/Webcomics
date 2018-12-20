@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_03_210513) do
+ActiveRecord::Schema.define(version: 2018_12_20_181126) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 2018_12_03_210513) do
     t.integer "font_id"
     t.integer "z_index"
     t.integer "frame_id"
+    t.integer "line_height"
   end
 
 end
