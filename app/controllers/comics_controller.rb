@@ -62,6 +62,12 @@ class ComicsController < ApplicationController
     end
   end
 
+  def createWithoutForm
+    name = 'Oleg'
+    c = Comic.new(name: name)
+    c.save
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_comic

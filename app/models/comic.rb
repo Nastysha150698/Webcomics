@@ -4,4 +4,6 @@ class Comic < ApplicationRecord
   has_many :frames
   has_many :images
   has_many :speeches
+
+  validates :name, presence: true
 end
