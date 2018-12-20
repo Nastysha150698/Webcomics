@@ -7,7 +7,7 @@
   bg_color = frame.background_color
   border_width = frame.border_width.to_s
   border_color = frame.border_color
-  opacity = frame.opacity
+  opacity = frame.opacity.to_s
   z_index = frame.z_index.to_s
 
   position = "position: absolute;"
@@ -17,7 +17,7 @@
   width = "width: #{ width }px;" if width != ""
   height = "height: #{ height }px;" if height != ""
   background_color = "background-color: #{ bg_color };" if bg_color != ""
-  opacity = "opacity: #{ opacity/100 };" if opacity != ""
+  opacity = "filter: opacity(#{ opacity }%);" if opacity != ""
   border_width = "border-width: #{ border_width }px;" if border_width != ""
   border_color = "border-color: #{ border_color };" if border_width != "" && border_color != ""
   border_style = "border-style: solid;" if border_width != ""

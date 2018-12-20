@@ -66,29 +66,29 @@ end
 end
 
 
-@forms = [
+@shapes = [
   {
     title: 'star',
-    link: '../public/uploads/images/bubbles/1.svg'
+    link: '../lib/assets/bubbles/1_1.svg'
   },
   {
     title: 'just',
-    link: '../public/uploads/images/bubbles/2.svg'
+    link: '../lib/assets/bubbles/1_2.svg'
   }
 ]
 
-def create_form(form)
-   Form.create(
-     title: form[:title],
-     link: form[:link]
+def create_shape(shape)
+   Shape.create(
+     title: shape[:title],
+     link:  shape[:link]
    )
  end
 
- @forms.each do |form|
-   v = create_form(form)
-   puts "form #{v.title} created"
- end
- 
+@shapes.each do |shape|
+   shape = create_shape(shape)
+   puts "Shape #{shape.title} created"
+end
+
 
 @fonts = [
   {

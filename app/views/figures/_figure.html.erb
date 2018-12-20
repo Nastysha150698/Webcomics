@@ -5,7 +5,7 @@
   width = figure.width.to_s
   height = figure.height.to_s
   bg_color = figure.background_color
-  opacity = figure.opacity
+  opacity = figure.opacity.to_s
   border_width = figure.border_width.to_s
   border_radius = figure.border_radius.to_s
   border_color = figure.border_color
@@ -18,7 +18,7 @@
   width = "width: #{ width }px;" if width != ""
   height = "height: #{ height }px;" if height != ""
   background_color = "background-color: #{ bg_color };" if bg_color != ""
-  opacity = "opacity: #{ opacity/100 };" if opacity != ""
+  opacity = "filter: opacity(#{ opacity }%);" if opacity != ""
   border_width = "border-width: #{ border_width }px;" if border_width != ""
   border_radius = "border-radius: #{ border_radius }px;" if border_width != "" && border_radius != ""
   border_color = "border-color: #{ border_color };" if border_width != "" && border_color != ""

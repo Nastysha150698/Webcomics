@@ -1,7 +1,7 @@
 class CreateShapes < ActiveRecord::Migration[5.2]
   def change
     create_table :shapes do |t|
-      t.string :title,
+      t.string :title
       t.string :link
 
       t.timestamps
