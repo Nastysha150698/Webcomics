@@ -192,16 +192,6 @@ end
 
 
 # Create random texts
-# @texts = [
-#   {
-#     text: 'kawabunga'
-#   }, {
-#     text: 'она наблюдает за мной'
-#   }, {
-#     text: 'у бабки нехилые пушки'
-#   }
-# ]
-
 @texts = [
   'kawabunga',
   'она наблюдает за мной',
@@ -294,7 +284,6 @@ frames = [
     y:              270,
     width:          414,
     height:         605,
-
     border_width:   2,
     border_color:  'white'
   }, {
@@ -372,7 +361,7 @@ images = [
     y:        0,
     width:    414,
     height:   605,
-    z_index:  0
+    z_index:  1
   }, {
     comic_id: 1,
     frame_id: 2,
@@ -381,7 +370,7 @@ images = [
     y:        0,
     width:    426,
     height:   137,
-    z_index:  0
+    z_index:  1
   }, {
     comic_id: 1,
     frame_id: 3,
@@ -390,7 +379,7 @@ images = [
     y:        0,
     width:    426,
     height:   136,
-    z_index:  0
+    z_index:  1
   }, {
     comic_id: 1,
     frame_id: 4,
@@ -399,7 +388,7 @@ images = [
     y:        0,
     width:    426,
     height:   136,
-    z_index:  0
+    z_index:  1
   }, {
     comic_id: 1,
     frame_id: 5,
@@ -408,7 +397,7 @@ images = [
     y:        0,
     width:    426,
     height:   137,
-    z_index:  0
+    z_index:  1
   },
 
   {
@@ -418,7 +407,7 @@ images = [
     y:        388,
     width:    106,
     height:   87,
-    z_index:  0
+    z_index:  3
   }, {
     comic_id: 1,
     image:    upload_image("pong.png"),
@@ -426,7 +415,7 @@ images = [
     y:        367,
     width:    70,
     height:   32,
-    z_index:  0
+    z_index:  3
   }
 ]
 
@@ -466,7 +455,7 @@ images = [
     y:        100,
     width:    140,
     height:   160,
-    z_index:  0
+    z_index:  2
   }, {
     comic_id: 1,
     frame_id: 1,
@@ -475,7 +464,7 @@ images = [
     y:        60,
     width:    140,
     height:   120,
-    z_index:  0
+    z_index:  2
   }
 ]
 
@@ -515,7 +504,7 @@ speeches = [
     font_size: 23,
     line_height: 28,
     color: 'white',
-    z_index: 0
+    z_index: 2
   }, {
     comic_id: 1,
     text: 'Nonstop Bar',
@@ -527,7 +516,7 @@ speeches = [
     font_size: 53,
     line_height: 64,
     color: 'white',
-    z_index: 0
+    z_index: 4
   }
 ]
 
