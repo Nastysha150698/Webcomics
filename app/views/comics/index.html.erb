@@ -1,6 +1,6 @@
-<h1>Comics</h1>
 
-<table>
+
+<!-- <table>
   <thead>
     <tr>
       <th>Name</th>
@@ -18,8 +18,24 @@
       </tr>
     <% end %>
   </tbody>
-</table>
+</table> -->
 
-<br>
+<div class="comicPreviews">
+  <div class="logo"></div>
+  <div class="comicPreviewsHeaders">
+    <h1>Simple and fast way to create animated web-comics</h1>
+    <h2>Version 0.0.1. You can create and even edit objects</h2>
+  </div>
+
+  <a class="comicPreviewNewComic"href="<%= new_comic_path %>">
+    <%= image_tag("plus.svg") %>
+    Create comic
+  </a>
+
+  <% @comics.each do |comic| %>
+    <%= render "comics/comicPreview", comic: comic %>
+  <% end %>
+</div>
+
 
 <%= link_to 'New Comic', new_comic_path %>

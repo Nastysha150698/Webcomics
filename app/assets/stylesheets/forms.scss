@@ -1,0 +1,98 @@
+.formName {
+  width: 240px;
+  height: 36px;
+  padding: 8px 20px;
+
+  background-color: #232537;
+
+  color: #00BF88;
+  font-size: 12px;
+  line-height: 16px;
+  font-family: AvenirNext-Medium;
+}
+
+.field {
+  width: 100%;
+  height: 58px;
+  padding: 12px 20px;
+  display: flex;
+  flex-direction: column;
+
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 16px;
+  font-family: AvenirNext-Medium;
+
+
+  label {
+    display: block;
+    width: 100%;
+
+    margin-bottom: 4px;
+  }
+
+  input {
+    width: 100%;
+    height: 24px;
+    color: #ffffff;
+    font-size: 12px;
+    line-height: 16px;
+    font-family: AvenirNext-Medium;
+
+
+    background-color: #232537;
+    border-radius: 2px;
+    border: 1px solid;
+    border-color: #212333;
+
+    padding: 4px 6px;
+  }
+}
+
+.fieldNoBg {
+  input {
+    background-color: #292C3F;
+    border: none;
+    padding: 4px 0;
+  }
+}
+
+.actions{
+  width: 240px;
+  height: 58px;
+  padding: 12px 20px;
+  margin-top: 24px;
+
+  input {
+    width: 112px;
+    height: 32px;
+    background-color: #9265F4;
+    border: none;
+    border-radius: 2px;
+
+
+    color: #ffffff;
+    font-size: 14px;
+    line-height: 18px;
+    font-family: AvenirNext-Medium;
+
+    cursor: pointer;
+  }
+}
+
+.fieldTwoInLine {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 240px;
+  height: 58px;
+  padding: 12px 20px;
+
+  .field:first-child{
+    margin-right: 16px;
+  }
+
+  .field {
+    padding: 0;
+  }
+}
