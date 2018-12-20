@@ -32,3 +32,6 @@
 /config/master.key
 
 erd.pdf
+
+lib/.DS_Store
+lib/tasks/.DS_Store
