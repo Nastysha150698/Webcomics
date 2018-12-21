@@ -46,7 +46,7 @@ def random_border
 end
 
 def random_color
-  ['red', 'green', 'blue', 'orange', 'black', 'yellow', 'magenta', 'cyan'].sample
+  ['#F44336', '#E91D63', '#9C27B0', '#673AB7', '#3F51B5', '#2096F3', '#01BCD4', '#009588', '#4CAE51', '#8BC24A', '#CDDC39', '#FFEB3B', '#FEC108', '#FF9801', '#FF5721', '#795548', '#9E9E9E', '#607D8B', '#374046'].sample
 end
 
 
