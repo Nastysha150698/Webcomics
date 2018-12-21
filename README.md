@@ -10,3 +10,5 @@ yarn install
 rails s
 ./bin/webpack-dev-server
 ```
+
+yo
