@@ -1,22 +1,31 @@
 <%= form_with(model: comic, local: true) do |form| %>
-  <% if comic.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(comic.errors.count, "error") %> prohibited this comic from being saved:</h2>
+  <div class="Sidebar">
+    <div class="comicsHeader">
+      <div class="comicsHeaderBacklink"><%= link_to '< To comics', comics_path %></div>
 
-      <ul>
-      <% comic.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+      <div class="field">
+        <%= form.label :name %>
+        <%= form.text_area :name %>
+      </div>
+
     </div>
-  <% end %>
+    <div class="actions">
+      <%= form.submit %>
+    </div>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <% if comic.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(comic.errors.count, "error") %> prohibited this comic from being saved:</h2>
+
+        <ul>
+        <% comic.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+
+
 <% end %>

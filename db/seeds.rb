@@ -12,7 +12,7 @@ end
 @comics = Comic.all
 
 # Create random Comics
-1.times do
+4.times do
   name = random_name
   c = Comic.new(name: name)
 
@@ -66,7 +66,7 @@ end
     y:                random_distance,
     width:            random_size,
     height:           random_size,
-    z_index:          0
+    z_index:          1
   )
 
   if i.save
@@ -117,7 +117,7 @@ end
     border_width:     random_border,
     border_color:     random_color,
     background_color: random_color,
-    z_index:          0
+    z_index:          1
   )
 
   if f.save
@@ -215,7 +215,7 @@ end
     font_size:        random_fontSize,
     line_height:      random_lineHeight,
     color:            random_color,
-    z_index:          0
+    z_index:          1
   )
 
   if s.save
@@ -224,8 +224,6 @@ end
     puts "Text #{name} not created"
   end
 end
-
-
 
 
 

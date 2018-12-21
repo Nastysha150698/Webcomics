@@ -11,21 +11,27 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
+  <div class="Sidebar">
+    <div class="formName">
+      Adding font
+    </div>
 
-  <p>ex. Amatic SC</p>
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title %>
+      ex. Amatic SC
+    </div>
 
-  <div class="field">
-    <%= form.label :link %>
-    <%= form.text_field :link %>
-  </div>
 
-  <p>ex. https://fonts.googleapis.com/css?family=Amatic+SC</p>
+    <div class="field">
+      <%= form.label :link %>
+      <%= form.text_field :link %>
+      ex. https://fonts.googleapis.com/css?family=Amatic+SC
+    </div>
 
-  <div class="actions">
-    <%= form.submit %>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
   </div>
 <% end %>

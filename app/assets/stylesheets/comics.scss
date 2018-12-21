@@ -10,7 +10,14 @@
   height: 100%;
   background: #292C3F;
   z-index: 1;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  #error_explanation {
+    color: #FE1616;
+    font-size: 12px;
+    padding: 16px;
+  }
 
   .comicsHeader {
     width: 240px;
@@ -19,6 +26,11 @@
     margin-bottom: 8px;
 
     background-color: #212333;
+
+
+    .field {
+      padding: 0;
+    }
 
     .comicsHeaderName {
       font-family: AvenirNext-Bold;
@@ -63,6 +75,10 @@
     }
 
     .newComicFigureIcon {background: url(shape.svg) no-repeat center; background-size: contain; width: 20px; height: 20px; margin-right: 8px;}
+    .newComicFigureIcon {background: url(shape.svg) no-repeat center; background-size: contain; width: 20px; height: 20px; margin-right: 8px;}
+    .newComicBubbleIcon {background: url(bubble.svg) no-repeat center; background-size: contain; width: 20px; height: 20px; margin-right: 8px;}
+    .newComicPictureIcon{background: url(picture.svg) no-repeat center; background-size: contain; width: 20px; height: 20px; margin-right: 8px;}
+    .newComicTextIcon   {background: url(type.svg) no-repeat center; background-size: contain; width: 20px; height: 20px; margin-right: 8px;}
   }
 }
 
@@ -134,6 +150,7 @@
         .newComicPictureIcon{background: url(picture.svg) no-repeat center; width: 24px; height: 24px; margin-right: 16px;}
         .newComicTextIcon   {background: url(type.svg) no-repeat center;    width: 24px; height: 24px; margin-right: 16px;}
 
+
         &:hover {
           color: #9265F4;
         }
@@ -165,4 +182,10 @@
     //   }
     // }
   }
+}
+
+.authors {
+  text-align: center;
+  margin: 140px auto 30px;
+  color: rgba(0,0,0,.35)
 }

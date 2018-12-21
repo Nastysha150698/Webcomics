@@ -12,70 +12,92 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :text %>
-    <%= form.text_area :text%>
-  </div>
+  <div class="Sidebar">
+    <div class="comicsHeader">
+      <div class="comicsHeaderBacklink"><%= link_to '< To comics', comics_path %></div>
+      <div class="comicsHeaderName"><%= link_to @comic.name, edit_comic_path(@comic) %></div>
+    </div>
 
-  <div class="field">
-    <%= form.label :frame_id %>
-    <%#= form.text_field :frame_id %>
-    <%= select("speech", "frame_id", @comic.frames.all.collect { |a| [a.frame, a.id] }, { include_blank: true }) %>
-  </div>
+    <div class="formName">
+      Text
+    </div>
 
-  <div class="field">
-    <%= form.label :x %>
-    <%= form.number_field :x%>
-  </div>
+    <div class="field">
+      <%= form.label :text %>
+      <%= form.text_area :text%>
+    </div>
 
-  <div class="field">
-    <%= form.label :y %>
-    <%= form.number_field :y%>
-  </div>
+    <div class="fieldTwoInLine">
+      <div class="field">
+        <%= form.label :x %>
+        <%= form.number_field :x%>
+      </div>
 
-  <div class="field">
-    <%= form.label :width %>
-    <%= form.number_field :width%>
-  </div>
+      <div class="field">
+        <%= form.label :y %>
+        <%= form.number_field :y%>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :height %>
-    <%= form.number_field :height%>
-  </div>
+    <div class="fieldTwoInLine">
+      <div class="field">
+        <%= form.label :width %>
+        <%= form.number_field :width%>
+      </div>
 
-  <div class="field">
-    <%= form.label :font_id %>
-    <%#= form.text_field :font_id %>
-    <%= select("speech", "font_id", Font.all.collect { |a| [a.title, a.id] }, { include_blank: true }) %>
-  </div>
+      <div class="field">
+        <%= form.label :height %>
+        <%= form.number_field :height%>
+      </div>
+    </div>
 
-  <div class="field">
-    <%= form.label :font_size %>
-    <%= form.number_field :font_size%>
-  </div>
+    <div class="field">
+      <%= form.label :font_id %>
+      <%#= form.text_field :font_id %>
+      <%= select("speech", "font_id", Font.all.collect { |a| [a.title, a.id] }, { include_blank: true }) %>
+    </div>
 
-  <div class="field">
-    <%= form.label :line_height %>
-    <%= form.number_field :line_height%>
-  </div>
+    <div class="field">
+      <%= form.label :font_size %>
+      <%= form.number_field :font_size%>
+    </div>
+    
+    <div class="field">
+      <%= form.label :line_height %>
+      <%= form.number_field :line_height%>
+    </div>
 
-  <div class="field">
-    <%= form.label :color %>
-    <%= form.text_field :color %>
-  </div>
+    <div class="field">
+      <%= form.label :color %>
+      <%= form.text_field :color, :autocomplete => :off %>
+    </div>
 
-  <div class="field">
-    <%= form.label :background_color %>
-    <%= form.text_field :background_color %>
-  </div>
+    <div class="field">
+      <%= form.label :background_color %>
+      <%= form.text_field :background_color, :autocomplete => :off %>
+    </div>
 
-  <div class="field">
-    <%= form.label :layer %>
-    <%= form.number_field :z_index, in: 1..(@comic.figures.count + @comic.speeches.count + @comic.images.count) %>
-    max value: <%= @comic.figures.count + @comic.speeches.count + @comic.images.count %>
-  </div>
+    <div class="field">
+      <%= form.label :frame_id %>
+      <%#= form.text_field :frame_id %>
+      <%= select("speech", "frame_id", @comic.frames.all.collect { |a| [a.frame, a.id] }, { include_blank: true }) %>
+    </div>
 
-  <div class="actions">
-    <%= form.submit %>
+    <div class="field">
+      <%= form.label :layer %>
+      <%= form.number_field :z_index, :autocomplete => :off, in: 1..(@comic.figures.count + @comic.speeches.count + @comic.images.count) %>
+      max value: <%= @comic.figures.count + @comic.speeches.count + @comic.images.count %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
   </div>
+  <section class="ComicsArtbord">
+    <%= render @comic.figures.all %>
+    <%= render @comic.bubbles.all %>
+    <%= render @comic.speeches.all %>
+    <%= render @comic.frames.all %>
+    <%= render @comic.images.all %>
+  </section>
 <% end %>
