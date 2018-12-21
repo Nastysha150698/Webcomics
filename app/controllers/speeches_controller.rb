@@ -84,6 +84,6 @@ class SpeechesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def speech_params
-      params.require(:speech).permit(:text, :x, :y, :width, :height, :font_style, :font_size, :color, :background_color, :comic_id, :frame_id, :font_id, :z_index)
+      params.require(:speech).permit(:text, :x, :y, :width, :height, :font_size, :line_height, :color, :background_color, :comic_id, :frame_id, :font_id, :z_index)
     end
 end
