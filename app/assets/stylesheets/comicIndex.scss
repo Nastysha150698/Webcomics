@@ -47,6 +47,7 @@
 
 
   .comicPreview {
+    position: relative;
     width: 248px;
     height: 216px;
     margin-bottom: 20px;
@@ -64,24 +65,42 @@
       .comicPrewiewName {
         color: #9265F4;
       }
+
+      .comicPreviewDestroy {
+        display: block;
+        opacity: .2;
+      }
     }
 
-    .comicPreviewImage {
-      width: 100%;
-      height: 150px;
-      background-image: url(gradient.png);
-      background-size: cover;
-      background-color: #292C3F;
+    .comicPreviewDestroy {
+      display: none;
+      position: absolute;
+      top: 20px;
+      right: 20px;
 
+      &:hover {
+        opacity: .9;
+      }
     }
 
-    .comicPrewiewName {
-      margin: 14px;
-      font-family: AvenirNext-Bold;
-      font-size: 14px;
-      line-height: 18px;
-      color: #111111;
-      letter-spacing: 0;
+    .comicPreviewContainer {
+      .comicPreviewImage {
+        width: 100%;
+        height: 150px;
+        background-image: url(gradient.png);
+        background-size: cover;
+        background-color: #292C3F;
+
+      }
+
+      .comicPrewiewName {
+        margin: 14px;
+        font-family: AvenirNext-Bold;
+        font-size: 14px;
+        line-height: 18px;
+        color: #111111;
+        letter-spacing: 0;
+      }
     }
   }
 }

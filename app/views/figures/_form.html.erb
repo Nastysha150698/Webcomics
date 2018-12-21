@@ -31,7 +31,7 @@
 
     <div class="field">
       <%= form.label :name %>
-      <%= form.text_field :figure %>
+      <%= form.text_field :figure, :autocomplete => :off %>
     </div>
 
     <div class="fieldTwoInLine">
@@ -72,18 +72,18 @@
 
     <div class="field">
       <%= form.label :border_color %>
-      <%= form.text_field :border_color %>
+      <%= form.text_field :border_color, :autocomplete => :off %>
     </div>
 
     <div class="field">
       <%= form.label :background_color %>
-      <%= form.text_field :background_color %>
+      <%= form.text_field :background_color, :autocomplete => :off %>
     </div>
 
     <div class="field">
       <%= form.label :layer %>
       <!-- <%= form.number_field :z_index %> -->
-      <%= form.number_field :z_index, in: 1..(@comic.figures.count + @comic.speeches.count + @comic.images.count) %>
+      <%= form.number_field :z_index, :autocomplete => :off, in: 1..(@comic.figures.count + @comic.speeches.count + @comic.images.count) %>
       max value: <%= @comic.figures.count + @comic.speeches.count + @comic.images.count %>
     </div>
 
@@ -92,10 +92,10 @@
     </div>
   </div>
   <section class="ComicsArtbord">
-    <%= render @comic.figures %>
-    <%= render @comic.bubbles %>
-    <%= render @comic.speeches %>
-    <%= render @comic.frames %>
-    <%= render @comic.images %>
+    <%= render @comic.figures.all %>
+    <%= render @comic.bubbles.all %>
+    <%= render @comic.speeches.all %>
+    <%= render @comic.frames.all %>
+    <%= render @comic.images.all %>
   </section>
 <% end %>

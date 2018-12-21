@@ -24,6 +24,10 @@
     <%= render "images/imageListItem",image: image %>
   <% end  %>
 
+  <% @comic.speeches.all.each do |speech|%>
+    <%= render "speeches/speechListItem", speech: speech %>
+  <% end  %>
+
   <%#
     objects = []
 
@@ -53,7 +57,7 @@
     <div class="newComicItemButton"></div>
     <div class="newComicItemMenu">
       <a class="newComicItemMenuItem" href="<%= url_for new_comic_figure_path(@comic) %>"><div class="icon newComicFigureIcon"></div>Figure</a>
-      <a class="newComicItemMenuItem" href="<%= url_for new_comic_bubble_path(@comic) %>"><div class="icon newComicBubbleIcon"></div>Bubble</a>
+      <!-- <a class="newComicItemMenuItem" href="<%#= url_for new_comic_bubble_path(@comic) %>"><div class="icon newComicBubbleIcon"></div>Bubble</a> -->
       <a class="newComicItemMenuItem" href="<%= url_for new_comic_image_path(@comic) %>"><div class="icon newComicPictureIcon"></div>Image</a>
       <a class="newComicItemMenuItem" href="<%= url_for new_comic_speech_path(@comic) %>"><div class="icon newComicTextIcon"></div>Text</a>
       <a class="newComicItemMenuItem newComicItemMenuItemLine" href="<%= url_for new_font_path %>"><div class="icon"></div>Add font</a>

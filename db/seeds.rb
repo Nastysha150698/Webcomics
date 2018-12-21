@@ -52,7 +52,7 @@ end
     y:                random_size,
     width:            random_size,
     height:           random_size,
-    z_index:          0
+    z_index:          1
   )
 
   if i.save
@@ -76,7 +76,7 @@ end
     border_width:     random_border,
     border_color:     random_color,
     background_color: random_color,
-    z_index:          0
+    z_index:          1
   )
 
   if f.save
@@ -167,7 +167,7 @@ end
     font_id:          Font.all.sample.id,
     font_size:        random_size,
     color:            random_color,
-    z_index:          0
+    z_index:          1
   )
 
   if s.save
