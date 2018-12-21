@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'comics_on_react/index'
+
   resources :fonts
   resources :comics do
     resources :frames

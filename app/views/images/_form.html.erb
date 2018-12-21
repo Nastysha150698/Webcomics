@@ -12,44 +12,63 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :image %>
-    <%= form.file_field :image %>
-  </div>
+  <div class="Sidebar">
+    <div class="comicsHeader">
+      <div class="comicsHeaderBacklink"><%= link_to '< To comics', comics_path %></div>
+      <div class="comicsHeaderName"><%= link_to @comic.name, edit_comic_path(@comic) %></div>
+    </div>
 
-  <div class="field">
-    <%= form.label :frame_id %>
-    <%#= form.text_field :frame_id %>
-    <%= select("image", "frame_id", @comic.frames.all.collect { |a| [a.frame, a.id] }, { include_blank: true }) %>
-  </div>
+    <div class="formName">
+      Image
+    </div>
 
-  <div class="field">
-    <%= form.label :x %>
-    <%= form.number_field :x%>
-  </div>
+    <div class="field">
+      <%= form.label :frame_id %>
+      <%#= form.text_field :frame_id %>
+      <%= select("image", "frame_id", @comic.frames.all.collect { |a| [a.frame, a.id] }, { include_blank: true }) %>
+    </div>
 
-  <div class="field">
-    <%= form.label :y %>
-    <%= form.number_field :y%>
-  </div>
 
-  <div class="field">
-    <%= form.label :width %>
-    <%= form.number_field :width%>
-  </div>
+    <div class="field fieldNoBg">
+      <%= form.label :image, 'Select Image' %>
+      <%= form.file_field :image %>
+    </div>
 
-  <div class="field">
-    <%= form.label :height %>
-    <%= form.number_field :height%>
-  </div>
+    <div class="field">
+      <%= form.label :x %>
+      <%= form.number_field :x%>
+    </div>
 
-  <div class="field">
-    <%= form.label :layer %>
-    <%= form.number_field :z_index, in: 1..(@comic.figures.count + @comic.speeches.count + @comic.images.count) %>
-    max value: <%= @comic.figures.count + @comic.speeches.count + @comic.images.count %>
-  </div>
+    <div class="field">
+      <%= form.label :y %>
+      <%= form.number_field :y%>
+    </div>
 
-  <div class="actions">
-    <%= form.submit %>
+    <div class="field">
+      <%= form.label :width %>
+      <%= form.number_field :width%>
+    </div>
+
+    <div class="field">
+      <%= form.label :height %>
+      <%= form.number_field :height%>
+    </div>
+
+    <div class="field">
+      <%= form.label :layer %>
+      <%= form.number_field :z_index, in: 1..(@comic.figures.count + @comic.speeches.count + @comic.images.count) %>
+      max value: <%= @comic.figures.count + @comic.speeches.count + @comic.images.count %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
   </div>
+  <section class="ComicsArtbord">
+    <%= render @comic.figures %>
+    <%= render @comic.bubbles %>
+    <%= render @comic.speeches %>
+    <%= render @comic.frames %>
+    <%= render @comic.images %>
+  </section>
 <% end %>
