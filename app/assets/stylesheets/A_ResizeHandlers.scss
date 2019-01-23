@@ -1,0 +1,70 @@
+.resize {
+  background:blue;
+  border-radius:10px;
+  border: 2px solid white;
+  width:10px;
+  height:10px;
+  position:absolute;
+  box-shadow: 0 0 0px black;
+  -moz-user-select: none;
+
+  z-index: 2;
+}
+
+.resize.nw {
+  top:-8px;
+  left:-8px;
+  right:auto;
+  bottom:auto;
+  cursor:nwse-resize;
+}
+
+.resize.n {
+  top:-8px;
+  left:calc(50% - 8px);
+  right:auto;
+  bottom:auto;
+  cursor:ns-resize;
+}
+.resize.ne {
+  top:-8px;
+  left:auto;
+  right:-8px;
+  bottom:auto;
+  cursor:nesw-resize;
+}
+.resize.w {
+  top:calc(50% - 8px);
+  left:-8px;
+  right:auto;
+  bottom:-8px;
+  cursor:ew-resize;
+}
+.resize.e {
+  top:calc(50% - 8px);
+  left:auto;
+  right:-8px;
+  bottom:-8px;
+  cursor:ew-resize;
+}
+.resize.sw {
+  top:auto;
+  left:-8px;
+  right:auto;
+  bottom:-8px;
+  cursor:nesw-resize;
+}
+.resize.s {
+  top:auto;
+  left:calc(50% - 8px);
+  right:-8px;
+  bottom:-8px;
+  cursor:ns-resize;
+}
+.resize.se {
+  top:auto;
+  left:auto;
+  right:-8px;
+  bottom:-8px;
+  cursor:nwse-resize;
+}

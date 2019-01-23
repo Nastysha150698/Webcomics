@@ -1,5 +1,5 @@
 class ComicsOnReactController < ApplicationController
   def index
-    @comic = Comic.find(10)
+    @comic = Comic.find(1)
   end
 end
