@@ -18,10 +18,6 @@ export default class O_Sidebar extends React.Component {
           figure={ figure }
           key={ i }
           index={ i }
-          handleFigureClick={ this.props.handleFigureClick }
-          handleDragStart={ this.props.handleDragStart }
-          handleDragOver={this.props.handleDragOver}
-          handleDrop={this.props.handleDrop}
         />
       )
     })
@@ -29,7 +25,6 @@ export default class O_Sidebar extends React.Component {
     return(
       <div
         className="O_Sidebar"
-        droppable="true"
       >
         { elements }
       </div>

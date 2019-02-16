@@ -11,6 +11,7 @@ export default class O_ComicsArtbord extends React.Component {
     this.state = {
       draggingFigure: 0,
       resizingFigure: 0,
+      activeFigure: 0,
       handlerType: '',
       clickX: 0,
       clickY: 0,
@@ -21,25 +22,43 @@ export default class O_ComicsArtbord extends React.Component {
       'setDraggingFigure',
       'setResizingFigure',
       'handleMouseMove',
-      'handleMouseUp'
+      'handleMouseUp',
+      'handleClick'
     )
   }
 
   setDraggingFigure(figure_id) {
-    var newFigures = this.state.figures
-    newFigures[this.state.draggingFigure]['active'] = true
+    if (figure_id != 0) {
+      var newFigures = this.state.figures
+      this.state.figures.map((figure, i) => {
+        if (i == figure_id) {
+          newFigures[i]['active'] = true
+        } else {
+          newFigures[i]['active'] = false
+        }
+      })
 
-    this.setState({
-      draggingFigure: figure_id,
-      clickX: event.pageX - this.state.figures[figure_id]['x'],
-      clickY: event.pageY - this.state.figures[figure_id]['y'],
-      figures: newFigures
-    })
+      this.setState({
+        draggingFigure: figure_id,
+        activeFigure: figure_id,
+        clickX: event.pageX - this.state.figures[figure_id]['x'],
+        clickY: event.pageY - this.state.figures[figure_id]['y'],
+        figures: newFigures
+      })
+    } else {
+      this.setState({
+        draggingFigure: 0
+      })
+    }
   }
 
   setResizingFigure(figure_id, handlerType) {
     var newFigures = this.state.figures
-    newFigures[this.state.resizingFigure]['active'] = true
+    if (figure_id == 0) {
+      newFigures[this.state.draggingFigure]['active'] = false
+    } else {
+      newFigures[this.state.draggingFigure]['active'] = true
+    }
 
     this.setState({
       resizingFigure: figure_id,
@@ -144,13 +163,23 @@ export default class O_ComicsArtbord extends React.Component {
     })
   }
 
-
+  handleClick() {
+    if (this.state.activeFigure != 0) {
+      var newFigures = this.state.figures
+      this.state.figures.map((figure, i) => {
+        newFigures[i]['active'] = false
+      })
+      this.setState({
+        activeFigure: 0,
+        figures: newFigures
+      })
+    }
+  }
 
   render() {
     let elements = []
 
     this.state.figures.map((figure, i) => {
-      // figure.focusFrame = 0
       elements.push(
         <M_Figure figure={ figure } key={ i } figure_id={i} setDraggingFigure={this.setDraggingFigure} setResizingFigure={this.setResizingFigure}/>
       )
@@ -160,6 +189,8 @@ export default class O_ComicsArtbord extends React.Component {
       <div className="O_ComicsArtbord"
         onMouseMove={ this.handleMouseMove }
         onMouseUp={ this.handleMouseUp}
+        onClick={ this.handleClick}
+
       >
         { elements }
       </div>

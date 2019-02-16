@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import A_ResizeHandlers from '../components/A_ResizeHandlers'
 
 
+
 export default class M_Figure extends React.Component {
   constructor(props, context) {
     super(props, context)
@@ -24,73 +25,35 @@ export default class M_Figure extends React.Component {
       zIndex: this.props.figure['z_index'],
       clickX: 0,
       clickY: 0,
-      focusFrame: this.props.focusFrame
+      focusFrame: this.props.focusFrame,
     }
     _.bindAll(
       this,
       'handleMouseDown',
       'handleMouseUp',
-      'handleMouseOut',
-      'handleMouseMove',
-      'figureResizing'
+      'handleClick'
     )
   }
 
   handleMouseDown() {
     this.props.setDraggingFigure(this.props.figure_id)
-    // this.props.setDraggingFigure(5)
-
-
-    this.setState({
-      // dragging: true,
-      resizing: true,
-      // clickX: event.pageX - this.state.left,
-      // clickY: event.pageY - this.state.top,
-      // focusFrame: "2px solid blue"
-    });
   }
 
   handleMouseUp() {
     this.props.setDraggingFigure(0)
-  //   this.setState({
-  //     dragging: false,
-  //   });
   }
 
-  handleMouseOut() {
-    this.setState({
-      // resizing: false,
-      // focusFrame: "0"
-    });
-  }
-
-  handleMouseMove(e) {
-    // if (this.state.dragging) {
-    //   e.preventDefault()
-    //   var coursorX = event.pageX
-    //   var coursorY = event.pageY
-    //
-    //   this.setState({
-    //     left: coursorX - this.state.clickX,
-    //     top: coursorY - this.state.clickY
-    //   })
-    //
-    //   console.log("dragging", coursorX, coursorY)
-    // }
-  }
-
-  figureResizing(top, left, width, height) {
-    // this.setState({
-    //   top: top,
-    //   left: left,
-    //   width: width,
-    //   height: height
-    // })
-    //
-    // console.log("resizing", top, left, width, height)
+  handleClick(e) {
+    e.stopPropagation()
   }
 
   render() {
+    var focusFrame
+    if (this.props.figure['active']) {
+      focusFrame = '2px solid blue'
+    } else {
+      focusFrame = 0
+    }
     const styles = {
       top: this.props.figure['y'],
       left: this.props.figure['x'],
@@ -104,28 +67,22 @@ export default class M_Figure extends React.Component {
       borderRadius: this.state.borderRadius,
       backgroundColor: this.state.backgroundColor,
       zIndex: this.state.zIndex,
-      outline: this.props.figure['focusFrame']
+      outline: focusFrame
     }
 
     return(
       <div
         onMouseDown={ this.handleMouseDown }
         onMouseUp={ this.handleMouseUp }
-        onMouseOut={ this.handleMouseOut }
-        onMouseMove={ this.handleMouseMove }
+        onClick={ this.handleClick}
         className="M_Figure"
         style={ styles }
       >
         { this.props.figure.id }
-        { (this.state.resizing || this.state.dragging) &&
+        { this.props.figure['active'] &&
           <A_ResizeHandlers
-            figureResizing={this.figureResizing}
             setResizingFigure={this.props.setResizingFigure}
             figure_id={this.props.figure_id}
-            top={this.state.top}
-            left={this.state.left}
-            width={this.state.width}
-            height={this.state.height}
           /> }
       </div>
     )
