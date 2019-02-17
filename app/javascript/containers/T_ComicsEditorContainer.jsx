@@ -31,6 +31,7 @@ export default class T_ComicsEditorContainer extends React.Component {
       this,
       'setDraggingFigure',
       'setResizingFigure',
+      'setActiveFigure',
       'setDraggingResizingNone',
       'setActiveNone',
       'setCoursorPosition'
@@ -76,6 +77,22 @@ export default class T_ComicsEditorContainer extends React.Component {
       clickX: event.pageX - this.state.figures[figure_id]['x'],
       clickY: event.pageY - this.state.figures[figure_id]['y'],
 
+      figures: newFigures
+    })
+  }
+
+  setActiveFigure(figure_id) {
+    var newFigures = this.state.figures
+    this.state.figures.map((figure, i) => {
+      if (i == figure_id) {
+        newFigures[i]['active'] = true
+      } else {
+        newFigures[i]['active'] = false
+      }
+    })
+
+    this.setState({
+      activeFigure: figure_id,
       figures: newFigures
     })
   }
@@ -185,6 +202,8 @@ export default class T_ComicsEditorContainer extends React.Component {
       <div className="T_ComicsEditorContainer">
         <O_Sidebar
           figures={ this.state.figures }
+
+          setActiveFigure={ this.setActiveFigure }
         />
 
         <O_ComicsArtboard

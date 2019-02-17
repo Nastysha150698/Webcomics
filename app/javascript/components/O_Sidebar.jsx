@@ -18,6 +18,8 @@ export default class O_Sidebar extends React.Component {
           figure={ figure }
           key={ i }
           index={ i }
+
+          setActiveFigure={ this.props.setActiveFigure }
         />
       )
     })
