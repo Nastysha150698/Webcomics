@@ -10,23 +10,6 @@ import A_ResizeHandlers from '../components/A_ResizeHandlers'
 export default class M_Figure extends React.Component {
   constructor(props, context) {
     super(props, context)
-    this.state = {
-      dragging: false,
-      resizing: false,
-
-      top: this.props.figure['y'],
-      left: this.props.figure['x'],
-      width: this.props.figure['width'],
-      height: this.props.figure['height'],
-      borderWidth: this.props.figure['border_width'],
-      borderColor: this.props.figure['border_color'],
-      borderRadius: this.props.figure['border_radius'],
-      backgroundColor: this.props.figure['background_color'],
-      zIndex: this.props.figure['z_index'],
-      clickX: 0,
-      clickY: 0,
-      focusFrame: this.props.focusFrame,
-    }
     _.bindAll(
       this,
       'handleMouseDown',
@@ -63,10 +46,10 @@ export default class M_Figure extends React.Component {
       // borderWidth: this.state.borderWidth,
       borderWidth: 0,
 
-      borderColor: this.state.borderColor,
-      borderRadius: this.state.borderRadius,
-      backgroundColor: this.state.backgroundColor,
-      zIndex: this.state.zIndex,
+      borderColor: this.props.figure['border_color'],
+      borderRadius: this.props.figure['border_radius'],
+      backgroundColor: this.props.figure['background_color'],
+      zIndex: this.props.figure['z_index'],
       outline: focusFrame
     }
 
@@ -78,7 +61,8 @@ export default class M_Figure extends React.Component {
         className="M_Figure"
         style={ styles }
       >
-        { this.props.figure.id }
+        RailsId: { this.props.figure.id }<br/>
+        ReactId: { this.props.figure_id }
         { this.props.figure['active'] &&
           <A_ResizeHandlers
             setResizingFigure={this.props.setResizingFigure}

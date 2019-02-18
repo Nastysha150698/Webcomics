@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
 import O_Sidebar from '../components/O_Sidebar'
+// import Layers from '../components/Layers'
 import O_ComicsArtboard from '../components/O_ComicsArtboard'
 
 export default class T_ComicsEditorContainer extends React.Component {
@@ -34,16 +35,18 @@ export default class T_ComicsEditorContainer extends React.Component {
       'setActiveFigure',
       'setDraggingResizingNone',
       'setActiveNone',
-      'setCoursorPosition'
+      'setCoursorPosition',
+      'reorderLayers'
     )
   }
 
   setDraggingFigure(figure_id) {
     if (figure_id != 0) {
-      var newFigures = this.state.figures
+      let newFigures = this.state.figures
       this.state.figures.map((figure, i) => {
         if (i == figure_id) {
           newFigures[i]['active'] = true
+          // console.log(i, this.state.figures[i]['active']);
         } else {
           newFigures[i]['active'] = false
         }
@@ -56,6 +59,9 @@ export default class T_ComicsEditorContainer extends React.Component {
         clickY: event.pageY - this.state.figures[figure_id]['y'],
         figures: newFigures
       })
+
+      // console.log('Figure', figure_id, 'active:', this.state.figures[figure_id]['active']);
+
     } else {
       this.setState({
         draggingFigure: 0
@@ -64,7 +70,7 @@ export default class T_ComicsEditorContainer extends React.Component {
   }
 
   setResizingFigure(figure_id, handlerType) {
-    var newFigures = this.state.figures
+    let newFigures = this.state.figures
     if (figure_id == 0) {
       newFigures[this.state.draggingFigure]['active'] = false
     } else {
@@ -82,7 +88,7 @@ export default class T_ComicsEditorContainer extends React.Component {
   }
 
   setActiveFigure(figure_id) {
-    var newFigures = this.state.figures
+    let newFigures = this.state.figures
     this.state.figures.map((figure, i) => {
       if (i == figure_id) {
         newFigures[i]['active'] = true
@@ -99,7 +105,7 @@ export default class T_ComicsEditorContainer extends React.Component {
 
   setCoursorPosition(coursorX, coursorY) {
     if ((this.state.draggingFigure != 0) && (this.state.resizingFigure == 0)) {
-      var newFigures = this.state.figures
+      let newFigures = this.state.figures
       newFigures[this.state.draggingFigure]['y'] = (coursorY - this.state.clickY)
       newFigures[this.state.draggingFigure]['x'] = (coursorX - this.state.clickX)
 
@@ -109,13 +115,13 @@ export default class T_ComicsEditorContainer extends React.Component {
     }
 
     if (this.state.resizingFigure != 0) {
-      var newFigures = this.state.figures
-      var currentFigure = newFigures[this.state.resizingFigure]
+      let newFigures = this.state.figures
+      let currentFigure = newFigures[this.state.resizingFigure]
 
-      var top
-      var left
-      var width
-      var height
+      let top
+      let left
+      let width
+      let height
 
       if (this.state.handlerType == 'nw') {
         top = coursorY
@@ -186,7 +192,7 @@ export default class T_ComicsEditorContainer extends React.Component {
 
   setActiveNone() {
     if (this.state.activeFigure != 0) {
-      var newFigures = this.state.figures
+      let newFigures = this.state.figures
       this.state.figures.map((figure, i) => {
         newFigures[i]['active'] = false
       })
@@ -195,6 +201,43 @@ export default class T_ComicsEditorContainer extends React.Component {
         figures: newFigures
       })
     }
+
+    let url = "comics/1/figures/" + this.state.activeFigure.toString + "/edit"
+    let figureToUpdate = this.state.figures[this.state.activeFigure]
+    fetch(url)
+      .then(figureToUpdate => figureToUpdate.json())
+      .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+            items: result.items
+          });
+        }
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        // (error) => {
+        //   this.setState({
+        //     isLoaded: true,
+        //     error
+        //   });
+        // }
+      )
+  }
+
+  reorderLayers(figures) {
+    console.log('reordering Layers...');
+    let newFigures = []
+    figures.map((figure, i) => {
+      figure.z_index = i
+      // figure.figure_id = i
+      newFigures.push(figure)
+    })
+    this.setState({
+      figures: newFigures
+    })
+
+    console.log('Layers reordered');
   }
 
   render() {
@@ -204,6 +247,7 @@ export default class T_ComicsEditorContainer extends React.Component {
           figures={ this.state.figures }
 
           setActiveFigure={ this.setActiveFigure }
+          reorderLayers={ this.reorderLayers }
         />
 
         <O_ComicsArtboard

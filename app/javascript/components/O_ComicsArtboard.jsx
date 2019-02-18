@@ -8,15 +8,6 @@ import M_Figure from '../components/M_Figure'
 export default class O_ComicsArtbord extends React.Component {
   constructor(props, context) {
     super(props, context)
-    this.state = {
-      draggingFigure: 0,
-      resizingFigure: 0,
-      activeFigure: 0,
-      handlerType: '',
-      clickX: 0,
-      clickY: 0,
-      figures: this.props.figures
-    }
     _.bindAll(
       this,
       'handleMouseMove',
@@ -42,7 +33,7 @@ export default class O_ComicsArtbord extends React.Component {
   render() {
     let elements = []
 
-    this.state.figures.map((figure, i) => {
+    this.props.figures.map((figure, i) => {
       elements.push(
         <M_Figure
           figure={ figure }

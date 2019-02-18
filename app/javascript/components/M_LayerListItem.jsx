@@ -11,20 +11,22 @@ export default class M_LayerListItem extends React.Component {
     }
     _.bindAll(
       this,
+      'handleDragStart',
       'handleClick'
     )
   }
+
+  handleDragStart = e => {
+    e.dataTransfer.effectAllowed = "move";
+    // e.dataTransfer.setData("text/html", e.target.parentNode);
+    // e.dataTransfer.setDragImage(e.target.parentNode, 20, 20);
+  };
 
   handleClick() {
     this.props.setActiveFigure(this.props.index)
   }
 
   render() {
-    // if (this.props.figure.active) {
-    //   this.setState({
-    //     id: 'YO'
-    //   })
-    // }
     let className = "M_LayerListItem"
     if (this.props.figure.active) {
       className += ' selected';
@@ -33,6 +35,9 @@ export default class M_LayerListItem extends React.Component {
     return(
       <div
         className={ className }
+
+        draggable={true}
+        onDragStart={e => this.handleDragStart(e, idx)}
 
         onClick={ this.handleClick}
       >
