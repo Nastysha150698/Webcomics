@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
   get 'comics_on_react/index'
+  post 'comics_on_react/tune'
+  post 'comics_on_react/create'
 
   resources :fonts
   resources :comics do

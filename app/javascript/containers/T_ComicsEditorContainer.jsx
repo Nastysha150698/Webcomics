@@ -2,6 +2,7 @@ import _ from 'lodash'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
+import $ from 'jquery'
 
 import O_Sidebar from '../components/O_Sidebar'
 // import Layers from '../components/Layers'
@@ -36,7 +37,8 @@ export default class T_ComicsEditorContainer extends React.Component {
       'setDraggingResizingNone',
       'setActiveNone',
       'setCoursorPosition',
-      'reorderLayers'
+      'reorderLayers',
+      'createNewFigure'
     )
   }
 
@@ -48,6 +50,9 @@ export default class T_ComicsEditorContainer extends React.Component {
           newFigures[i]['active'] = true
           // console.log(i, this.state.figures[i]['active']);
         } else {
+          if (newFigures[i]['active']) {
+            this.tuneFigure(this.state.figures[i])
+          }
           newFigures[i]['active'] = false
         }
       })
@@ -202,27 +207,32 @@ export default class T_ComicsEditorContainer extends React.Component {
       })
     }
 
-    let url = "comics/1/figures/" + this.state.activeFigure.toString + "/edit"
-    let figureToUpdate = this.state.figures[this.state.activeFigure]
-    fetch(url)
-      .then(figureToUpdate => figureToUpdate.json())
-      .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            items: result.items
-          });
+    this.tuneFigure(this.state.figures[this.state.activeFigure])
+  }
+
+  tuneFigure(figure) {
+    $.ajax( {
+        dataType: "json",
+        method: "POST",
+        url: "/comics_on_react/tune",
+        data: {
+          comic_id: figure.comic_id,
+          figure_id: figure.id,
+          width: figure.width,
+          height: figure.height,
+          x: figure.x,
+          y: figure.y
         }
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        // (error) => {
-        //   this.setState({
-        //     isLoaded: true,
-        //     error
-        //   });
-        // }
-      )
+      })
+      .done(function() {
+        console.log("success: tuneFigure")
+      })
+      .fail(function() {
+        console.log("error")
+      })
+      .always(function() {
+        console.log("complete")
+    })
   }
 
   reorderLayers(figures) {
@@ -238,6 +248,55 @@ export default class T_ComicsEditorContainer extends React.Component {
     })
 
     console.log('Layers reordered');
+  }
+
+  createNewFigure() {
+    let newFigures = this.state.figures
+    let newFigure = {
+      background_color: "#D8D8D8",
+      border_color: "#795548",
+      border_radius: null,
+      border_width: 9,
+      comic_id: this.props.comic_id,
+      height: 300,
+      width: 300,
+      x: 300,
+      y: 300,
+      z_index: 100
+    }
+    newFigures.push(newFigure)
+    this.setState({
+      figures: newFigures
+    })
+
+    let figure = this.state.figures[this.state.figures.length - 1]
+
+    $.ajax( {
+        dataType: "json",
+        method: "POST",
+        url: "/comics/" + this.props.comic_id + "/figures",
+        data: {
+          comic_id: this.props.comic_id,
+          figure: figure
+          // x: figure['x'],
+          // y: figure['x'],
+          // width: figure['width'],
+          // height: figure['height'],
+          // border_width: figure['border_width'],
+          // border_color: figure['border_color'],
+          // background_color: figure['background_color'],
+          // border_radius: figure['border_radius']
+        }
+      })
+      .done(function() {
+        console.log("success: createNewFigure")
+      })
+      .fail(function() {
+        console.log("error")
+      })
+      .always(function() {
+        console.log("complete")
+    })
   }
 
   render() {
@@ -258,6 +317,8 @@ export default class T_ComicsEditorContainer extends React.Component {
           setDraggingResizingNone={ this.setDraggingResizingNone }
           setActiveNone={ this.setActiveNone }
           setCoursorPosition={ this.setCoursorPosition }
+
+          createNewFigure={this.createNewFigure}
         />
       </div>
     )

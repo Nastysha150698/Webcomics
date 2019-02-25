@@ -4,39 +4,35 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
-
 export default class A_Button extends React.Component {
   constructor(props, context) {
     super(props, context)
-    this.state = {
-      color: this.props.color
-    }
     _.bindAll(
       this,
       'handleClick'
     )
   }
 
-  handleClick() {
-    console.log("yooo");
-    this.setState({
-      color: "yellow"
-    })
+  handleClick(e) {
+    e.stopPropagation()
+    this.props.function()
   }
 
   render() {
     const styles = {
-      backgroundColor: this.state.color
+      backgroundColor: this.props.backgroundColor,
+      color: this.props.color,
+      width: this.props.width,
+      height: this.props.height
     }
 
     return(
       <div
+        style={styles}
         onClick={ this.handleClick }
-
         className="A_Button"
-        style={ styles }
       >
-        {this.props.text}
+        <span>{this.props.content}</span>
       </div>
     )
   }

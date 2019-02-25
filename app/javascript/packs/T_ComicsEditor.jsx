@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let figures = JSON.parse(document.body.dataset.figures)
 
   ReactDOM.render(
-    <T_ComicsEditor figures={ figures } />,
+    <T_ComicsEditor figures={ figures } comic_id={1}/>,
     document.body.appendChild(document.createElement('div'))
   )
 })
