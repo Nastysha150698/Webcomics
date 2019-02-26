@@ -1,15 +1,16 @@
 import _ from 'lodash'
-
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
+import O_Dropdown from '../components/O_Dropdown'
 
 export default class A_Button extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
-      color: this.props.color
+      color: this.props.color,
+      active: false
     }
     _.bindAll(
       this,
@@ -18,10 +19,11 @@ export default class A_Button extends React.Component {
   }
 
   handleClick() {
-    console.log("yooo");
     this.setState({
-      color: "yellow"
+      // color: "violet"
+      active: !this.state.active
     })
+
   }
 
   render() {
@@ -36,6 +38,10 @@ export default class A_Button extends React.Component {
         className="A_Button"
         style={ styles }
       >
+        <O_Dropdown
+          active={ this.state.active }
+          data={ this.props.data }
+        />
         {this.props.text}
       </div>
     )

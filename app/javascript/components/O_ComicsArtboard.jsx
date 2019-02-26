@@ -4,6 +4,9 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
 import M_Figure from '../components/M_Figure'
+import A_Button from '../components/A_Button'
+import O_Dropdown from '../components/O_Dropdown'
+import M_DropdownListItem from '../components/M_DropdownListItem'
 
 export default class O_ComicsArtbord extends React.Component {
   constructor(props, context) {
@@ -45,6 +48,8 @@ export default class O_ComicsArtbord extends React.Component {
       )
     })
 
+    const data = ["text", "figure", "shape"]
+
     return(
       <div className="O_ComicsArtbord"
         onMouseMove={ this.handleMouseMove }
@@ -52,7 +57,13 @@ export default class O_ComicsArtbord extends React.Component {
         onClick={ this.handleClick}
       >
         { elements }
+        <A_Button
+        // color={"grey"}
+          text={ "Add" }
+          data={ data }
+        />
       </div>
+
     )
   }
 }
