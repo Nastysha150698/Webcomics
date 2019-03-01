@@ -7,6 +7,7 @@ import M_Figure from '../components/M_Figure'
 import A_Button from '../components/A_Button'
 import O_Dropdown from '../components/O_Dropdown'
 import M_DropdownListItem from '../components/M_DropdownListItem'
+import A_InputForm from '../components/A_InputForm'
 
 export default class O_ComicsArtbord extends React.Component {
   constructor(props, context) {
@@ -57,6 +58,7 @@ export default class O_ComicsArtbord extends React.Component {
         onClick={ this.handleClick}
       >
         { elements }
+        <A_TextAreaForm/>
         <A_Button
         // color={"grey"}
           text={ "Add" }
