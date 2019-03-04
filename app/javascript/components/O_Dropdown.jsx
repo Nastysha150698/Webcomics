@@ -27,7 +27,7 @@ export default class O_Dropdown extends React.Component {
       <div
         className="O_Dropdown"
       >
-      { this.props.active && elements }
+      { elements }
 
       </div>
 

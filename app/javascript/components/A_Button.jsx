@@ -38,10 +38,12 @@ export default class A_Button extends React.Component {
         className="A_Button"
         style={ styles }
       >
-        <O_Dropdown
-          active={ this.state.active }
-          data={ this.props.data }
-        />
+        { this.state.active &&
+          <O_Dropdown
+            active={ this.state.active }
+            data={ this.props.data }
+          />
+        }
         {this.props.text}
       </div>
     )
