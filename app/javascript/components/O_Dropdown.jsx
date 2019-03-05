@@ -7,10 +7,16 @@ import M_DropdownListItem from '../components/M_DropdownListItem'
 export default class O_Dropdown extends React.Component {
   constructor(props, context) {
     super(props, context)
+    this.state = {
+      backgroundColor: this.props.backgroundColor
+    }
   }
 
 
   render() {
+    const styles = {
+      backgroundColor: this.state.backgroundColor
+    }
 
     let elements = []
 
@@ -19,6 +25,7 @@ export default class O_Dropdown extends React.Component {
         <M_DropdownListItem
           text={ item }
           key={ i }
+          backgroundColor={ "yellow" }
         />
       )
     })
@@ -26,6 +33,7 @@ export default class O_Dropdown extends React.Component {
     return(
       <div
         className="O_Dropdown"
+        style={ styles }
       >
       { elements }
 
