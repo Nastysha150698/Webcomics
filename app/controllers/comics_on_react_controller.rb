@@ -16,7 +16,7 @@ class ComicsOnReactController < ApplicationController
 
     respond_to do |format|
       figure.update_attributes(:width => width, :height => height, :x => x, :y => y)
-      format.json { render json: '',  status: :ok }
+      format.json { render json: {},  status: :ok }
     end
   end
 
@@ -27,6 +27,18 @@ class ComicsOnReactController < ApplicationController
     respond_to do |format|
       @figure.save
       format.json { render json: '',  status: :ok }
+    end
+  end
+
+  def destroy
+    comic_id = params[:comic_id]
+    figure_id = params[:figure_id]
+    comic = Comic.find(comic_id)
+    figure = comic.figures.find(figure_id)
+
+    figure.destroy
+    respond_to do |format|
+      format.json { render json: {},  status: :ok }
     end
   end
 

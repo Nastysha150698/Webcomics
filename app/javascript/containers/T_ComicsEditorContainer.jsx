@@ -31,6 +31,7 @@ export default class T_ComicsEditorContainer extends React.Component {
     }
     _.bindAll(
       this,
+      'handleKeyPress',
       'setDraggingFigure',
       'setResizingFigure',
       'setActiveFigure',
@@ -253,6 +254,7 @@ export default class T_ComicsEditorContainer extends React.Component {
   createNewFigure() {
     let newFigures = this.state.figures
     let newFigure = {
+      active: true,
       background_color: "#D8D8D8",
       border_color: "#795548",
       border_radius: null,
@@ -266,15 +268,18 @@ export default class T_ComicsEditorContainer extends React.Component {
     }
     newFigures.push(newFigure)
     this.setState({
+      activeFigure: this.state.figures.length - 1,
       figures: newFigures
     })
 
     let figure = this.state.figures[this.state.figures.length - 1]
+    // var _this = this
 
     $.ajax( {
         dataType: "json",
         method: "POST",
         url: "/comics/" + this.props.comic_id + "/figures",
+        context: this,
         data: {
           comic_id: this.props.comic_id,
           figure: figure
@@ -288,8 +293,14 @@ export default class T_ComicsEditorContainer extends React.Component {
           // border_radius: figure['border_radius']
         }
       })
-      .done(function() {
-        console.log("success: createNewFigure")
+      .done(function(data) {
+        console.log("success: figure " + data.figure_id + " created")
+
+        let newFigures = this.state.figures
+        newFigures[newFigures.length - 1]['id'] = data.figure_id
+        this.setState({
+          figures: newFigures
+        })
       })
       .fail(function() {
         console.log("error")
@@ -299,9 +310,48 @@ export default class T_ComicsEditorContainer extends React.Component {
     })
   }
 
+  deleteFigure() {
+    let activeFigure = this.state.figures[this.state.activeFigure]
+    let newFigures = this.state.figures.filter(item => item !== activeFigure)
+    let figure_id = activeFigure.id
+
+    this.setState({
+      figures: newFigures
+    })
+
+    $.ajax( {
+        dataType: "json",
+        method: "POST",
+        url: "/comics_on_react/destroy",
+        context: this,
+        data: {
+          comic_id: this.props.comic_id,
+          figure_id: figure_id
+        }
+      })
+      .done(function(data) {
+        console.log("success: figure destroyed")
+      })
+      .fail(function() {
+        console.log("error")
+      })
+      .always(function() {
+        console.log("complete")
+    })
+  }
+
+  handleKeyPress = (event) => {
+    if (event.key == 'Enter') {
+      this.deleteFigure()
+    }
+  }
+
   render() {
     return(
-      <div className="T_ComicsEditorContainer">
+      <div className="T_ComicsEditorContainer"
+        tabIndex="0"
+        onKeyPress={this.handleKeyPress}
+      >
         <O_Sidebar
           figures={ this.state.figures }
 

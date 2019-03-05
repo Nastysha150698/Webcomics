@@ -2,93 +2,125 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
-// import M_LayerListItem from '../components/M_LayerListItem'
+import M_LayerListItem from '../components/M_LayerListItem'
+import M_LayerListItemDevider from '../components/M_LayerListItemDevider'
+
 
 export default class O_Sidebar extends React.Component {
   constructor(props, context) {
     super(props, context)
+
+    let items = []
+    this.props.figures.map((item, i) => {
+      item.type = 'figure'
+      items.push(item)
+    })
+
     this.state = {
-      figures: this.props.figures
+      items: items
     }
     _.bindAll(
       this,
+      'setDraggedItem',
       'onDragStart',
       'onDragOver',
+      'setNewFiguresOrder',
       'onDragEnd'
     )
   }
 
   onDragStart = (e, index) => {
-    this.draggedItem = this.state.figures[index];
-
-    console.log(this.draggedItem.id);
-
-    e.dataTransfer.effectAllowed = "uninitialized";
-    // e.dataTransfer.setData("text/html", e.target.parentNode);
-    // e.dataTransfer.setDragImage(e.target.parentNode, 20, 20);
+    // this.draggedItem = this.state.figures[index];
+    // e.dataTransfer.effectAllowed = "uninitialized";
   };
 
-  onDragOver = index => {
-    const draggedOverItem = this.state.figures[index];
+  setDraggedItem(index) {
+    this.setState({
+      draggedItemIndex: index
+    })
+  }
 
-    // if the item is dragged over itself, ignore
-    if (this.draggedItem === draggedOverItem) {
+  setNewFiguresOrder(draggedOverItemId, draggedOverItemIndex) {
+    const draggedItem = this.state.items[this.state.draggedItemIndex]
+    const draggedOverItem = this.state.items[draggedOverItemIndex]
+
+    if (draggedItem['id'] === draggedOverItemId) {
       return;
     } else {
 
-      // filter out the currently dragged item
-      let newFigures = this.state.figures.filter(item => item !== this.draggedItem);
+      console.log('draggedOverItem:', draggedOverItemIndex, draggedOverItem.id, 'draggedItem:', this.state.draggedItemIndex, draggedItem.id)
 
-      // add the dragged item after the dragged over item
-      newFigures.splice(index, 0, this.draggedItem);
+      let newFigures = this.state.items.filter(item => item !== draggedItem)
+      newFigures.splice(draggedOverItemIndex, 0, draggedItem)
 
       this.setState({
         figures: newFigures
       })
 
+      console.log('draggedOverItem:', draggedOverItemIndex, draggedOverItem.id, 'draggedItem:', this.state.draggedItemIndex, draggedItem.id)
+
+      console.log('figures reordered');
     }
-  };
+  }
+
+  onDragOver = index => {
+    // const draggedOverItem = this.state.figures[index];
+    //
+    // if (this.draggedItem === draggedOverItem) {
+    //   return;
+    // } else {
+    //   let newFigures = this.state.figures.filter(item => item !== this.draggedItem);
+    //   newFigures.splice(index, 0, this.draggedItem);
+    //   this.setState({
+    //     figures: newFigures
+    //   })
+    // }
+  }
 
   onDragEnd = () => {
-    this.draggedIdx = null;
-    this.props.reorderLayers(this.state.figures)
+    // this.draggedIdx = null;
+    // this.props.reorderLayers(this.state.figures)
   };
 
   render() {
-    // let elements = []
-    //
-    // this.props.figures.map((figure, i) => {
-    //   elements.push(
-    //     <M_LayerListItem
-    //
-    //       figure={ figure }
-    //       key={ i }
-    //       index={ i }
-    //
-    //       setActiveFigure={ this.props.setActiveFigure }
-    //     />
-    //   )
-    // })
+    let elements = []
+
+    this.state.items.map((figure, i) => {
+      elements.push(
+        <M_LayerListItem
+
+          figure={ figure }
+          key={ i }
+          index={ i }
+
+          setActiveFigure={ this.props.setActiveFigure }
+          setDraggedItem={ this.setDraggedItem }
+          setNewFiguresOrder={ this.setNewFiguresOrder }
+        />
+      )
+    })
 
     return(
       <div
         className="O_Sidebar"
       >
-        <ul>
-            {this.state.figures.map((figure, idx) => (
-              <li key={idx} onDragOver={() => this.onDragOver(idx)}>
-                <div
-                  className="M_LayerListItem"
-                  draggable
-                  onDragStart={e => this.onDragStart(e, idx)}
-                  onDragEnd={this.onDragEnd}
-                >
-                  Figure {figure.id}
-                </div>
-              </li>
-            ))}
-        </ul>
+        { elements }
       </div>
     )
   }
 }
+
+// <ul>
+//     {this.state.figures.map((figure, idx) => (
+//       <li key={idx} onDragOver={() => this.onDragOver(idx)}>
+//         <div
+//           className="M_LayerListItem"
+//           draggable
+//           onDragStart={e => this.onDragStart(e, idx)}
+//           onDragEnd={this.onDragEnd}
+//         >
+//           Figure {figure.id}
+//         </div>
+//       </li>
+//     ))}
+// </ul>
