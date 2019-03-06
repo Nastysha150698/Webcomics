@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   post 'comics_on_react/tune'
   # post 'comics_on_react/create'
   post 'comics_on_react/destroy'
+  post 'comics_on_react/saveLayersOrder'
 
   resources :fonts
   resources :comics do

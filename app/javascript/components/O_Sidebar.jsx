@@ -85,7 +85,7 @@ export default class O_Sidebar extends React.Component {
   render() {
     let elements = []
 
-    this.state.items.map((figure, i) => {
+    this.props.figures.map((figure, i) => {
       elements.push(
         <M_LayerListItem
 
@@ -99,6 +99,8 @@ export default class O_Sidebar extends React.Component {
         />
       )
     })
+
+    elements.reverse()
 
     return(
       <div

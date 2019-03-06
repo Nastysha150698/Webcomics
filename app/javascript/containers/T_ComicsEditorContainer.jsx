@@ -15,7 +15,7 @@ export default class T_ComicsEditorContainer extends React.Component {
     let figures = []
 
     this.props.figures.map((figure, i) => {
-      figure.z_index = i
+      // figure.z_index = i
       figures.push(figure)
     })
 
@@ -310,6 +310,39 @@ export default class T_ComicsEditorContainer extends React.Component {
     })
   }
 
+  saveLayersOrder() {
+
+    // figure Index = Z_Index !!!!
+
+    let data = new Object()
+    let figuresIndexes = new Object()
+
+    this.state.figures.map((figure, i) => {
+      figuresIndexes[figure.id] = i
+    })
+
+    console.log(figuresIndexes)
+
+    data['comic_id'] = this.props.comic_id
+    data['figuresIndexes'] = figuresIndexes
+
+    $.ajax( {
+        dataType: "json",
+        method: "POST",
+        url: "/comics_on_react/saveLayersOrder",
+        data: { data }
+      })
+      .done(function() {
+        console.log("success: saveLayersOrder")
+      })
+      .fail(function() {
+        console.log("error")
+      })
+      .always(function() {
+        console.log("complete")
+    })
+  }
+
   deleteFigure() {
     let activeFigure = this.state.figures[this.state.activeFigure]
     let newFigures = this.state.figures.filter(item => item !== activeFigure)
@@ -338,29 +371,75 @@ export default class T_ComicsEditorContainer extends React.Component {
       .always(function() {
         console.log("complete")
     })
+
+    this.setState({
+      activeFigure: 0
+    })
+  }
+
+  putFigureDown() {
+    if (this.state.activeFigure > 0) {
+      let activeFigure = this.state.figures[this.state.activeFigure]
+      let newFigures = this.state.figures.filter(item => item !== activeFigure)
+      newFigures.splice(this.state.activeFigure - 1, 0, activeFigure)
+      this.setState({
+        figures: newFigures,
+        activeFigure: this.state.activeFigure - 1
+      })
+      this.saveLayersOrder()
+    }
+  }
+
+  putFigureUp() {
+    if (this.state.activeFigure < this.state.figures.length - 1) {
+      let activeFigure = this.state.figures[this.state.activeFigure]
+      let newFigures = this.state.figures.filter(item => item !== activeFigure)
+      newFigures.splice(this.state.activeFigure + 1, 0, activeFigure)
+      this.setState({
+        figures: newFigures,
+        activeFigure: this.state.activeFigure + 1
+      })
+      this.saveLayersOrder()
+    }
   }
 
   handleKeyPress = (event) => {
     if (event.key == 'Enter') {
       this.deleteFigure()
     }
+    if (event.key == 'd') {
+      this.putFigureDown()
+    }
+    if (event.key == 'u') {
+      this.putFigureUp()
+    }
+    if (event.key == 's') {
+      this.saveLayersOrder()
+    }
   }
 
   render() {
+    let figures = []
+
+    this.state.figures.map((figure, i) => {
+      figure.layer_index = i
+      figures.push(figure)
+    })
+
     return(
       <div className="T_ComicsEditorContainer"
         tabIndex="0"
         onKeyPress={this.handleKeyPress}
       >
         <O_Sidebar
-          figures={ this.state.figures }
+          figures={ figures }
 
           setActiveFigure={ this.setActiveFigure }
           reorderLayers={ this.reorderLayers }
         />
 
         <O_ComicsArtboard
-          figures={ this.state.figures }
+          figures={ figures }
 
           setDraggingFigure={ this.setDraggingFigure }
           setResizingFigure={ this.setResizingFigure }

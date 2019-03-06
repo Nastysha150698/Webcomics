@@ -49,7 +49,7 @@ export default class M_Figure extends React.Component {
       borderColor: this.props.figure['border_color'],
       borderRadius: this.props.figure['border_radius'],
       backgroundColor: this.props.figure['background_color'],
-      zIndex: this.props.figure['z_index'],
+      zIndex: this.props.figure['layer_index'],
       outline: focusFrame
     }
 
@@ -62,7 +62,9 @@ export default class M_Figure extends React.Component {
         style={ styles }
       >
         RailsId: { this.props.figure.id }<br/>
-        ReactId: { this.props.figure_id }
+        ReactId: { this.props.figure_id }<br/>
+        Z_Index: { this.props.figure.layer_index}<br/>
+        Rails_Z_Index: { this.props.figure.z_index }
         { this.props.figure['active'] &&
           <A_ResizeHandlers
             setResizingFigure={this.props.setResizingFigure}

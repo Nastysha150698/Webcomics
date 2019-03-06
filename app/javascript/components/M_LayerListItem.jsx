@@ -37,13 +37,27 @@ export default class M_LayerListItem extends React.Component {
   }
 
   render() {
-    let className = "M_LayerListItem"
+    // var focusFrame
+    let color, backgroundColor
     if (this.props.figure.active) {
-      className += ' selected';
+      // focusFrame = '2px solid blue'
+      color = '#00BF88'
+      backgroundColor = 'rgba(255, 255, 255, .05)'
+    } else {
+      // focusFrame = 0
+      color = '#FFFFFF'
+      backgroundColor = 'rgba(255, 255, 255, 0)'
+    }
+    const styles = {
+      // outline: focusFrame,
+      color: color,
+      backgroundColor: backgroundColor
     }
 
     return(
       <div
+        style={ styles }
+
         className="M_LayerListItem"
         draggable
         onDragStart={e => this.handleDragStart(e)}
@@ -52,7 +66,7 @@ export default class M_LayerListItem extends React.Component {
 
         onClick={ this.handleClick}
       >
-        {this.props.index }  |  Layer Name { this.state.id } { this.props.figure.active && 'YO'}
+        {this.props.index }  |  Layer Name { this.props.figure.id } { this.props.figure.active && 'YO'}
       </div>
     )
   }

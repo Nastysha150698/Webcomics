@@ -20,6 +20,19 @@ class ComicsOnReactController < ApplicationController
     end
   end
 
+  def saveLayersOrder
+    comic_id = params[:data][:comic_id]
+    figuresIndexes = params[:data][:figuresIndexes]
+
+    comic = Comic.find(comic_id)
+
+    figuresIndexes.each do |id, z_index|
+      figure = comic.figures.find(id)
+      figure.update_attributes(:z_index => z_index)
+      p figure.id, figure.z_index
+    end
+  end
+
   def create
     @figure = Figure.new(params[:figure])
     @figure.comic_id = params[:comic_id]
