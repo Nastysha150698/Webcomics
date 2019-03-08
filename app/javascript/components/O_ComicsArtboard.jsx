@@ -58,7 +58,7 @@ export default class O_ComicsArtbord extends React.Component {
       >
         { elements }
         <A_Button
-          color={"violet"}
+          color={"#292c3f"}
           text={ "Add" }
           data={ data }
         />

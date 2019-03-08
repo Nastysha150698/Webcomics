@@ -19,7 +19,7 @@ export default class M_DropdownListItem extends React.Component {
 
   mouseOver() {
     this.setState({
-      backgroundColor: "green"
+      backgroundColor: "#3F4253"
     })
 
     console.log("Mouse over items")

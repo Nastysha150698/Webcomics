@@ -37,7 +37,7 @@ export default class A_Button extends React.Component {
 
   mouseOver() {
     this.setState({
-      color: "red"
+      color: "#3F4253"
     })
 
     console.log("Mouse over")
