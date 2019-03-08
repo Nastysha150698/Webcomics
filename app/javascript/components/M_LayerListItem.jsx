@@ -7,7 +7,7 @@ export default class M_LayerListItem extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
-      id: this.props.figure.id
+      id: this.props.comicItem.id
     }
     _.bindAll(
       this,
@@ -33,13 +33,13 @@ export default class M_LayerListItem extends React.Component {
   }
 
   handleClick() {
-    this.props.setActiveFigure(this.props.index)
+    this.props.setActiveComicItem(this.props.index)
   }
 
   render() {
     // var focusFrame
     let color, backgroundColor
-    if (this.props.figure.active) {
+    if (this.props.comicItem.active) {
       // focusFrame = '2px solid blue'
       color = '#00BF88'
       backgroundColor = 'rgba(255, 255, 255, .05)'
@@ -66,7 +66,7 @@ export default class M_LayerListItem extends React.Component {
 
         onClick={ this.handleClick}
       >
-        {this.props.index }  |  Layer Name { this.props.figure.id } { this.props.figure.active && 'YO'}
+        {this.props.index }  |  Layer Name { this.props.comicItem.id } { this.props.comicItem.active && 'YO'}
       </div>
     )
   }

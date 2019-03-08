@@ -19,11 +19,11 @@ export default class M_Figure extends React.Component {
   }
 
   handleMouseDown() {
-    this.props.setDraggingFigure(this.props.figure_id)
+    this.props.setDraggingComicItem(this.props.index)
   }
 
   handleMouseUp() {
-    this.props.setDraggingFigure(0)
+    this.props.setDraggingComicItem(0)
   }
 
   handleClick(e) {
@@ -32,24 +32,24 @@ export default class M_Figure extends React.Component {
 
   render() {
     var focusFrame
-    if (this.props.figure['active']) {
+    if (this.props.comicItem['active']) {
       focusFrame = '2px solid blue'
     } else {
       focusFrame = 0
     }
     const styles = {
-      top: this.props.figure['y'],
-      left: this.props.figure['x'],
-      width: this.props.figure['width'],
-      height: this.props.figure['height'],
+      top: this.props.comicItem['y'],
+      left: this.props.comicItem['x'],
+      width: this.props.comicItem['width'],
+      height: this.props.comicItem['height'],
 
       // borderWidth: this.state.borderWidth,
       borderWidth: 0,
 
-      borderColor: this.props.figure['border_color'],
-      borderRadius: this.props.figure['border_radius'],
-      backgroundColor: this.props.figure['background_color'],
-      zIndex: this.props.figure['layer_index'],
+      borderColor: this.props.comicItem['border_color'],
+      borderRadius: this.props.comicItem['border_radius'],
+      backgroundColor: this.props.comicItem['background_color'],
+      zIndex: this.props.comicItem['layer_index'],
       outline: focusFrame
     }
 
@@ -61,11 +61,11 @@ export default class M_Figure extends React.Component {
         className="M_Figure"
         style={ styles }
       >
-        { this.props.figure.id }<br/>
-        { this.props.figure['active'] &&
+        { this.props.comicItem.id }<br/>
+        { this.props.comicItem['active'] &&
           <A_ResizeHandlers
-            setResizingFigure={this.props.setResizingFigure}
-            figure_id={this.props.figure_id}
+            setResizingComicItem={this.props.setResizingComicItem}
+            index={this.props.index}
           /> }
       </div>
     )

@@ -34,14 +34,14 @@ export default class O_ComicsArtbord extends React.Component {
   render() {
     let elements = []
 
-    this.props.figures.map((figure, i) => {
+    this.props.comicItems.map((comicItem, i) => {
       elements.push(
         <M_Figure
-          figure={ figure }
+          comicItem={ comicItem }
           key={ i }
-          figure_id={i}
-          setDraggingFigure={this.props.setDraggingFigure}
-          setResizingFigure={this.props.setResizingFigure}
+          index={i}
+          setDraggingComicItem={this.props.setDraggingComicItem}
+          setResizingComicItem={this.props.setResizingComicItem}
         />
       )
     })
@@ -58,7 +58,7 @@ export default class O_ComicsArtbord extends React.Component {
         color={'white'}
         width={'150px'}
         height={'50px'}
-        function={this.props.createNewFigure}
+        function={this.props.createNewComicItem}
       />
         { elements }
       </div>

@@ -4,19 +4,20 @@ import PropTypes from 'prop-types'
 
 import M_LayerListItem from '../components/M_LayerListItem'
 import M_ColorPicker from '../components/M_ColorPicker'
+import M_Input from '../components/M_Input'
 
 export default class O_Sidebar extends React.Component {
   constructor(props, context) {
     super(props, context)
 
-    let items = []
-    this.props.figures.map((item, i) => {
-      item.type = 'figure'
-      items.push(item)
+    let comicItems = []
+    this.props.comicItems.map((comicItem, i) => {
+      comicItem.type = 'figure'
+      comicItems.push(comicItem)
     })
 
     this.state = {
-      items: items
+      comicItems: comicItems
     }
     _.bindAll(
       this,
@@ -83,35 +84,37 @@ export default class O_Sidebar extends React.Component {
 
   render() {
     let elements = []
-    this.props.figures.map((figure, i) => {
+    this.props.comicItems.map((comicItem, i) => {
       elements.push(
         <M_LayerListItem
 
-          figure={ figure }
+          comicItem={ comicItem }
           key={ i }
           index={ i }
 
-          setActiveFigure={ this.props.setActiveFigure }
+          setActiveComicItem={ this.props.setActiveComicItem }
           setDraggedItem={ this.setDraggedItem }
-          setNewFiguresOrder={ this.setNewFiguresOrder }
+          setNewComicItemsOrder={ this.setNewComicItemsOrder }
         />
       )
     })
     elements.reverse()
 
-    let color = this.props.figures[this.props.activeFigure].background_color
+    let color = this.props.comicItems[this.props.activeComicItem].background_color
 
     return(
       <div
         className="O_Sidebar"
       >
         <M_ColorPicker
-          activeFigure={ this.props.activeFigure }
+          activeComicItem={ this.props.activeComicItem }
           color={ color }
 
           updateColor={this.props.updateColor}
-          tuneFigure={ this.props.tuneFigure }
+          tuneComicItem={ this.props.tuneComicItem }
         />
+
+        <M_Input/>
 
         { elements }
       </div>

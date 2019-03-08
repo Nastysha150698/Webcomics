@@ -11,21 +11,21 @@ export default class T_ComicsEditorContainer extends React.Component {
   constructor(props, context) {
     super(props, context)
 
-    let figures = []
-    this.props.figures.map((figure, i) => {
+    let comicItems = []
+    this.props.figures.map((comicItem, i) => {
       // figure.z_index = i
-      figures.push(figure)
+      comicItems.push(comicItem)
     })
-    figures.sort(function(a, b){
+    comicItems.sort(function(a, b){
       return a.z_index - b.z_index
     })
 
     this.state = {
-      figures: figures,
+      comicItems: comicItems,
 
-      draggingFigure: 0,
-      resizingFigure: 0,
-      activeFigure: 0,
+      draggingComicItem: 0,
+      resizingComicItem: 0,
+      activeComicItem: 0,
       handlerType: '',
       clickX: 0,
       clickY: 0,
@@ -33,102 +33,102 @@ export default class T_ComicsEditorContainer extends React.Component {
     _.bindAll(
       this,
       'handleKeyPress',
-      'setDraggingFigure',
-      'setResizingFigure',
-      'setActiveFigure',
+      'setDraggingComicItem',
+      'setResizingComicItem',
+      'setActiveComicItem',
       'setCoursorPosition',
       'setDraggingResizingNone',
       'setActiveNone',
       'reorderLayers',
-      'createNewFigure',
+      'createNewComicItem',
       'saveLayersOrder',
-      'deleteFigure',
-      'putFigureDown',
-      'putFigureUp',
+      'deleteComicItem',
+      'putComicItemDown',
+      'putComicItemUp',
       'updateColor',
-      'tuneFigure'
+      'tuneComicItem'
     )
   }
 
-  setDraggingFigure(comicsItemIndex) {
+  setDraggingComicItem(comicsItemIndex) {
     if (comicsItemIndex != 0) {
-      let newFigures = this.state.figures
-      this.state.figures.map((figure, i) => {
+      let newComicItems = this.state.comicItems
+      this.state.comicItems.map((comicItem, i) => {
         if (i == comicsItemIndex) {
-          newFigures[i]['active'] = true
+          newComicItems[i]['active'] = true
         } else {
-          if (newFigures[i]['active']) {
-            this.tuneFigure(i)
+          if (newComicItems[i]['active']) {
+            this.tuneComicItem(i)
           }
-          newFigures[i]['active'] = false
+          newComicItems[i]['active'] = false
         }
       })
 
       this.setState({
-        draggingFigure: comicsItemIndex,
-        activeFigure: comicsItemIndex,
-        clickX: event.pageX - this.state.figures[comicsItemIndex]['x'],
-        clickY: event.pageY - this.state.figures[comicsItemIndex]['y'],
-        figures: newFigures
+        draggingComicItem: comicsItemIndex,
+        activeComicItem: comicsItemIndex,
+        clickX: event.pageX - this.state.comicItems[comicsItemIndex]['x'],
+        clickY: event.pageY - this.state.comicItems[comicsItemIndex]['y'],
+        comicItems: newComicItems
       })
 
     } else {
-      this.tuneFigure(this.state.activeFigure)
+      this.tuneComicItem(this.state.activeComicItem)
 
       this.setState({
-        draggingFigure: 0
+        draggingComicItem: 0
       })
     }
   }
 
-  setResizingFigure(comicsItemIndex, handlerType) {
-    let newFigures = this.state.figures
+  setResizingComicItem(comicsItemIndex, handlerType) {
+    let newComicItems = this.state.comicItems
     if (comicsItemIndex == 0) {
-      newFigures[this.state.draggingFigure]['active'] = false
+      newComicItems[this.state.draggingComicItem]['active'] = false
     } else {
-      newFigures[this.state.draggingFigure]['active'] = true
+      newComicItems[this.state.draggingComicItem]['active'] = true
     }
 
     this.setState({
-      resizingFigure: comicsItemIndex,
+      resizingComicItem: comicsItemIndex,
       handlerType: handlerType,
-      clickX: event.pageX - this.state.figures[comicsItemIndex]['x'],
-      clickY: event.pageY - this.state.figures[comicsItemIndex]['y'],
+      clickX: event.pageX - this.state.comicItems[comicsItemIndex]['x'],
+      clickY: event.pageY - this.state.comicItems[comicsItemIndex]['y'],
 
-      figures: newFigures
+      comicItems: newComicItems
     })
   }
 
-  setActiveFigure(comicsItemIndex) {
-    let newFigures = this.state.figures
-    this.state.figures.map((figure, i) => {
+  setActiveComicItem(comicsItemIndex) {
+    let newComicItems = this.state.comicItems
+    this.state.comicItems.map((comicItem, i) => {
       if (i == comicsItemIndex) {
-        newFigures[i]['active'] = true
+        newComicItems[i]['active'] = true
       } else {
-        newFigures[i]['active'] = false
+        newComicItems[i]['active'] = false
       }
     })
 
     this.setState({
-      activeFigure: comicsItemIndex,
-      figures: newFigures
+      activeComicItem: comicsItemIndex,
+      comicItems: newComicItems
     })
   }
 
   setCoursorPosition(coursorX, coursorY) {
-    if ((this.state.draggingFigure != 0) && (this.state.resizingFigure == 0)) {
-      let newFigures = this.state.figures
-      newFigures[this.state.draggingFigure]['y'] = (coursorY - this.state.clickY)
-      newFigures[this.state.draggingFigure]['x'] = (coursorX - this.state.clickX)
+    if ((this.state.draggingComicItem != 0) && (this.state.resizingComicItem == 0)) {
+      let newComicItems = this.state.comicItems
+      newComicItems[this.state.draggingComicItem]['y'] = (coursorY - this.state.clickY)
+      newComicItems[this.state.draggingComicItem]['x'] = (coursorX - this.state.clickX)
 
       this.setState({
-        figures: newFigures
+        comicItems: newComicItems
       })
     }
 
-    if (this.state.resizingFigure != 0) {
-      let newFigures = this.state.figures
-      let currentFigure = newFigures[this.state.resizingFigure]
+    if (this.state.resizingComicItem != 0) {
+      let newComicItems = this.state.comicItems
+      let currentComicItem = newComicItems[this.state.resizingComicItem]
 
       let top
       let left
@@ -138,128 +138,127 @@ export default class T_ComicsEditorContainer extends React.Component {
       if (this.state.handlerType == 'nw') {
         top = coursorY
         left = coursorX - 240
-        width = currentFigure['x'] + currentFigure['width'] - left
-        height = currentFigure['y'] + currentFigure['height'] - top
+        width = currentComicItem['x'] + currentComicItem['width'] - left
+        height = currentComicItem['y'] + currentComicItem['height'] - top
       }
       if (this.state.handlerType == 'n') {
         top = coursorY
-        left = currentFigure['x']
-        width = currentFigure['width']
-        height = currentFigure['y'] + currentFigure['height'] - top
+        left = currentComicItem['x']
+        width = currentComicItem['width']
+        height = currentComicItem['y'] + currentComicItem['height'] - top
       }
       if (this.state.handlerType == 'ne') {
         top = coursorY
-        left = currentFigure['x']
-        width = coursorX - 240 - currentFigure['x']
-        height = currentFigure['y'] + currentFigure['height'] - top
+        left = currentComicItem['x']
+        width = coursorX - 240 - currentComicItem['x']
+        height = currentComicItem['y'] + currentComicItem['height'] - top
       }
       if (this.state.handlerType == 'e') {
-        top = currentFigure['y']
-        left = currentFigure['x']
-        width = coursorX - 240 - currentFigure['x']
-        height = currentFigure['y'] + currentFigure['height'] - top
+        top = currentComicItem['y']
+        left = currentComicItem['x']
+        width = coursorX - 240 - currentComicItem['x']
+        height = currentComicItem['y'] + currentComicItem['height'] - top
       }
       if (this.state.handlerType == 'se') {
-        top = currentFigure['y']
-        left = currentFigure['x']
-        width = coursorX - 240 - currentFigure['x']
-        height = coursorY - currentFigure['y']
+        top = currentComicItem['y']
+        left = currentComicItem['x']
+        width = coursorX - 240 - currentComicItem['x']
+        height = coursorY - currentComicItem['y']
       }
       if (this.state.handlerType == 's') {
-        top = currentFigure['y']
-        left = currentFigure['x']
-        width = currentFigure['width']
-        height = coursorY - currentFigure['y']
+        top = currentComicItem['y']
+        left = currentComicItem['x']
+        width = currentComicItem['width']
+        height = coursorY - currentComicItem['y']
       }
       if (this.state.handlerType == 'sw') {
-        top = currentFigure['y']
+        top = currentComicItem['y']
         left = coursorX - 240
-        width = currentFigure['x'] + currentFigure['width'] - left
-        height = coursorY - currentFigure['y']
+        width = currentComicItem['x'] + currentComicItem['width'] - left
+        height = coursorY - currentComicItem['y']
       }
       if (this.state.handlerType == 'w') {
-        top = currentFigure['y']
+        top = currentComicItem['y']
         left = coursorX - 240
-        width = currentFigure['x'] + currentFigure['width'] - left
-        height = currentFigure['height']
+        width = currentComicItem['x'] + currentComicItem['width'] - left
+        height = currentComicItem['height']
       }
 
-      newFigures[this.state.resizingFigure]['y'] = top
-      newFigures[this.state.resizingFigure]['x'] = left
-      newFigures[this.state.resizingFigure]['width'] = width
-      newFigures[this.state.resizingFigure]['height'] = height
+      newComicItems[this.state.resizingComicItem]['y'] = top
+      newComicItems[this.state.resizingComicItem]['x'] = left
+      newComicItems[this.state.resizingComicItem]['width'] = width
+      newComicItems[this.state.resizingComicItem]['height'] = height
 
       this.setState({
-        figures: newFigures
+        comicItems: newComicItems
       })
     }
   }
 
   setDraggingResizingNone() {
     this.setState({
-      draggingFigure: 0,
-      resizingFigure: 0
+      draggingComicItem: 0,
+      resizingComicItem: 0
     })
   }
 
   setActiveNone() {
-    if (this.state.activeFigure != 0) {
-      let newFigures = this.state.figures
-      this.state.figures.map((figure, i) => {
-        newFigures[i]['active'] = false
+    if (this.state.activeComicItem != 0) {
+      let newComicItems = this.state.comicItems
+      this.state.comicItems.map((comicItem, i) => {
+        newComicItems[i]['active'] = false
       })
       this.setState({
-        activeFigure: 0,
-        figures: newFigures
+        activeComicItem: 0,
+        comicItems: newComicItems
       })
     }
   }
 
-  tuneFigure(comicsItemIndex) {
-    let figure = this.state.figures[comicsItemIndex]
+  tuneComicItem(comicsItemIndex) {
+    let comicItem = this.state.comicItems[comicsItemIndex]
     $.ajax( {
         dataType: "json",
         method: "POST",
         url: "/comics_on_react/tune",
         data: {
           comic_id: this.props.comic_id,
-          figure_id: figure.id,
-          width: figure.width,
-          height: figure.height,
-          x: figure.x,
-          y: figure.y,
-          background_color: figure.background_color
+          figure_id: comicItem.id,
+          width: comicItem.width,
+          height: comicItem.height,
+          x: comicItem.x,
+          y: comicItem.y,
+          background_color: comicItem.background_color
         }
       })
       .done(function() {
-        console.log("success: tuneFigure")
+        console.log("success: tuneComicItem")
       })
       .fail(function() {
-        console.log("error: tuneFigure")
+        console.log("error: tuneComicItem")
       })
       .always(function() {
         console.log("complete")
     })
   }
 
-  reorderLayers(figures) {
+  reorderLayers(comicItems) {
     console.log('reordering Layers...');
-    let newFigures = []
-    figures.map((figure, i) => {
-      figure.z_index = i
-      // figure.figure_id = i
-      newFigures.push(figure)
+    let newComicItems = []
+    comicItems.map((comicItem, i) => {
+      comicItem.z_index = i
+      newComicItems.push(comicItem)
     })
     this.setState({
-      figures: newFigures
+      comicItems: newComicItems
     })
 
     console.log('Layers reordered');
   }
 
-  createNewFigure() {
-    let newFigures = this.state.figures
-    let newFigure = {
+  createNewComicItem() {
+    let newComicItems = this.state.comicItems
+    let newComicItem = {
       active: true,
       background_color: "#D8D8D8",
       border_color: "#795548",
@@ -272,13 +271,13 @@ export default class T_ComicsEditorContainer extends React.Component {
       y: 300,
       z_index: 100
     }
-    newFigures.push(newFigure)
+    newComicItems.push(newComicItem)
     this.setState({
-      activeFigure: this.state.figures.length - 1,
-      figures: newFigures
+      activeComicItem: this.state.comicItems.length - 1,
+      comicItems: newComicItems
     })
 
-    let figure = this.state.figures[this.state.figures.length - 1]
+    let comicItem = this.state.comicItems[this.state.comicItems.length - 1]
     // var _this = this
 
     $.ajax( {
@@ -288,24 +287,16 @@ export default class T_ComicsEditorContainer extends React.Component {
         context: this,
         data: {
           comic_id: this.props.comic_id,
-          figure: figure
-          // x: figure['x'],
-          // y: figure['x'],
-          // width: figure['width'],
-          // height: figure['height'],
-          // border_width: figure['border_width'],
-          // border_color: figure['border_color'],
-          // background_color: figure['background_color'],
-          // border_radius: figure['border_radius']
+          figure: comicItem
         }
       })
       .done(function(data) {
-        console.log("success: figure " + data.figure_id + " created")
+        console.log("success: comicItem " + data.figure_id + " created")
 
-        let newFigures = this.state.figures
-        newFigures[newFigures.length - 1]['id'] = data.figure_id
+        let newComicItems = this.state.comicItems
+        newComicItems[newComicItems.length - 1]['id'] = data.figure_id
         this.setState({
-          figures: newFigures
+          comicItems: newComicItems
         })
       })
       .fail(function() {
@@ -317,16 +308,16 @@ export default class T_ComicsEditorContainer extends React.Component {
   }
 
   saveLayersOrder() {
-    // figure Index = Z_Index !!!!
+    // comicItem Index = Z_Index !!!!
 
     let data = new Object()
-    let figuresIndexes = new Object()
-    this.state.figures.map((figure, i) => {
-      figuresIndexes[figure.id] = i
+    let comicItemsIndexes = new Object()
+    this.state.comicItems.map((comicItem, i) => {
+      comicItemsIndexes[comicItem.id] = i
     })
 
     data['comic_id'] = this.props.comic_id
-    data['figuresIndexes'] = figuresIndexes
+    data['figuresIndexes'] = comicItemsIndexes
 
     $.ajax( {
         dataType: "json",
@@ -345,13 +336,13 @@ export default class T_ComicsEditorContainer extends React.Component {
     })
   }
 
-  deleteFigure() {
-    let activeFigure = this.state.figures[this.state.activeFigure]
-    let newFigures = this.state.figures.filter(item => item !== activeFigure)
-    let figure_id = activeFigure.id
+  deleteComicItem() {
+    let activeComicItem = this.state.comicItems[this.state.activeComicItem]
+    let newComicItems = this.state.comicItems.filter(item => item !== activeComicItem)
+    let comicItem_id = activeComicItem.id
 
     this.setState({
-      figures: newFigures
+      comicItems: newComicItems
     })
 
     $.ajax( {
@@ -361,11 +352,11 @@ export default class T_ComicsEditorContainer extends React.Component {
         context: this,
         data: {
           comic_id: this.props.comic_id,
-          figure_id: figure_id
+          figure_id: comicItem_id
         }
       })
       .done(function(data) {
-        console.log("success: figure destroyed")
+        console.log("success: deleteComicItem")
       })
       .fail(function() {
         console.log("error")
@@ -375,32 +366,32 @@ export default class T_ComicsEditorContainer extends React.Component {
     })
 
     this.setState({
-      activeFigure: 0
+      activeComicItem: 0
     })
   }
 
-  putFigureDown() {
-    if (this.state.activeFigure > 0) {
-      let activeFigure = this.state.figures[this.state.activeFigure]
-      let newFigures = this.state.figures.filter(item => item !== activeFigure)
-      newFigures.splice(this.state.activeFigure - 1, 0, activeFigure)
+  putComicItemDown() {
+    if (this.state.activeComicItem > 0) {
+      let activeComicItem = this.state.comicItems[this.state.activeComicItem]
+      let newComicsItems = this.state.comicItems.filter(item => item !== activeComicItem)
+      newComicsItems.splice(this.state.activeComicItem - 1, 0, activeComicItem)
       this.setState({
-        figures: newFigures,
-        activeFigure: this.state.activeFigure - 1
+        comicItems: newComicsItems,
+        activeComicItem: this.state.activeComicItem - 1
         },
         () => {this.saveLayersOrder()}
       )
     }
   }
 
-  putFigureUp() {
-    if (this.state.activeFigure < this.state.figures.length - 1) {
-      let activeFigure = this.state.figures[this.state.activeFigure]
-      let newFigures = this.state.figures.filter(item => item !== activeFigure)
-      newFigures.splice(this.state.activeFigure + 1, 0, activeFigure)
+  putComicItemUp() {
+    if (this.state.activeComicItem < this.state.comicItems.length - 1) {
+      let activeComicItem = this.state.comicItems[this.state.activeComicItem]
+      let newComicsItems = this.state.comicItems.filter(item => item !== activeComicItem)
+      newComicsItems.splice(this.state.activeComicItem + 1, 0, activeComicItem)
       this.setState({
-        figures: newFigures,
-        activeFigure: this.state.activeFigure + 1
+        comicItems: newComicsItems,
+        activeComicItem: this.state.activeComicItem + 1
         },
         () => {this.saveLayersOrder()}
       )
@@ -408,32 +399,32 @@ export default class T_ComicsEditorContainer extends React.Component {
   }
 
   handleKeyPress = (event) => {
-    if (event.key == 'Enter') {
-      this.deleteFigure()
+    if (event.key == 'q') {
+      this.deleteComicItem()
     }
     if (event.key == 'd') {
-      this.putFigureDown()
+      this.putComicItemDown()
     }
     if (event.key == 'u') {
-      this.putFigureUp()
+      this.putComicItemUp()
     }
   }
 
   updateColor(color) {
-    let newFigures = this.state.figures
-    newFigures[this.state.activeFigure].background_color = color.hex
+    let newComicItems = this.state.comicItems
+    newComicItems[this.state.activeComicItem].background_color = color.hex
     this.setState({
-      figures: newFigures
+      comicItems: newComicItems
       }
     )
   }
 
   render() {
-    let figures = []
+    let comicItems = []
 
-    this.state.figures.map((figure, i) => {
-      figures.push(figure)
-      figure.layer_index = i
+    this.state.comicItems.map((comicItem, i) => {
+      comicItems.push(comicItem)
+      comicItems.layer_index = i
     })
 
     return(
@@ -442,26 +433,26 @@ export default class T_ComicsEditorContainer extends React.Component {
         onKeyPress={this.handleKeyPress}
       >
         <O_Sidebar
-          figures={ figures }
+          comicItems={ comicItems }
 
-          activeFigure={ this.state.activeFigure }
+          activeComicItem={ this.state.activeComicItem }
 
-          setActiveFigure={ this.setActiveFigure }
+          setActiveComicItem={ this.setActiveComicItem }
           reorderLayers={ this.reorderLayers }
           updateColor={ this.updateColor }
-          tuneFigure={ this.tuneFigure }
+          tuneComicItem={ this.tuneComicItem }
         />
 
         <O_ComicsArtboard
-          figures={ figures }
+          comicItems={ comicItems }
 
-          setDraggingFigure={ this.setDraggingFigure }
-          setResizingFigure={ this.setResizingFigure }
+          setDraggingComicItem={ this.setDraggingComicItem }
+          setResizingComicItem={ this.setResizingComicItem }
           setDraggingResizingNone={ this.setDraggingResizingNone }
           setActiveNone={ this.setActiveNone }
           setCoursorPosition={ this.setCoursorPosition }
 
-          createNewFigure={this.createNewFigure}
+          createNewComicItem={this.createNewComicItem}
         />
       </div>
     )
