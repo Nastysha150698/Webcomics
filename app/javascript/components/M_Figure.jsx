@@ -61,10 +61,7 @@ export default class M_Figure extends React.Component {
         className="M_Figure"
         style={ styles }
       >
-        RailsId: { this.props.figure.id }<br/>
-        ReactId: { this.props.figure_id }<br/>
-        Z_Index: { this.props.figure.layer_index}<br/>
-        Rails_Z_Index: { this.props.figure.z_index }
+        { this.props.figure.id }<br/>
         { this.props.figure['active'] &&
           <A_ResizeHandlers
             setResizingFigure={this.props.setResizingFigure}

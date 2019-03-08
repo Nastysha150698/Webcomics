@@ -10,12 +10,13 @@ class ComicsOnReactController < ApplicationController
     height = params[:height]
     x = params[:x]
     y = params[:y]
+    background_color = params[:background_color]
 
     comic = Comic.find(comic_id)
     figure = comic.figures.find(figure_id)
 
     respond_to do |format|
-      figure.update_attributes(:width => width, :height => height, :x => x, :y => y)
+      figure.update_attributes(:width => width, :height => height, :x => x, :y => y, :background_color => background_color)
       format.json { render json: {},  status: :ok }
     end
   end

@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
 import M_LayerListItem from '../components/M_LayerListItem'
-import M_LayerListItemDevider from '../components/M_LayerListItemDevider'
-
+import M_ColorPicker from '../components/M_ColorPicker'
 
 export default class O_Sidebar extends React.Component {
   constructor(props, context) {
@@ -84,7 +83,6 @@ export default class O_Sidebar extends React.Component {
 
   render() {
     let elements = []
-
     this.props.figures.map((figure, i) => {
       elements.push(
         <M_LayerListItem
@@ -99,13 +97,22 @@ export default class O_Sidebar extends React.Component {
         />
       )
     })
-
     elements.reverse()
+
+    let color = this.props.figures[this.props.activeFigure].background_color
 
     return(
       <div
         className="O_Sidebar"
       >
+        <M_ColorPicker
+          activeFigure={ this.props.activeFigure }
+          color={ color }
+
+          updateColor={this.props.updateColor}
+          tuneFigure={ this.props.tuneFigure }
+        />
+
         { elements }
       </div>
     )

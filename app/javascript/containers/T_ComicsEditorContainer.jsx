@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import $ from 'jquery'
 
 import O_Sidebar from '../components/O_Sidebar'
-// import Layers from '../components/Layers'
 import O_ComicsArtboard from '../components/O_ComicsArtboard'
 
 export default class T_ComicsEditorContainer extends React.Component {
@@ -17,6 +16,10 @@ export default class T_ComicsEditorContainer extends React.Component {
     this.props.figures.map((figure, i) => {
       // figure.z_index = i
       figures.push(figure)
+    })
+
+    figures.sort(function(a, b){
+      return a.z_index - b.z_index
     })
 
     this.state = {
@@ -35,11 +38,17 @@ export default class T_ComicsEditorContainer extends React.Component {
       'setDraggingFigure',
       'setResizingFigure',
       'setActiveFigure',
+      'setCoursorPosition',
       'setDraggingResizingNone',
       'setActiveNone',
-      'setCoursorPosition',
       'reorderLayers',
-      'createNewFigure'
+      'createNewFigure',
+      'saveLayersOrder',
+      'deleteFigure',
+      'putFigureDown',
+      'putFigureUp',
+      'updateColor',
+      'tuneFigure'
     )
   }
 
@@ -52,7 +61,7 @@ export default class T_ComicsEditorContainer extends React.Component {
           // console.log(i, this.state.figures[i]['active']);
         } else {
           if (newFigures[i]['active']) {
-            this.tuneFigure(this.state.figures[i])
+            this.tuneFigure(i)
           }
           newFigures[i]['active'] = false
         }
@@ -69,6 +78,8 @@ export default class T_ComicsEditorContainer extends React.Component {
       // console.log('Figure', figure_id, 'active:', this.state.figures[figure_id]['active']);
 
     } else {
+      this.tuneFigure(this.state.activeFigure)
+
       this.setState({
         draggingFigure: 0
       })
@@ -208,28 +219,30 @@ export default class T_ComicsEditorContainer extends React.Component {
       })
     }
 
-    this.tuneFigure(this.state.figures[this.state.activeFigure])
+    // this.tuneFigure(this.state.figures[this.state.activeFigure])
   }
 
-  tuneFigure(figure) {
+  tuneFigure(index) {
+    let figure = this.state.figures[index]
     $.ajax( {
         dataType: "json",
         method: "POST",
         url: "/comics_on_react/tune",
         data: {
-          comic_id: figure.comic_id,
+          comic_id: this.props.comic_id,
           figure_id: figure.id,
           width: figure.width,
           height: figure.height,
           x: figure.x,
-          y: figure.y
+          y: figure.y,
+          background_color: figure.background_color
         }
       })
       .done(function() {
         console.log("success: tuneFigure")
       })
       .fail(function() {
-        console.log("error")
+        console.log("error: tuneFigure")
       })
       .always(function() {
         console.log("complete")
@@ -311,17 +324,15 @@ export default class T_ComicsEditorContainer extends React.Component {
   }
 
   saveLayersOrder() {
-
     // figure Index = Z_Index !!!!
 
     let data = new Object()
     let figuresIndexes = new Object()
-
     this.state.figures.map((figure, i) => {
       figuresIndexes[figure.id] = i
     })
 
-    console.log(figuresIndexes)
+    // console.log(figuresIndexes)
 
     data['comic_id'] = this.props.comic_id
     data['figuresIndexes'] = figuresIndexes
@@ -385,8 +396,9 @@ export default class T_ComicsEditorContainer extends React.Component {
       this.setState({
         figures: newFigures,
         activeFigure: this.state.activeFigure - 1
-      })
-      this.saveLayersOrder()
+        },
+        () => {this.saveLayersOrder()}
+      )
     }
   }
 
@@ -398,12 +410,14 @@ export default class T_ComicsEditorContainer extends React.Component {
       this.setState({
         figures: newFigures,
         activeFigure: this.state.activeFigure + 1
-      })
-      this.saveLayersOrder()
+        },
+        () => {this.saveLayersOrder()}
+      )
     }
   }
 
   handleKeyPress = (event) => {
+    // console.log('handleKeyPress ||| this.state.activeFigure =', this.state.activeFigure)
     if (event.key == 'Enter') {
       this.deleteFigure()
     }
@@ -413,17 +427,23 @@ export default class T_ComicsEditorContainer extends React.Component {
     if (event.key == 'u') {
       this.putFigureUp()
     }
-    if (event.key == 's') {
-      this.saveLayersOrder()
-    }
+  }
+
+  updateColor(color) {
+    let newFigures = this.state.figures
+    newFigures[this.state.activeFigure].background_color = color.hex
+    this.setState({
+      figures: newFigures
+      }
+    )
   }
 
   render() {
     let figures = []
 
     this.state.figures.map((figure, i) => {
-      figure.layer_index = i
       figures.push(figure)
+      figure.layer_index = i
     })
 
     return(
@@ -434,8 +454,12 @@ export default class T_ComicsEditorContainer extends React.Component {
         <O_Sidebar
           figures={ figures }
 
+          activeFigure={ this.state.activeFigure }
+
           setActiveFigure={ this.setActiveFigure }
           reorderLayers={ this.reorderLayers }
+          updateColor={ this.updateColor }
+          tuneFigure={ this.tuneFigure }
         />
 
         <O_ComicsArtboard
