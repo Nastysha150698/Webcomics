@@ -12,12 +12,10 @@ export default class T_ComicsEditorContainer extends React.Component {
     super(props, context)
 
     let figures = []
-
     this.props.figures.map((figure, i) => {
       // figure.z_index = i
       figures.push(figure)
     })
-
     figures.sort(function(a, b){
       return a.z_index - b.z_index
     })
@@ -52,13 +50,12 @@ export default class T_ComicsEditorContainer extends React.Component {
     )
   }
 
-  setDraggingFigure(figure_id) {
-    if (figure_id != 0) {
+  setDraggingFigure(comicsItemIndex) {
+    if (comicsItemIndex != 0) {
       let newFigures = this.state.figures
       this.state.figures.map((figure, i) => {
-        if (i == figure_id) {
+        if (i == comicsItemIndex) {
           newFigures[i]['active'] = true
-          // console.log(i, this.state.figures[i]['active']);
         } else {
           if (newFigures[i]['active']) {
             this.tuneFigure(i)
@@ -68,14 +65,12 @@ export default class T_ComicsEditorContainer extends React.Component {
       })
 
       this.setState({
-        draggingFigure: figure_id,
-        activeFigure: figure_id,
-        clickX: event.pageX - this.state.figures[figure_id]['x'],
-        clickY: event.pageY - this.state.figures[figure_id]['y'],
+        draggingFigure: comicsItemIndex,
+        activeFigure: comicsItemIndex,
+        clickX: event.pageX - this.state.figures[comicsItemIndex]['x'],
+        clickY: event.pageY - this.state.figures[comicsItemIndex]['y'],
         figures: newFigures
       })
-
-      // console.log('Figure', figure_id, 'active:', this.state.figures[figure_id]['active']);
 
     } else {
       this.tuneFigure(this.state.activeFigure)
@@ -86,28 +81,28 @@ export default class T_ComicsEditorContainer extends React.Component {
     }
   }
 
-  setResizingFigure(figure_id, handlerType) {
+  setResizingFigure(comicsItemIndex, handlerType) {
     let newFigures = this.state.figures
-    if (figure_id == 0) {
+    if (comicsItemIndex == 0) {
       newFigures[this.state.draggingFigure]['active'] = false
     } else {
       newFigures[this.state.draggingFigure]['active'] = true
     }
 
     this.setState({
-      resizingFigure: figure_id,
+      resizingFigure: comicsItemIndex,
       handlerType: handlerType,
-      clickX: event.pageX - this.state.figures[figure_id]['x'],
-      clickY: event.pageY - this.state.figures[figure_id]['y'],
+      clickX: event.pageX - this.state.figures[comicsItemIndex]['x'],
+      clickY: event.pageY - this.state.figures[comicsItemIndex]['y'],
 
       figures: newFigures
     })
   }
 
-  setActiveFigure(figure_id) {
+  setActiveFigure(comicsItemIndex) {
     let newFigures = this.state.figures
     this.state.figures.map((figure, i) => {
-      if (i == figure_id) {
+      if (i == comicsItemIndex) {
         newFigures[i]['active'] = true
       } else {
         newFigures[i]['active'] = false
@@ -115,7 +110,7 @@ export default class T_ComicsEditorContainer extends React.Component {
     })
 
     this.setState({
-      activeFigure: figure_id,
+      activeFigure: comicsItemIndex,
       figures: newFigures
     })
   }
@@ -218,12 +213,10 @@ export default class T_ComicsEditorContainer extends React.Component {
         figures: newFigures
       })
     }
-
-    // this.tuneFigure(this.state.figures[this.state.activeFigure])
   }
 
-  tuneFigure(index) {
-    let figure = this.state.figures[index]
+  tuneFigure(comicsItemIndex) {
+    let figure = this.state.figures[comicsItemIndex]
     $.ajax( {
         dataType: "json",
         method: "POST",
@@ -332,8 +325,6 @@ export default class T_ComicsEditorContainer extends React.Component {
       figuresIndexes[figure.id] = i
     })
 
-    // console.log(figuresIndexes)
-
     data['comic_id'] = this.props.comic_id
     data['figuresIndexes'] = figuresIndexes
 
@@ -417,7 +408,6 @@ export default class T_ComicsEditorContainer extends React.Component {
   }
 
   handleKeyPress = (event) => {
-    // console.log('handleKeyPress ||| this.state.activeFigure =', this.state.activeFigure)
     if (event.key == 'Enter') {
       this.deleteFigure()
     }
