@@ -7,7 +7,7 @@ export default class M_DropdownListItem extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
-      color: this.props.backgroundColor
+      backgroundColor: this.props.backgroundColor
     }
 
     _.bindAll(
@@ -19,7 +19,7 @@ export default class M_DropdownListItem extends React.Component {
 
   mouseOver() {
     this.setState({
-      color: "green"
+      backgroundColor: "green"
     })
 
     console.log("Mouse over items")
@@ -27,13 +27,16 @@ export default class M_DropdownListItem extends React.Component {
 
   mouseOut() {
     this.setState({
-      color: this.props.color
+      backgroundColor: this.state.color
     })
 
     console.log("Mouse out items")
   }
 
   render() {
+    const styles = {
+      backgroundColor: this.state.backgroundColor
+    }
 
     return(
       <div
@@ -41,6 +44,7 @@ export default class M_DropdownListItem extends React.Component {
         onMouseOut={ this.mouseOut }
 
         className="M_DropdownListItem"
+        style={ styles }
       >
       { this.props.text }
       </div>

@@ -70,7 +70,7 @@ export default class A_Button extends React.Component {
           <O_Dropdown
             active={ this.state.active }
             data={ this.props.data }
-            backgroundColor={ "blue" }
+            // backgroundColor={ "blue" }
           />
         }
         {this.props.text}

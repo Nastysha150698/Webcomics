@@ -25,7 +25,6 @@ export default class O_Dropdown extends React.Component {
         <M_DropdownListItem
           text={ item }
           key={ i }
-          backgroundColor={ "yellow" }
         />
       )
     })
