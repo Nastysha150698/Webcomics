@@ -1,0 +1,40 @@
+.valueInput {
+  width: 64px;
+  height: 24px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  background-color: #232537;
+  border-radius: 2px;
+  border: 1px solid;
+  border-color: #212333;
+
+
+  input {
+    // margin: -1px;
+    max-height: 22px;
+    max-width: 44px;
+    padding: 4px 6px;
+    border-radius: 2px;
+    background-color: #232537;
+    border: 0;
+
+    color: #ffffff;
+    font-size: 12px;
+    line-height: 24px;
+    font-family: AvenirNext-Medium;
+  }
+
+  .inputType {
+    width: 20px;
+    font-family: AvenirNext-Medium;
+    font-size: 10px;
+    line-height: 24px;
+    color: #737793;
+    letter-spacing: 0;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
