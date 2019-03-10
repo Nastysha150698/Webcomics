@@ -46,23 +46,27 @@ export default class M_ColorPicker extends React.Component {
     const styles = reactCSS({
       'default': {
         color: {
-          width: '36px',
-          height: '14px',
+          width: '56',
+          height: '16px',
           borderRadius: '2px',
-          // background: `rgba(${ this.state.color.r }, ${ this.state.color.g }, ${ this.state.color.b }, ${ this.state.color.a })`,
-          background: this.props.color
+          background: this.props.activeComicItemColor
         },
         swatch: {
-          padding: '5px',
-          background: '#fff',
-          borderRadius: '1px',
-          boxShadow: '0 0 0 1px rgba(0,0,0,.1)',
+          width: '64px',
+          height: '24px',
+          padding: '3px',
+          background: '#232537',
+          border: '1px solid',
+          borderColor: '#212333',
+          borderRadius: '2px',
           display: 'inline-block',
           cursor: 'pointer',
         },
         popover: {
           position: 'absolute',
           zIndex: '2',
+          marginTop: '5px',
+          left: '0px'
         },
         cover: {
           position: 'fixed',
@@ -83,7 +87,7 @@ export default class M_ColorPicker extends React.Component {
           <div style={ styles.cover } onClick={ this.handleClose }/>
           <SketchPicker
             width={ '220px' }
-            color={ this.props.color}
+            color={ this.props.activeComicItemColor}
             onChange={ this.handleChange }
             onChangeComplete={ this.handleChangeComplete }
           />

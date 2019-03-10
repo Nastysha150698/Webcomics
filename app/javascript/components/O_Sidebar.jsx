@@ -2,9 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
+import O_DataEditor from '../components/O_DataEditor'
+import M_LayerList from '../components/M_LayerList'
 import M_LayerListItem from '../components/M_LayerListItem'
-import M_ColorPicker from '../components/M_ColorPicker'
-import M_Input from '../components/M_Input'
 
 export default class O_Sidebar extends React.Component {
   constructor(props, context) {
@@ -100,23 +100,28 @@ export default class O_Sidebar extends React.Component {
     })
     elements.reverse()
 
-    let color = this.props.comicItems[this.props.activeComicItem].background_color
+    let activeComicItemColor = '#232537'
+    if (this.props.activeComicItem) {
+      activeComicItemColor = this.props.comicItems[this.props.activeComicItem].background_color
+    }
 
     return(
       <div
         className="O_Sidebar"
       >
-        <M_ColorPicker
+        <O_DataEditor
+          comicItems={ this.props.comicItems }
           activeComicItem={ this.props.activeComicItem }
-          color={ color }
+          activeComicItemColor={ activeComicItemColor }
 
           updateColor={this.props.updateColor}
+          changeComicItemData={this.props.changeComicItemData}
           tuneComicItem={ this.props.tuneComicItem }
         />
 
-        <M_Input/>
-
-        { elements }
+        <M_LayerList>
+          { elements }
+        </M_LayerList>
       </div>
     )
   }

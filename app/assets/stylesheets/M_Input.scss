@@ -25,6 +25,11 @@
     font-size: 12px;
     line-height: 24px;
     font-family: AvenirNext-Medium;
+
+    &:focus {
+      border: none;
+      outline: none;
+    }
   }
 
   .inputType {

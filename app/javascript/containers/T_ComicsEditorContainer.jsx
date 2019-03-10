@@ -25,7 +25,7 @@ export default class T_ComicsEditorContainer extends React.Component {
 
       draggingComicItem: 0,
       resizingComicItem: 0,
-      activeComicItem: 0,
+      activeComicItem: null,
       handlerType: '',
       clickX: 0,
       clickY: 0,
@@ -46,6 +46,7 @@ export default class T_ComicsEditorContainer extends React.Component {
       'putComicItemDown',
       'putComicItemUp',
       'updateColor',
+      'changeComicItemData',
       'tuneComicItem'
     )
   }
@@ -203,13 +204,13 @@ export default class T_ComicsEditorContainer extends React.Component {
   }
 
   setActiveNone() {
-    if (this.state.activeComicItem != 0) {
+    if (this.state.activeComicItem != null) {
       let newComicItems = this.state.comicItems
       this.state.comicItems.map((comicItem, i) => {
         newComicItems[i]['active'] = false
       })
       this.setState({
-        activeComicItem: 0,
+        activeComicItem: null,
         comicItems: newComicItems
       })
     }
@@ -366,7 +367,7 @@ export default class T_ComicsEditorContainer extends React.Component {
     })
 
     this.setState({
-      activeComicItem: 0
+      activeComicItem: null
     })
   }
 
@@ -419,6 +420,18 @@ export default class T_ComicsEditorContainer extends React.Component {
     )
   }
 
+  changeComicItemData(paramName, paramValue) {
+    let newComicItems = this.state.comicItems
+    // console.log(newComicItems[this.state.activeComicItem][paramName])
+    newComicItems[this.state.activeComicItem][paramName] = paramValue
+    this.setState({
+      comicItems: newComicItems
+      }
+    )
+    this.tuneComicItem(this.state.activeComicItem)
+    console.log('changeComicItemData: [', paramName, ':', paramValue, ']');
+  }
+
   render() {
     let comicItems = []
 
@@ -441,6 +454,7 @@ export default class T_ComicsEditorContainer extends React.Component {
           reorderLayers={ this.reorderLayers }
           updateColor={ this.updateColor }
           tuneComicItem={ this.tuneComicItem }
+          changeComicItemData={this.changeComicItemData}
         />
 
         <O_ComicsArtboard
