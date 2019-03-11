@@ -3,9 +3,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
+import M_DataEditorItem from '../components/M_DataEditorItem'
 import M_ColorPicker from '../components/M_ColorPicker'
 import A_Input from '../components/A_Input'
-import M_DataEditorItem from '../components/M_DataEditorItem'
+import A_Button from '../components/A_Button'
 
 export default class O_DataEditor extends React.Component {
   constructor(props, context) {
@@ -84,6 +85,42 @@ export default class O_DataEditor extends React.Component {
 
             updateColor={this.props.updateColor}
             tuneComicItem={ this.props.tuneComicItem }
+          />
+        </M_DataEditorItem>
+
+        <M_DataEditorItem
+          dataEditorItemName={'Layer'}
+          changeComicItemData={this.props.changeComicItemData}
+        >
+          <A_Button
+            content={'Down'}
+            backgroundColor={'#232537'}
+            color={'white'}
+            width={'64px'}
+            height={'24px'}
+            function={this.props.putComicItemDown}
+          />
+          <A_Button
+            content={'Up'}
+            backgroundColor={'#232537'}
+            color={'white'}
+            width={'64px'}
+            height={'24px'}
+            function={this.props.putComicItemUp}
+          />
+        </M_DataEditorItem>
+
+        <M_DataEditorItem
+          dataEditorItemName={'Object'}
+          changeComicItemData={this.props.changeComicItemData}
+        >
+          <A_Button
+            content={'Delete'}
+            backgroundColor={'#232537'}
+            color={'white'}
+            width={'64px'}
+            height={'24px'}
+            function={this.props.deleteComicItem}
           />
         </M_DataEditorItem>
       </div>

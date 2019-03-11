@@ -26,6 +26,15 @@
     line-height: 24px;
     font-family: AvenirNext-Medium;
 
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
     &:focus {
       border: none;
       outline: none;

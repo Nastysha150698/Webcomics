@@ -46,9 +46,11 @@ export default class A_Input extends React.Component {
   }
 
   render() {
-    this.state = {
-      value: this.props.value
-    }
+    // if (!this.state.active) {
+      this.state = {
+        value: this.props.value
+      }
+    // }
     const styles = {
       width: 64,
       height: 24
@@ -61,7 +63,7 @@ export default class A_Input extends React.Component {
         <input
           style={ styles }
 
-          type="text"
+          type="number"
           value={this.state.value}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}

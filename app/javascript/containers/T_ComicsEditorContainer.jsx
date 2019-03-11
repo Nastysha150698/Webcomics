@@ -455,6 +455,9 @@ export default class T_ComicsEditorContainer extends React.Component {
           updateColor={ this.updateColor }
           tuneComicItem={ this.tuneComicItem }
           changeComicItemData={this.changeComicItemData}
+          putComicItemUp={this.putComicItemUp}
+          putComicItemDown={this.putComicItemDown}
+          deleteComicItem={this.deleteComicItem}
         />
 
         <O_ComicsArtboard

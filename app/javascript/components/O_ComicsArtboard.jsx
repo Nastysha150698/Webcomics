@@ -46,20 +46,27 @@ export default class O_ComicsArtbord extends React.Component {
       )
     })
 
+    const styles = {
+      position: 'fixed',
+      top: '20px',
+      left: '260px',
+    }
+
     return(
       <div className="O_ComicsArtbord"
         onMouseMove={ this.handleMouseMove }
         onMouseUp={ this.handleMouseUp}
         onClick={ this.handleClick}
       >
-      <A_Button
-        content={'New Figure'}
-        backgroundColor={'#292C3F'}
-        color={'white'}
-        width={'150px'}
-        height={'50px'}
-        function={this.props.createNewComicItem}
-      />
+        <A_Button
+          content={'New Figure'}
+          backgroundColor={'#292C3F'}
+          color={'white'}
+          width={'150px'}
+          height={'50px'}
+          function={this.props.createNewComicItem}
+          styles={ styles }
+        />
         { elements }
       </div>
     )

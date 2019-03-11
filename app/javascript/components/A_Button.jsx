@@ -19,12 +19,15 @@ export default class A_Button extends React.Component {
   }
 
   render() {
-    const styles = {
+    let localStyles = {
       backgroundColor: this.props.backgroundColor,
       color: this.props.color,
       width: this.props.width,
       height: this.props.height
     }
+
+    let styles = Object.assign(localStyles, this.props.styles)
+
 
     return(
       <div
