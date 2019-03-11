@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 
 import M_Figure from '../components/M_Figure'
 import A_Button from '../components/A_Button'
+import A_DropdownButton from '../components/A_DropdownButton'
 
 export default class O_ComicsArtbord extends React.Component {
   constructor(props, context) {
@@ -51,6 +52,7 @@ export default class O_ComicsArtbord extends React.Component {
       top: '20px',
       left: '260px',
     }
+    const data = [{text: 'figure', function: this.props.createNewComicItem}]
 
     return(
       <div className="O_ComicsArtbord"
@@ -58,14 +60,10 @@ export default class O_ComicsArtbord extends React.Component {
         onMouseUp={ this.handleMouseUp}
         onClick={ this.handleClick}
       >
-        <A_Button
-          content={'New Figure'}
-          backgroundColor={'#292C3F'}
-          color={'white'}
-          width={'150px'}
-          height={'50px'}
-          function={this.props.createNewComicItem}
-          styles={ styles }
+        <A_DropdownButton
+          color={"#292c3f"}
+          text={ "Add" }
+          data={ data }
         />
         { elements }
       </div>
