@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
 import M_Figure from '../components/M_Figure'
+import M_Speech from '../components/M_Speech'
 import A_Button from '../components/A_Button'
 import O_Dropdown from '../components/O_Dropdown'
 import M_DropdownListItem from '../components/M_DropdownListItem'
@@ -48,7 +49,9 @@ export default class O_ComicsArtbord extends React.Component {
       )
     })
 
+
     const data = ["text", "figure", "shape"]
+    const speech = ["у бабки много бабок"]
 
     return(
       <div className="O_ComicsArtbord"
@@ -61,6 +64,10 @@ export default class O_ComicsArtbord extends React.Component {
           color={"#292c3f"}
           text={ "Add" }
           data={ data }
+        />
+        <M_Speech
+          // color={"black"}
+          speech={ speech }
         />
       </div>
 

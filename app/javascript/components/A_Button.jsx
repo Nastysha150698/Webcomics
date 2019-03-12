@@ -73,7 +73,7 @@ export default class A_Button extends React.Component {
             // backgroundColor={ "blue" }
           />
         }
-        {this.props.text}
+        { this.props.text }
       </div>
     )
   }
