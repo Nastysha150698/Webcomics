@@ -16,11 +16,11 @@ export default class M_Speech extends React.Component {
   }
 
   handleMouseDown() {
-    this.props.setDraggingFigure(this.props.figure_id)
+    this.props.setDraggingSpeech(this.props.speech_id)
   }
 
   handleMouseUp() {
-    this.props.setDraggingFigure(0)
+    this.props.setDraggingSpeech(0)
   }
 
   handleClick(e) {
@@ -30,7 +30,7 @@ export default class M_Speech extends React.Component {
 
   render() {
     var focusFrame
-    if (this.props.figure['active']) {
+    if (this.props.speech['active']) {
       focusFrame = '2px solid blue'
     } else {
       focusFrame = 0
@@ -40,9 +40,11 @@ export default class M_Speech extends React.Component {
       left: this.props.speech['x'],
       width: this.props.speech['width'],
       height: this.props.speech['height'],
+      
       fontFamily: this.props.speech['font_title'],
       fontSize: this.props.speech['font_size'],
       lineHeight: this.props.speech['line_height'],
+      zIndex: this.props.speech['z_index'],
 
       color: this.props.speech['color'],
       outline: focusFrame
