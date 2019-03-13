@@ -9,7 +9,7 @@
   <%= javascript_pack_tag 'T_ComicsEditor' %>
 </head>
 
-<body data-figures="<%= @comic.figures.as_json.to_json %>">
+<body data-figures="<%= @comic.figures.as_json.to_json %>" data-images="<%= @comic.images.as_json.to_json %>" data-speeches="<%= @comic.speeches.as_json.to_json %>">
   <!-- Здесь будет React -->
 </body>
 </html>

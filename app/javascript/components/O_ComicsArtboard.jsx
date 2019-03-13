@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
 import M_Figure from '../components/M_Figure'
+import M_Image from '../components/M_Image'
+import M_Speech from '../components/M_Speech'
 import A_Button from '../components/A_Button'
 import A_DropdownButton from '../components/A_DropdownButton'
 
@@ -36,15 +38,42 @@ export default class O_ComicsArtbord extends React.Component {
     let elements = []
 
     this.props.comicItems.map((comicItem, i) => {
-      elements.push(
-        <M_Figure
-          comicItem={ comicItem }
-          key={ i }
-          index={i}
-          setDraggingComicItem={this.props.setDraggingComicItem}
-          setResizingComicItem={this.props.setResizingComicItem}
-        />
-      )
+      if (comicItem.type == 'figure') {
+        elements.push(
+          <M_Figure
+            type={ comicItem.type }
+            comicItem={ comicItem }
+            key={ i }
+            index={i}
+            setDraggingComicItem={this.props.setDraggingComicItem}
+            setResizingComicItem={this.props.setResizingComicItem}
+          />
+        )
+      }
+      if (comicItem.type == 'image') {
+        elements.push(
+          <M_Image
+            type={ comicItem.type }
+            comicItem={ comicItem }
+            key={ i }
+            index={i}
+            setDraggingComicItem={this.props.setDraggingComicItem}
+            setResizingComicItem={this.props.setResizingComicItem}
+          />
+        )
+      }
+      if (comicItem.type == 'speech') {
+        elements.push(
+          <M_Speech
+            type={ comicItem.type }
+            comicItem={ comicItem }
+            key={ i }
+            index={i}
+            setDraggingComicItem={this.props.setDraggingComicItem}
+            setResizingComicItem={this.props.setResizingComicItem}
+          />
+        )
+      }
     })
 
     const styles = {

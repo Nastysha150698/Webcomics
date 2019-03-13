@@ -12,9 +12,17 @@ export default class T_ComicsEditorContainer extends React.Component {
     super(props, context)
 
     let comicItems = []
-    this.props.figures.map((comicItem, i) => {
-      // figure.z_index = i
-      comicItems.push(comicItem)
+    this.props.figures.map((figure, i) => {
+      figure.type = 'figure'
+      comicItems.push(figure)
+    })
+    this.props.images.map((image, i) => {
+      image.type = 'image'
+      comicItems.push(image)
+    })
+    this.props.speeches.map((speech, i) => {
+      speech.type = 'speech'
+      comicItems.push(speech)
     })
     comicItems.sort(function(a, b){
       return a.z_index - b.z_index

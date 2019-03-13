@@ -12,7 +12,7 @@ export default class O_Sidebar extends React.Component {
 
     let comicItems = []
     this.props.comicItems.map((comicItem, i) => {
-      comicItem.type = 'figure'
+      // comicItem.type = 'figure'
       comicItems.push(comicItem)
     })
 

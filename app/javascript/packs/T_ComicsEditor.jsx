@@ -20,9 +20,11 @@ const T_ComicsEditor = props => (
 
 document.addEventListener('DOMContentLoaded', () => {
   let figures = JSON.parse(document.body.dataset.figures)
+  let images = JSON.parse(document.body.dataset.images)
+  let speeches = JSON.parse(document.body.dataset.speeches)
 
   ReactDOM.render(
-    <T_ComicsEditor figures={ figures } comic_id={1}/>,
+    <T_ComicsEditor figures={ figures } images={images} speeches={speeches} comic_id={1}/>,
     document.body.appendChild(document.createElement('div'))
   )
 })

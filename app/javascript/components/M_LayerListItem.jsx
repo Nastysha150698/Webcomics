@@ -66,7 +66,7 @@ export default class M_LayerListItem extends React.Component {
 
         onClick={ this.handleClick}
       >
-        Figure { this.props.comicItem.id }
+        { this.props.comicItem.type } { this.props.comicItem.id }
       </div>
     )
   }
