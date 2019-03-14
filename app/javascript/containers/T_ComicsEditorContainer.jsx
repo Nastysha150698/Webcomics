@@ -226,10 +226,25 @@ export default class T_ComicsEditorContainer extends React.Component {
 
   tuneComicItem(comicsItemIndex) {
     let comicItem = this.state.comicItems[comicsItemIndex]
+    switch (comicItem.type) {
+      case 'figure':
+        this.tuneFigure(comicItem)
+        break;
+      case 'speech':
+        this.tuneSpeech(comicItem)
+        break;
+      case 'image':
+        this.tuneImage(comicItem)
+        break;
+      default:
+    }
+  }
+
+  tuneFigure(comicItem) {
     $.ajax( {
         dataType: "json",
         method: "POST",
-        url: "/comics_on_react/tune",
+        url: "/comics_on_react/tuneFigure",
         data: {
           comic_id: this.props.comic_id,
           figure_id: comicItem.id,
@@ -241,15 +256,67 @@ export default class T_ComicsEditorContainer extends React.Component {
         }
       })
       .done(function() {
-        console.log("success: tuneComicItem")
+        console.log("success: tuneFigure")
       })
       .fail(function() {
-        console.log("error: tuneComicItem")
+        console.log("error: tuneFigure")
       })
       .always(function() {
         console.log("complete")
     })
   }
+
+  tuneSpeech(comicItem) {
+    $.ajax( {
+        dataType: "json",
+        method: "POST",
+        url: "/comics_on_react/tuneSpeech",
+        data: {
+          comic_id: this.props.comic_id,
+          speech_id: comicItem.id,
+          width: comicItem.width,
+          height: comicItem.height,
+          x: comicItem.x,
+          y: comicItem.y,
+          text: comicItem.text
+        }
+      })
+      .done(function() {
+        console.log("success: tuneSpeech")
+      })
+      .fail(function() {
+        console.log("error: tuneSpeech")
+      })
+      .always(function() {
+        console.log("complete")
+    })
+  }
+
+  tuneImage(comicItem) {
+    $.ajax( {
+        dataType: "json",
+        method: "POST",
+        url: "/comics_on_react/tuneImage",
+        data: {
+          comic_id: this.props.comic_id,
+          image_id: comicItem.id,
+          width: comicItem.width,
+          height: comicItem.height,
+          x: comicItem.x,
+          y: comicItem.y
+        }
+      })
+      .done(function() {
+        console.log("success: tuneImage")
+      })
+      .fail(function() {
+        console.log("error: tuneImage")
+      })
+      .always(function() {
+        console.log("complete")
+    })
+  }
+
 
   reorderLayers(comicItems) {
     console.log('reordering Layers...');
@@ -338,7 +405,7 @@ export default class T_ComicsEditorContainer extends React.Component {
         console.log("success: saveLayersOrder")
       })
       .fail(function() {
-        console.log("error")
+        console.log("error: saveLayersOrder")
       })
       .always(function() {
         console.log("complete")

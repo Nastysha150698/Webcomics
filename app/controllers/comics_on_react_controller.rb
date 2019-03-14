@@ -3,7 +3,7 @@ class ComicsOnReactController < ApplicationController
     @comic = Comic.find(1)
   end
 
-  def tune
+  def tuneFigure
     comic_id = params[:comic_id]
     figure_id = params[:figure_id]
     width = params[:width]
@@ -17,6 +17,41 @@ class ComicsOnReactController < ApplicationController
 
     respond_to do |format|
       figure.update_attributes(:width => width, :height => height, :x => x, :y => y, :background_color => background_color)
+      format.json { render json: {},  status: :ok }
+    end
+  end
+
+  def tuneSpeech
+    comic_id = params[:comic_id]
+    speech_id = params[:speech_id]
+    width = params[:width]
+    height = params[:height]
+    x = params[:x]
+    y = params[:y]
+    text = params[:text]
+
+    comic = Comic.find(comic_id)
+    speech = comic.speeches.find(speech_id)
+
+    respond_to do |format|
+      speech.update_attributes(:width => width, :height => height, :x => x, :y => y, :text => text)
+      format.json { render json: {},  status: :ok }
+    end
+  end
+
+  def tuneImage
+    comic_id = params[:comic_id]
+    image_id = params[:image_id]
+    width = params[:width]
+    height = params[:height]
+    x = params[:x]
+    y = params[:y]
+
+    comic = Comic.find(comic_id)
+    image = comic.images.find(image_id)
+
+    respond_to do |format|
+      image.update_attributes(:width => width, :height => height, :x => x, :y => y)
       format.json { render json: {},  status: :ok }
     end
   end
