@@ -59,13 +59,26 @@ class ComicsOnReactController < ApplicationController
   def saveLayersOrder
     comic_id = params[:data][:comic_id]
     figuresIndexes = params[:data][:figuresIndexes]
+    speechesIndexes = params[:data][:speechesIndexes]
+    imagesIndexes = params[:data][:imagesIndexes]
 
     comic = Comic.find(comic_id)
 
-    figuresIndexes.each do |id, z_index|
-      figure = comic.figures.find(id)
-      figure.update_attributes(:z_index => z_index)
-      p figure.id, figure.z_index
+    respond_to do |format|
+      figuresIndexes.each do |id, z_index|
+        figure = comic.figures.find(id)
+        figure.update_attributes(:z_index => z_index)
+      end
+      speechesIndexes.each do |id, z_index|
+        speech = comic.speeches.find(id)
+        speech.update_attributes(:z_index => z_index)
+      end
+      imagesIndexes.each do |id, z_index|
+        image = comic.images.find(id)
+        image.update_attributes(:z_index => z_index)
+      end
+      
+      format.json { render json: {},  status: :ok }
     end
   end
 

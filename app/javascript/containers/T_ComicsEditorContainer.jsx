@@ -387,13 +387,31 @@ export default class T_ComicsEditorContainer extends React.Component {
     // comicItem Index = Z_Index !!!!
 
     let data = new Object()
-    let comicItemsIndexes = new Object()
+    let figuresIndexes = new Object()
+    let speechesIndexes = new Object()
+    let imagesIndexes = new Object()
+
     this.state.comicItems.map((comicItem, i) => {
-      comicItemsIndexes[comicItem.id] = i
+      switch (comicItem.type) {
+        case 'figure':
+          figuresIndexes[comicItem.id] = i
+          break;
+        case 'speech':
+          speechesIndexes[comicItem.id] = i
+          break;
+        case 'image':
+          imagesIndexes[comicItem.id] = i
+          break;
+        default:
+      }
     })
 
     data['comic_id'] = this.props.comic_id
-    data['figuresIndexes'] = comicItemsIndexes
+    data['figuresIndexes'] = figuresIndexes
+    data['speechesIndexes'] = speechesIndexes
+    data['imagesIndexes'] = imagesIndexes
+
+    // console.log(data)
 
     $.ajax( {
         dataType: "json",
