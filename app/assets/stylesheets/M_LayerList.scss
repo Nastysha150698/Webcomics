@@ -1,0 +1,17 @@
+.M_LayerList {
+  .M_LayerListHeader {
+    height: 28px;
+    background: #232537;
+    padding: 0 10px;
+
+    font-family: AvenirNext-Medium;
+    font-size: 12px;
+    line-height: 28px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+  }
+  .M_LayerListScrolable {
+    height: 575px;
+    overflow-y: scroll;
+  }
+}

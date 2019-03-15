@@ -6,40 +6,67 @@ import PropTypes from 'prop-types'
 export default class M_LayerListItem extends React.Component {
   constructor(props, context) {
     super(props, context)
-
+    this.state = {
+      id: this.props.comicItem.id
+    }
     _.bindAll(
       this,
       'handleDragStart',
       'handleDragOver',
-      'handleDrop'
+      // 'onDragOver',
+      // 'onDragEnd',
+      'handleClick'
     )
   }
 
-  handleDragStart() {
-    this.props.handleDragStart(this.props.figure.id)
+  handleDragStart = (e, index) => {
+    console.log('dragStart', this.props.index, this.state.id)
+    this.props.setDraggedItem(this.props.index)
+    // this.draggedItem = this.state.figures[index];
+    e.dataTransfer.effectAllowed = "uninitialized";
   }
 
-  handleDragOver(e) {
-    e.preventDefault()
+  handleDragOver = index => {
+    console.log('dragover', this.props.index, this.state.id);
+
+    this.props.setNewFiguresOrder(this.state.id, this.props.index)
   }
 
-  handleDrop() {
-    this.props.handleDrop(this.props.figure.id)
+  handleClick() {
+    this.props.setActiveComicItem(this.props.index)
   }
 
   render() {
-    // console.log('M_LayerListItem', this.props.figure)
+    // var focusFrame
+    let color, backgroundColor
+    if (this.props.comicItem.active) {
+      // focusFrame = '2px solid blue'
+      color = '#00BF88'
+      backgroundColor = 'rgba(255, 255, 255, .05)'
+    } else {
+      // focusFrame = 0
+      color = '#FFFFFF'
+      backgroundColor = 'rgba(255, 255, 255, 0)'
+    }
+    const styles = {
+      // outline: focusFrame,
+      color: color,
+      backgroundColor: backgroundColor
+    }
 
     return(
       <div
+        style={ styles }
+
         className="M_LayerListItem"
-        onClick={ this.handleFigureClick }
         draggable
-        onDragStart={ this.handleDragStart }
-        onDragOver={ (e)=>this.handleDragOver(e) }
-        onDrop={ this.handleDrop }
+        onDragStart={e => this.handleDragStart(e)}
+        onDragOver={this.handleDragOver}
+        onDragEnd={this.onDragEnd}
+
+        onClick={ this.handleClick}
       >
-        {this.props.index }  |  Layer Name { this.props.figure.id}
+        { this.props.comicItem.type } { this.props.comicItem.id }
       </div>
     )
   }

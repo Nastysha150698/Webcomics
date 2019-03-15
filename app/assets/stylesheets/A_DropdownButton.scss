@@ -1,0 +1,19 @@
+.A_DropdownButton {
+  position: fixed;
+  top: 20px;
+  left: 260px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 70px;
+  background-color: #292c3f;
+  color: white;
+  z-index: 100;
+  border-radius: 2px;
+  user-select: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

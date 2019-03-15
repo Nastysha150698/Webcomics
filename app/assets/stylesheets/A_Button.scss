@@ -1,0 +1,19 @@
+.A_Button {
+  // position: fixed;
+  // top: 20px;
+  // left: 260px;
+  width: 200px;
+  height: 100px;
+  background-color: red;
+  border-radius: 2px;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #292C3F;
+  }
+}

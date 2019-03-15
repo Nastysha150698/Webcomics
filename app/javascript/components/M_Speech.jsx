@@ -7,7 +7,7 @@ import A_ResizeHandlers from '../components/A_ResizeHandlers'
 
 
 
-export default class M_Figure extends React.Component {
+export default class M_Speech extends React.Component {
   constructor(props, context) {
     super(props, context)
     _.bindAll(
@@ -43,15 +43,10 @@ export default class M_Figure extends React.Component {
       width: this.props.comicItem['width'],
       height: this.props.comicItem['height'],
 
-      // borderWidth: this.state.borderWidth,
-      borderWidth: 0,
+      fontSize: this.props.comicItem.font_size,
 
-      borderColor: this.props.comicItem['border_color'],
-      borderRadius: this.props.comicItem['border_radius'],
-      backgroundColor: this.props.comicItem['background_color'],
       zIndex: this.props.comicItem['layer_index'],
       outline: focusFrame,
-      // backgroundImage: "url(" + this.props.comicItem.image.url + ")"
     }
 
     if (this.props.comicItem.image) {
@@ -63,10 +58,11 @@ export default class M_Figure extends React.Component {
         onMouseDown={ this.handleMouseDown }
         onMouseUp={ this.handleMouseUp }
         onClick={ this.handleClick}
-        className="M_Figure"
+        className="M_Speech"
         style={ styles }
       >
         { this.props.comicItem.id }<br/>
+        { this.props.comicItem.text }
         { this.props.comicItem['active'] &&
           <A_ResizeHandlers
             setResizingComicItem={this.props.setResizingComicItem}

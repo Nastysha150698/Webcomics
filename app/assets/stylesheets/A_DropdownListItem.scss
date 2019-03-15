@@ -1,0 +1,10 @@
+.A_DropdownListItem {
+  padding: 12px 16px;
+  background-color: #292c3f;
+  user-select: none;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #232537;
+  }
+}

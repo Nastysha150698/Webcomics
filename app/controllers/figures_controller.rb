@@ -40,11 +40,12 @@ class FiguresController < ApplicationController
     respond_to do |format|
       if @figure.save
         @comic = @figure.comic
-        format.html { redirect_to @comic, notice: 'Figure was successfully created.' }
-        format.json { render :show, status: :created, location: @figure }
+        # format.html { redirect_to @comic, notice: 'Figure was successfully created.' }
+        # format.json { render :show, status: :created, location: @figure }
+        format.json { render json: {figure_id: @figure.id},  status: :ok }
       else
-        format.html { render :new }
-        format.json { render json: @figure.errors, status: :unprocessable_entity }
+        # format.html { render :new }
+        # format.json { render json: @figure.errors, status: :unprocessable_entity }
       end
     end
   end

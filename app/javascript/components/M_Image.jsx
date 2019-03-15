@@ -5,9 +5,7 @@ import PropTypes from 'prop-types'
 
 import A_ResizeHandlers from '../components/A_ResizeHandlers'
 
-
-
-export default class M_Figure extends React.Component {
+export default class M_Image extends React.Component {
   constructor(props, context) {
     super(props, context)
     _.bindAll(
@@ -43,19 +41,12 @@ export default class M_Figure extends React.Component {
       width: this.props.comicItem['width'],
       height: this.props.comicItem['height'],
 
-      // borderWidth: this.state.borderWidth,
-      borderWidth: 0,
+      backgroundImage: "url(" + this.props.comicItem.image.url + ")",
+      backgroundColor: '#fafafa',
 
-      borderColor: this.props.comicItem['border_color'],
-      borderRadius: this.props.comicItem['border_radius'],
-      backgroundColor: this.props.comicItem['background_color'],
+
       zIndex: this.props.comicItem['layer_index'],
       outline: focusFrame,
-      // backgroundImage: "url(" + this.props.comicItem.image.url + ")"
-    }
-
-    if (this.props.comicItem.image) {
-      styles.backgroundImage = "url(" + this.props.comicItem.image.url + ")"
     }
 
     return(
@@ -63,7 +54,7 @@ export default class M_Figure extends React.Component {
         onMouseDown={ this.handleMouseDown }
         onMouseUp={ this.handleMouseUp }
         onClick={ this.handleClick}
-        className="M_Figure"
+        className="M_Image"
         style={ styles }
       >
         { this.props.comicItem.id }<br/>
