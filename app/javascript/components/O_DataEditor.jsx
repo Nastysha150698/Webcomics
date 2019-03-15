@@ -58,7 +58,7 @@ export default class O_DataEditor extends React.Component {
         </M_DataEditorItem>
 
         <M_DataEditorItem
-          dataEditorItemName={'Posoton'}
+          dataEditorItemName={'Position'}
           changeComicItemData={this.props.changeComicItemData}
         >
           <A_Input
