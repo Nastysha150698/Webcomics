@@ -55,8 +55,8 @@ test:
 production:
   <<: *default
   database: inkie_production
-  username: inkie
-  password: <%= ENV['INKIE_DATABASE_PASSWORD'] %>
+  # username: inkie
+  # password: <%= ENV['INKIE_DATABASE_PASSWORD'] %>
 
 
 
