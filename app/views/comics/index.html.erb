@@ -11,9 +11,9 @@
   </a>
 <%#= @comics.any? %>
   <%# if @comics.any? %>
-    <%# @comics.each do |comic| %>
-      <%#= render "comics/comicPreview", comic: comic %>
-    <%# end %>
+    <% @comics.each do |comic| %>
+      <%= render "comics/comicPreview", comic: comic %>
+    <% end %>
   <%# end %>
 </div>
 <div class="authors">
