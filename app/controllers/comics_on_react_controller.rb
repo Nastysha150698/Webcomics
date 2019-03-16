@@ -29,12 +29,13 @@ class ComicsOnReactController < ApplicationController
     x = params[:x]
     y = params[:y]
     text = params[:text]
+    font_size = params[:font_size]
 
     comic = Comic.find(comic_id)
     speech = comic.speeches.find(speech_id)
 
     respond_to do |format|
-      speech.update_attributes(:width => width, :height => height, :x => x, :y => y, :text => text)
+      speech.update_attributes(:width => width, :height => height, :x => x, :y => y, :text => text, :font_size => font_size)
       format.json { render json: {},  status: :ok }
     end
   end
@@ -77,7 +78,7 @@ class ComicsOnReactController < ApplicationController
         image = comic.images.find(id)
         image.update_attributes(:z_index => z_index)
       end
-      
+
       format.json { render json: {},  status: :ok }
     end
   end
@@ -92,13 +93,37 @@ class ComicsOnReactController < ApplicationController
     end
   end
 
-  def destroy
+  def destroyFigure
     comic_id = params[:comic_id]
     figure_id = params[:figure_id]
     comic = Comic.find(comic_id)
     figure = comic.figures.find(figure_id)
 
     figure.destroy
+    respond_to do |format|
+      format.json { render json: {},  status: :ok }
+    end
+  end
+
+  def destroySpeech
+    comic_id = params[:comic_id]
+    speech_id = params[:speech_id]
+    comic = Comic.find(comic_id)
+    speech = comic.speeches.find(speech_id)
+
+    speech.destroy
+    respond_to do |format|
+      format.json { render json: {},  status: :ok }
+    end
+  end
+
+  def destroyImage
+    comic_id = params[:comic_id]
+    image_id = params[:image_id]
+    comic = Comic.find(comic_id)
+    image = comic.images.find(image_id)
+
+    image.destroy
     respond_to do |format|
       format.json { render json: {},  status: :ok }
     end

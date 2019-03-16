@@ -224,6 +224,7 @@ export default class T_ComicsEditorContainer extends React.Component {
     }
   }
 
+
   tuneComicItem(comicsItemIndex) {
     let comicItem = this.state.comicItems[comicsItemIndex]
     switch (comicItem.type) {
@@ -278,7 +279,8 @@ export default class T_ComicsEditorContainer extends React.Component {
           height: comicItem.height,
           x: comicItem.x,
           y: comicItem.y,
-          text: comicItem.text
+          text: comicItem.text,
+          font_size: comicItem.font_size
         }
       })
       .done(function() {
@@ -332,9 +334,11 @@ export default class T_ComicsEditorContainer extends React.Component {
     console.log('Layers reordered');
   }
 
+
   createNewComicItem() {
     let newComicItems = this.state.comicItems
     let newComicItem = {
+      type: 'figure',
       active: true,
       background_color: "#D8D8D8",
       border_color: "#795548",
@@ -430,19 +434,40 @@ export default class T_ComicsEditorContainer extends React.Component {
     })
   }
 
+
   deleteComicItem() {
     let activeComicItem = this.state.comicItems[this.state.activeComicItem]
     let newComicItems = this.state.comicItems.filter(item => item !== activeComicItem)
     let comicItem_id = activeComicItem.id
+    let comicItem_type = activeComicItem.type
 
     this.setState({
       comicItems: newComicItems
     })
 
+    switch (comicItem_type) {
+      case 'figure':
+        this.deleteFigure(comicItem_id)
+        break;
+      case 'speech':
+        this.deleteSpeech(comicItem_id)
+        break;
+      case 'image':
+        this.deleteImage(comicItem_id)
+        break;
+      default:
+    }
+
+    this.setState({
+      activeComicItem: null
+    })
+  }
+
+  deleteFigure(comicItem_id) {
     $.ajax( {
         dataType: "json",
         method: "POST",
-        url: "/comics_on_react/destroy",
+        url: "/comics_on_react/destroyFigure",
         context: this,
         data: {
           comic_id: this.props.comic_id,
@@ -450,19 +475,60 @@ export default class T_ComicsEditorContainer extends React.Component {
         }
       })
       .done(function(data) {
-        console.log("success: deleteComicItem")
+        console.log("success: deleteFigure")
       })
       .fail(function() {
-        console.log("error")
+        console.log("error: deleteFigure")
       })
       .always(function() {
         console.log("complete")
     })
+  }
 
-    this.setState({
-      activeComicItem: null
+  deleteSpeech(comicItem_id) {
+    $.ajax( {
+        dataType: "json",
+        method: "POST",
+        url: "/comics_on_react/destroySpeech",
+        context: this,
+        data: {
+          comic_id: this.props.comic_id,
+          speech_id: comicItem_id
+        }
+      })
+      .done(function(data) {
+        console.log("success: deleteSpeech")
+      })
+      .fail(function() {
+        console.log("error: deleteSpeech")
+      })
+      .always(function() {
+        console.log("complete")
     })
   }
+
+  deleteImage(comicItem_id) {
+    $.ajax( {
+        dataType: "json",
+        method: "POST",
+        url: "/comics_on_react/destroyImage",
+        context: this,
+        data: {
+          comic_id: this.props.comic_id,
+          image_id: comicItem_id
+        }
+      })
+      .done(function(data) {
+        console.log("success: deleteImage")
+      })
+      .fail(function() {
+        console.log("error: deleteImage")
+      })
+      .always(function() {
+        console.log("complete")
+    })
+  }
+
 
   putComicItemDown() {
     if (this.state.activeComicItem > 0) {
@@ -503,6 +569,7 @@ export default class T_ComicsEditorContainer extends React.Component {
       this.putComicItemUp()
     }
   }
+
 
   updateColor(color) {
     let newComicItems = this.state.comicItems

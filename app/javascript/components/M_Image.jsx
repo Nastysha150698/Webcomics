@@ -42,7 +42,7 @@ export default class M_Image extends React.Component {
       height: this.props.comicItem['height'],
 
       backgroundImage: "url(" + this.props.comicItem.image.url + ")",
-      backgroundColor: '#fafafa',
+      // backgroundColor: '#fafafa',
 
 
       zIndex: this.props.comicItem['layer_index'],
