@@ -17,7 +17,7 @@ export default class A_ResizeHandler extends React.Component {
   }
 
   handleMouseDown() {
-    this.props.setResizingComicItem(this.props.index, this.props.handlerType)
+    this.props.setResizingComicItem(this.props.index, this.props.handlerType, event.clientX, event.clientY)
   }
 
   render() {

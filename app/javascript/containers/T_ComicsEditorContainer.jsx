@@ -37,6 +37,8 @@ export default class T_ComicsEditorContainer extends React.Component {
       handlerType: '',
       clickX: 0,
       clickY: 0,
+      handlerX: 0,
+      handlerY: 0
     }
     _.bindAll(
       this,
@@ -77,8 +79,8 @@ export default class T_ComicsEditorContainer extends React.Component {
       this.setState({
         draggingComicItem: comicsItemIndex,
         activeComicItem: comicsItemIndex,
-        clickX: event.pageX - this.state.comicItems[comicsItemIndex]['x'],
-        clickY: event.pageY - this.state.comicItems[comicsItemIndex]['y'],
+        clickX: event.pageX - $('#O_ComicsArtbordZone').offset().left - this.state.comicItems[comicsItemIndex]['x'],
+        clickY: event.pageY - $('#O_ComicsArtbordZone').offset().top - this.state.comicItems[comicsItemIndex]['y'],
         comicItems: newComicItems
       })
 
@@ -91,7 +93,7 @@ export default class T_ComicsEditorContainer extends React.Component {
     }
   }
 
-  setResizingComicItem(comicsItemIndex, handlerType) {
+  setResizingComicItem(comicsItemIndex, handlerType, handlerX, handlerY) {
     let newComicItems = this.state.comicItems
     if (comicsItemIndex == 0) {
       newComicItems[this.state.draggingComicItem]['active'] = false
@@ -104,6 +106,8 @@ export default class T_ComicsEditorContainer extends React.Component {
       handlerType: handlerType,
       clickX: event.pageX - this.state.comicItems[comicsItemIndex]['x'],
       clickY: event.pageY - this.state.comicItems[comicsItemIndex]['y'],
+      handlerX: handlerX,
+      handlerY: handlerY,
 
       comicItems: newComicItems
     })
@@ -125,7 +129,7 @@ export default class T_ComicsEditorContainer extends React.Component {
     })
   }
 
-  setCoursorPosition(coursorX, coursorY) {
+  setCoursorPosition(coursorX,coursorY) {
     if ((this.state.draggingComicItem != 0) && (this.state.resizingComicItem == 0)) {
       let newComicItems = this.state.comicItems
       newComicItems[this.state.draggingComicItem]['y'] = (coursorY - this.state.clickY)
@@ -147,7 +151,7 @@ export default class T_ComicsEditorContainer extends React.Component {
 
       if (this.state.handlerType == 'nw') {
         top = coursorY
-        left = coursorX - 240
+        left = coursorX
         width = currentComicItem['x'] + currentComicItem['width'] - left
         height = currentComicItem['y'] + currentComicItem['height'] - top
       }
@@ -160,19 +164,19 @@ export default class T_ComicsEditorContainer extends React.Component {
       if (this.state.handlerType == 'ne') {
         top = coursorY
         left = currentComicItem['x']
-        width = coursorX - 240 - currentComicItem['x']
+        width = coursorX - currentComicItem['x']
         height = currentComicItem['y'] + currentComicItem['height'] - top
       }
       if (this.state.handlerType == 'e') {
         top = currentComicItem['y']
         left = currentComicItem['x']
-        width = coursorX - 240 - currentComicItem['x']
+        width = coursorX - currentComicItem['x']
         height = currentComicItem['y'] + currentComicItem['height'] - top
       }
       if (this.state.handlerType == 'se') {
         top = currentComicItem['y']
         left = currentComicItem['x']
-        width = coursorX - 240 - currentComicItem['x']
+        width = coursorX - currentComicItem['x']
         height = coursorY - currentComicItem['y']
       }
       if (this.state.handlerType == 's') {
@@ -183,13 +187,13 @@ export default class T_ComicsEditorContainer extends React.Component {
       }
       if (this.state.handlerType == 'sw') {
         top = currentComicItem['y']
-        left = coursorX - 240
+        left = coursorX
         width = currentComicItem['x'] + currentComicItem['width'] - left
         height = coursorY - currentComicItem['y']
       }
       if (this.state.handlerType == 'w') {
         top = currentComicItem['y']
-        left = coursorX - 240
+        left = coursorX
         width = currentComicItem['x'] + currentComicItem['width'] - left
         height = currentComicItem['height']
       }

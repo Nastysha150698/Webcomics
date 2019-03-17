@@ -2,6 +2,7 @@ import _ from 'lodash'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
+import $ from 'jquery'
 
 import M_Figure from '../components/M_Figure'
 import M_Image from '../components/M_Image'
@@ -20,9 +21,10 @@ export default class O_ComicsArtbord extends React.Component {
     )
   }
 
-  handleMouseMove(e) {
-    var coursorX = event.pageX
-    var coursorY = event.pageY
+  handleMouseMove() {
+    var coursorX = event.pageX - $('#O_ComicsArtbordZone').offset().left;
+    var coursorY = event.pageY - $('#O_ComicsArtbordZone').offset().top;
+
     this.props.setCoursorPosition(coursorX, coursorY)
   }
 
@@ -93,12 +95,14 @@ export default class O_ComicsArtbord extends React.Component {
         onMouseUp={ this.handleMouseUp}
         onClick={ this.handleClick}
       >
-        <A_DropdownButton
-          color={"#292c3f"}
-          text={ "Add" }
-          data={ data }
-        />
-        { elements }
+        <div id="O_ComicsArtbordZone">
+          <A_DropdownButton
+            color={"#292c3f"}
+            text={ "Add" }
+            data={ data }
+          />
+          { elements }
+        </div>
       </div>
     )
   }
