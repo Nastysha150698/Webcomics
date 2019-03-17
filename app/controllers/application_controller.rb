@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session
-  
+
   def objects_quantity(comic)
     (comic.figures.all.count + comic.images.all.count + comic.speeches.all.count)
   end

@@ -71,6 +71,7 @@ export default class O_ComicsArtbord extends React.Component {
             index={i}
             setDraggingComicItem={this.props.setDraggingComicItem}
             setResizingComicItem={this.props.setResizingComicItem}
+            changeComicItemData={this.props.changeComicItemData}
           />
         )
       }
@@ -81,7 +82,10 @@ export default class O_ComicsArtbord extends React.Component {
       top: '20px',
       left: '260px',
     }
-    const data = [{text: 'figure', function: this.props.createNewComicItem}]
+    const data = [
+      {text: 'Figure', function: this.props.createNewComicItem, type: 'figure'},
+      {text: 'Speech', function: this.props.createNewComicItem, type: 'speech'}
+    ]
 
     return(
       <div className="O_ComicsArtbord"

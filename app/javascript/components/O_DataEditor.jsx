@@ -39,9 +39,16 @@ export default class O_DataEditor extends React.Component {
       activeComicItemType = this.props.comicItems[this.props.activeComicItem].type
     }
 
+    let activeComicItemBackgroundColor = '#232537'
+    if (activeComicItemType == 'figure') {
+      activeComicItemBackgroundColor = this.props.comicItems[this.props.activeComicItem].background_color
+    }
+
     let activeComicItemFont_size = 8
+    let activeComicItemColor = ''
     if (activeComicItemType == 'speech') {
       activeComicItemFont_size = this.props.comicItems[this.props.activeComicItem].font_size
+      activeComicItemColor = this.props.comicItems[this.props.activeComicItem].color
     }
     return(
       <div
@@ -128,7 +135,7 @@ export default class O_DataEditor extends React.Component {
           >
             <M_ColorPicker
               activeComicItem={ this.props.activeComicItem }
-              activeComicItemColor={ this.props.activeComicItemColor }
+              activeComicItemColor={ activeComicItemBackgroundColor }
 
               updateColor={this.props.updateColor}
               tuneComicItem={ this.props.tuneComicItem }
@@ -139,7 +146,7 @@ export default class O_DataEditor extends React.Component {
         {
           activeComicItemType == 'speech' &&
           <M_DataEditorItem
-            dataEditorItemName={'Font size'}
+            dataEditorItemName={'Font'}
             changeComicItemData={this.props.changeComicItemData}
           >
             <A_Input
@@ -147,6 +154,13 @@ export default class O_DataEditor extends React.Component {
               inputType={'S'}
               paramName={ 'font_size' }
               changeComicItemData={this.props.changeComicItemData}
+            />
+            <M_ColorPicker
+              activeComicItem={ this.props.activeComicItem }
+              activeComicItemColor={ activeComicItemColor }
+
+              updateColor={this.props.updateColor}
+              tuneComicItem={ this.props.tuneComicItem }
             />
           </M_DataEditorItem>
         }

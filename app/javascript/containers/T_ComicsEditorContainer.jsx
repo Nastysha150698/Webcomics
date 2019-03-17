@@ -334,8 +334,22 @@ export default class T_ComicsEditorContainer extends React.Component {
     console.log('Layers reordered');
   }
 
+  createNewComicItem(comicItemType) {
+    switch (comicItemType) {
+      case 'figure':
+        this.createNewFigure()
+        break;
+      case 'speech':
+        this.createNewSpeech()
+        break;
+      case 'image':
 
-  createNewComicItem() {
+        break;
+      default:
+    }
+  }
+
+  createNewFigure() {
     let newComicItems = this.state.comicItems
     let newComicItem = {
       type: 'figure',
@@ -359,6 +373,8 @@ export default class T_ComicsEditorContainer extends React.Component {
 
     let comicItem = this.state.comicItems[this.state.comicItems.length - 1]
     // var _this = this
+    console.log(comicItem)
+
 
     $.ajax( {
         dataType: "json",
@@ -378,6 +394,60 @@ export default class T_ComicsEditorContainer extends React.Component {
         this.setState({
           comicItems: newComicItems
         })
+      })
+      .fail(function() {
+        console.log("error")
+      })
+      .always(function() {
+        console.log("complete")
+    })
+  }
+
+  createNewSpeech() {
+    let newComicItems = this.state.comicItems
+    let newComicItem = {
+      type: 'speech',
+      active: true,
+      comic_id: this.props.comic_id,
+      height: 50,
+      width: 300,
+      x: 300,
+      y: 300,
+      text: 'New text',
+      color: '#000000',
+      font_size: 24,
+      line_height: 36,
+      z_index: 100
+    }
+    newComicItems.push(newComicItem)
+    this.setState({
+      activeComicItem: this.state.comicItems.length - 1,
+      comicItems: newComicItems
+    })
+
+    let comicItem = this.state.comicItems[this.state.comicItems.length - 1]
+    // var _this = this
+
+    console.log(comicItem)
+
+    $.ajax( {
+        dataType: "json",
+        method: "POST",
+        url: "/comics/" + this.props.comic_id + "/speeches",
+        context: this,
+        data: {
+          comic_id: this.props.comic_id,
+          speech: comicItem
+        }
+      })
+      .done(function(data) {
+        // console.log("success: comicItem " + data.figure_id + " created")
+        //
+        // let newComicItems = this.state.comicItems
+        // newComicItems[newComicItems.length - 1]['id'] = data.figure_id
+        // this.setState({
+        //   comicItems: newComicItems
+        // })
       })
       .fail(function() {
         console.log("error")
@@ -574,6 +644,7 @@ export default class T_ComicsEditorContainer extends React.Component {
   updateColor(color) {
     let newComicItems = this.state.comicItems
     newComicItems[this.state.activeComicItem].background_color = color.hex
+    newComicItems[this.state.activeComicItem].color = color.hex
     this.setState({
       comicItems: newComicItems
       }
@@ -630,6 +701,7 @@ export default class T_ComicsEditorContainer extends React.Component {
           setCoursorPosition={ this.setCoursorPosition }
 
           createNewComicItem={this.createNewComicItem}
+          changeComicItemData={this.changeComicItemData}
         />
       </div>
     )

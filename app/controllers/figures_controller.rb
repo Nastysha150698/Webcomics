@@ -37,6 +37,8 @@ class FiguresController < ApplicationController
     @figure.comic_id = params[:comic_id]
     @figure.z_index = objects_quantity(@figure.comic) + 1
 
+    p @figure
+
     respond_to do |format|
       if @figure.save
         @comic = @figure.comic
