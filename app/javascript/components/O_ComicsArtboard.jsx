@@ -89,18 +89,35 @@ export default class O_ComicsArtbord extends React.Component {
       {text: 'Speech', function: this.props.createNewComicItem, type: 'speech'}
     ]
 
+    let buttonStyles = {
+      position: 'fixed',
+      right: '20px',
+      top: '20px'
+    }
+
     return(
       <div className="O_ComicsArtbord"
         onMouseMove={ this.handleMouseMove }
         onMouseUp={ this.handleMouseUp}
         onClick={ this.handleClick}
       >
-        <div id="O_ComicsArtbordZone">
+        {this.props.sidebarOn &&
           <A_DropdownButton
             color={"#292c3f"}
             text={ "Add" }
             data={ data }
           />
+        }
+        <A_Button
+          content={'Show'}
+          backgroundColor={'#232537'}
+          color={'white'}
+          width={'50px'}
+          height={'50px'}
+          styles={ buttonStyles }
+          function={this.props.hideSidebar}
+        />
+        <div id="O_ComicsArtbordZone">
           { elements }
         </div>
       </div>

@@ -57,7 +57,6 @@ export default class M_Image extends React.Component {
         className="M_Image"
         style={ styles }
       >
-        { this.props.comicItem.id }<br/>
         { this.props.comicItem['active'] &&
           <A_ResizeHandlers
             setResizingComicItem={this.props.setResizingComicItem}

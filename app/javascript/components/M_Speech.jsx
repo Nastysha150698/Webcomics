@@ -83,7 +83,6 @@ export default class M_Speech extends React.Component {
         className="M_Speech"
         style={ styles }
       >
-        { this.props.comicItem.id }<br/>
         <textarea
           type="text"
           value={this.state.text}

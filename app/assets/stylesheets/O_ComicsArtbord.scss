@@ -1,8 +1,11 @@
 .O_ComicsArtbord {
-  position: fixed;
-  top: 0;
-  left: 240px;
-  width: calc(100% - 240px);
+  // position: fixed;
+  position: relative;
+  // top: 0;
+  // left: 240px;
+  // width: calc(100% - 240px);
+  flex-grow: 1;
   height: 100%;
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }

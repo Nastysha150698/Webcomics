@@ -31,6 +31,8 @@ export default class T_ComicsEditorContainer extends React.Component {
     this.state = {
       comicItems: comicItems,
 
+      sidebarOn: true,
+
       draggingComicItem: 0,
       resizingComicItem: 0,
       activeComicItem: null,
@@ -58,38 +60,41 @@ export default class T_ComicsEditorContainer extends React.Component {
       'updateColor',
       'changeComicItemData',
       'tuneComicItem',
-      'updateImage'
+      'updateImage',
+      'hideSidebar'
     )
   }
 
   setDraggingComicItem(comicsItemIndex) {
-    if (comicsItemIndex != 0) {
-      let newComicItems = this.state.comicItems
-      this.state.comicItems.map((comicItem, i) => {
-        if (i == comicsItemIndex) {
-          newComicItems[i]['active'] = true
-        } else {
-          if (newComicItems[i]['active']) {
-            this.tuneComicItem(i)
+    if (this.state.sidebarOn) {
+      if (comicsItemIndex != 0) {
+        let newComicItems = this.state.comicItems
+        this.state.comicItems.map((comicItem, i) => {
+          if (i == comicsItemIndex) {
+            newComicItems[i]['active'] = true
+          } else {
+            if (newComicItems[i]['active']) {
+              this.tuneComicItem(i)
+            }
+            newComicItems[i]['active'] = false
           }
-          newComicItems[i]['active'] = false
-        }
-      })
+        })
 
-      this.setState({
-        draggingComicItem: comicsItemIndex,
-        activeComicItem: comicsItemIndex,
-        clickX: event.pageX - $('#O_ComicsArtbordZone').offset().left - this.state.comicItems[comicsItemIndex]['x'],
-        clickY: event.pageY - $('#O_ComicsArtbordZone').offset().top - this.state.comicItems[comicsItemIndex]['y'],
-        comicItems: newComicItems
-      })
+        this.setState({
+          draggingComicItem: comicsItemIndex,
+          activeComicItem: comicsItemIndex,
+          clickX: event.pageX - $('#O_ComicsArtbordZone').offset().left - this.state.comicItems[comicsItemIndex]['x'],
+          clickY: event.pageY - $('#O_ComicsArtbordZone').offset().top - this.state.comicItems[comicsItemIndex]['y'],
+          comicItems: newComicItems
+        })
 
-    } else {
-      this.tuneComicItem(this.state.activeComicItem)
+      } else {
+        this.tuneComicItem(this.state.activeComicItem)
 
-      this.setState({
-        draggingComicItem: 0
-      })
+        this.setState({
+          draggingComicItem: 0
+        })
+      }
     }
   }
 
@@ -657,15 +662,17 @@ export default class T_ComicsEditorContainer extends React.Component {
   }
 
   changeComicItemData(paramName, paramValue) {
-    let newComicItems = this.state.comicItems
-    // console.log(newComicItems[this.state.activeComicItem][paramName])
-    newComicItems[this.state.activeComicItem][paramName] = paramValue
-    this.setState({
-      comicItems: newComicItems
-      }
-    )
-    this.tuneComicItem(this.state.activeComicItem)
-    console.log('changeComicItemData: [', paramName, ':', paramValue, ']');
+    if (this.state.sidebarOn) {
+      let newComicItems = this.state.comicItems
+      // console.log(newComicItems[this.state.activeComicItem][paramName])
+      newComicItems[this.state.activeComicItem][paramName] = paramValue
+      this.setState({
+        comicItems: newComicItems
+        }
+      )
+      this.tuneComicItem(this.state.activeComicItem)
+      console.log('changeComicItemData: [', paramName, ':', paramValue, ']');
+    }
   }
 
   updateImage(image) {
@@ -690,6 +697,13 @@ export default class T_ComicsEditorContainer extends React.Component {
         console.log("complete")
     })
   }
+
+  hideSidebar() {
+    this.setState({
+      sidebarOn: !this.state.sidebarOn
+    })
+  }
+
   render() {
     let comicItems = []
 
@@ -703,21 +717,23 @@ export default class T_ComicsEditorContainer extends React.Component {
         tabIndex="0"
         onKeyPress={this.handleKeyPress}
       >
-        <O_Sidebar
-          comicItems={ comicItems }
+        {this.state.sidebarOn &&
+          <O_Sidebar
+            comicItems={ comicItems }
 
-          activeComicItem={ this.state.activeComicItem }
+            activeComicItem={ this.state.activeComicItem }
 
-          setActiveComicItem={ this.setActiveComicItem }
-          reorderLayers={ this.reorderLayers }
-          updateColor={ this.updateColor }
-          updateImage={ this.updateImage }
-          tuneComicItem={ this.tuneComicItem }
-          changeComicItemData={this.changeComicItemData}
-          putComicItemUp={this.putComicItemUp}
-          putComicItemDown={this.putComicItemDown}
-          deleteComicItem={this.deleteComicItem}
-        />
+            setActiveComicItem={ this.setActiveComicItem }
+            reorderLayers={ this.reorderLayers }
+            updateColor={ this.updateColor }
+            updateImage={ this.updateImage }
+            tuneComicItem={ this.tuneComicItem }
+            changeComicItemData={this.changeComicItemData}
+            putComicItemUp={this.putComicItemUp}
+            putComicItemDown={this.putComicItemDown}
+            deleteComicItem={this.deleteComicItem}
+          />
+        }
 
         <O_ComicsArtboard
           comicItems={ comicItems }
@@ -730,6 +746,9 @@ export default class T_ComicsEditorContainer extends React.Component {
 
           createNewComicItem={this.createNewComicItem}
           changeComicItemData={this.changeComicItemData}
+
+          hideSidebar={this.hideSidebar}
+          sidebarOn={ this.state.sidebarOn }
         />
       </div>
     )
