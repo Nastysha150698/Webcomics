@@ -57,6 +57,22 @@ class ComicsOnReactController < ApplicationController
     end
   end
 
+  def updateImage
+    comic_id = params[:comic_id]
+    image_id = params[:image_id]
+    imagePic = params[:image]
+
+    comic = Comic.find(comic_id)
+    image = comic.images.find(image_id)
+
+    respond_to do |format|
+      image.update_attributes(:image => imagePic)
+      format.json { render json: {},  status: :ok }
+    end
+
+    p image
+  end
+
   def saveLayersOrder
     comic_id = params[:data][:comic_id]
     figuresIndexes = params[:data][:figuresIndexes]

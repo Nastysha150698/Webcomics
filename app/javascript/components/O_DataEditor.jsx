@@ -7,6 +7,8 @@ import M_DataEditorItem from '../components/M_DataEditorItem'
 import M_ColorPicker from '../components/M_ColorPicker'
 import A_Input from '../components/A_Input'
 import A_Button from '../components/A_Button'
+import A_UploadButton from '../components/A_UploadButton'
+
 
 export default class O_DataEditor extends React.Component {
   constructor(props, context) {
@@ -161,6 +163,17 @@ export default class O_DataEditor extends React.Component {
 
               updateColor={this.props.updateColor}
               tuneComicItem={ this.props.tuneComicItem }
+            />
+          </M_DataEditorItem>
+        }
+        {
+          activeComicItemType == 'image' &&
+          <M_DataEditorItem
+            dataEditorItemName={'Image'}
+            changeComicItemData={this.props.changeComicItemData}
+          >
+            <A_UploadButton
+              updateImage={ this.props.updateImage }
             />
           </M_DataEditorItem>
         }

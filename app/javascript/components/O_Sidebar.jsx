@@ -112,6 +112,8 @@ export default class O_Sidebar extends React.Component {
 
 
           updateColor={this.props.updateColor}
+          updateImage={ this.props.updateImage }
+          
           changeComicItemData={this.props.changeComicItemData}
           tuneComicItem={ this.props.tuneComicItem }
           putComicItemUp={this.props.putComicItemUp}

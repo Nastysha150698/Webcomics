@@ -55,7 +55,8 @@ export default class T_ComicsEditorContainer extends React.Component {
       'putComicItemUp',
       'updateColor',
       'changeComicItemData',
-      'tuneComicItem'
+      'tuneComicItem',
+      'updateImage'
     )
   }
 
@@ -663,6 +664,28 @@ export default class T_ComicsEditorContainer extends React.Component {
     console.log('changeComicItemData: [', paramName, ':', paramValue, ']');
   }
 
+  updateImage(image) {
+    console.log(image);
+    $.ajax( {
+        // dataType: "json",
+        method: "POST",
+        url: "/comics_on_react/updateImage",
+        data: {
+          comic_id: this.props.comic_id,
+          image_id: this.state.comicItems[this.state.activeComicItem].id,
+          image: image
+        }
+      })
+      .done(function() {
+        console.log("success: updateImage")
+      })
+      .fail(function() {
+        console.log("error: updateImage")
+      })
+      .always(function() {
+        console.log("complete")
+    })
+  }
   render() {
     let comicItems = []
 
@@ -684,6 +707,7 @@ export default class T_ComicsEditorContainer extends React.Component {
           setActiveComicItem={ this.setActiveComicItem }
           reorderLayers={ this.reorderLayers }
           updateColor={ this.updateColor }
+          updateImage={ this.updateImage }
           tuneComicItem={ this.tuneComicItem }
           changeComicItemData={this.changeComicItemData}
           putComicItemUp={this.putComicItemUp}

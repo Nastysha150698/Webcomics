@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   post 'comics_on_react/tuneSpeech'
   post 'comics_on_react/tuneImage'
 
+  post 'comics_on_react/updateImage'
+
   # post 'comics_on_react/create'
 
   post 'comics_on_react/destroyFigure'
