@@ -675,16 +675,24 @@ export default class T_ComicsEditorContainer extends React.Component {
     }
   }
 
-  updateImage(image) {
-    console.log(image);
+  updateImage(file) {
+    console.log(file);
+    // var formData = new FormData()
+    // formData.append('image', file)
+    // formData.append('comic_id', this.props.comic_id)
+    // formData.append('image_id', this.state.comicItems[this.state.activeComicItem].id)
+    // console.log(formData.get('image'), formData.get('comic_id'))
+
     $.ajax( {
-        // dataType: "json",
+        dataType: "json",
+        // contentType: 'false',
+        // processData: false,
         method: "POST",
         url: "/comics_on_react/updateImage",
         data: {
           comic_id: this.props.comic_id,
           image_id: this.state.comicItems[this.state.activeComicItem].id,
-          image: image
+          file: file
         }
       })
       .done(function() {

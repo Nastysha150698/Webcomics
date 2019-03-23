@@ -60,17 +60,25 @@ class ComicsOnReactController < ApplicationController
   def updateImage
     comic_id = params[:comic_id]
     image_id = params[:image_id]
-    imagePic = params[:image]
+    file = params[:file]
+
+    fileArray = file.split(',')
+
+    tempfile = Tempfile.new("fileupload")
+    tempfile.binmode
+    tempfile.write(Base64.decode64(fileArray[1]))
+    tempfile.rewind()
+
+    mime_type = Mime::Type.lookup_by_extension(File.extname('filename.jpg')[1..-1]).to_s
+    newFile = ActionDispatch::Http::UploadedFile.new(tempfile: tempfile, filename: 'filename.jpg', type: mime_type)
 
     comic = Comic.find(comic_id)
     image = comic.images.find(image_id)
 
     respond_to do |format|
-      image.update_attributes(:image => imagePic)
+      image.update_attributes(:image => newFile)
       format.json { render json: {},  status: :ok }
     end
-
-    p image
   end
 
   def saveLayersOrder
@@ -147,6 +155,10 @@ class ComicsOnReactController < ApplicationController
 
   def figure_params
     params.require(:figure).permit(:figure, :x, :y, :width, :height, :border_width, :border_radius, :border_color, :background_color, :comic_id, :frame_id, :z_index)
+  end
+
+  def image_params
+    params.require(:image).permit(:image, :x, :y, :width, :height, :comic_id, :frame_id, :z_index)
   end
 
 end

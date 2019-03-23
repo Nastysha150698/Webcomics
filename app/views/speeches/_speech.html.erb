@@ -7,7 +7,7 @@
   font_size = speech.font_size
   line_height = speech.line_height.to_s
   color = speech.color
-  font_title = speech.font.title
+  # font_title = speech.font.title
   z_index = speech.z_index.to_s
 
   position = "position: absolute;"
@@ -20,11 +20,12 @@
   line_height = "line-height: #{ line_height }px;"
   color = "color: #{ color };" if color != ""
   z_index = "z-index: #{ z_index };" if z_index != ""
-  font_title = "font-family: #{ font_title };" if font_title != ""
+  # font_title = "font-family: #{ font_title };" if font_title != ""
 
   style = [
     position, top, left, width, height, background_color,
-    font_size, color, z_index, line_height, font_title
+    font_size, color, z_index, line_height,
+    # font_title
   ].join(" ")
 %>
 
