@@ -41,8 +41,7 @@ export default class A_UploadButton extends React.Component{
       const { accept, capture, multiple } = this.props, { src, value } = this.state;
       return(
           <div>
-              <img src={src} height={80} width={80}/>
-              <button onClick={this.handleClick}>Upload</button>
+              <button className={'A_Button'} onClick={this.handleClick}>Upload</button>
               <input
                 type="file"
                 ref="input_reader"

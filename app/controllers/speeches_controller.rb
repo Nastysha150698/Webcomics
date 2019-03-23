@@ -34,7 +34,7 @@ class SpeechesController < ApplicationController
 
     respond_to do |format|
       if @speech.save
-        format.json { render json: {},  status: :ok }
+        format.json { render json: {speech_id: @speech.id},  status: :ok }
         # format.html { redirect_to @comic, notice: 'Speech was successfully created.' }
         # format.json { render :show, status: :created, location: @speech }
       else

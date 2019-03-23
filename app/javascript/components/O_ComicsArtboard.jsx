@@ -86,7 +86,8 @@ export default class O_ComicsArtbord extends React.Component {
     }
     const data = [
       {text: 'Figure', function: this.props.createNewComicItem, type: 'figure'},
-      {text: 'Speech', function: this.props.createNewComicItem, type: 'speech'}
+      {text: 'Speech', function: this.props.createNewComicItem, type: 'speech'},
+      {text: 'Image', function: this.props.createNewComicItem, type: 'image'}
     ]
 
     let buttonStyles = {

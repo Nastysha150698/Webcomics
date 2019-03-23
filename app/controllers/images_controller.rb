@@ -28,18 +28,20 @@ class ImagesController < ApplicationController
   # POST /images.json
   def create
     # @image = Image.new(image_params)
+    @comic = Comic.find(params[:comic_id])
     @image = Image.new(image_params)
     @image.comic_id = params[:comic_id]
     @image.z_index = objects_quantity(@image.comic) + 1
 
     respond_to do |format|
       if @image.save
-        @comic = @image.comic
-        format.html { redirect_to @comic, notice: 'Image was successfully created.' }
-        format.json { render :show, status: :created, location: @image }
+        format.json { render json: {image_id: @image.id},  status: :ok }
+        # @comic = @image.comic
+        # format.html { redirect_to @comic, notice: 'Image was successfully created.' }
+        # format.json { render :show, status: :created, location: @image }
       else
-        format.html { render :new }
-        format.json { render json: @image.errors, status: :unprocessable_entity }
+        # format.html { render :new }
+        # format.json { render json: @image.errors, status: :unprocessable_entity }
       end
     end
   end

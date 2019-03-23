@@ -353,7 +353,7 @@ export default class T_ComicsEditorContainer extends React.Component {
         this.createNewSpeech()
         break;
       case 'image':
-
+        this.createNewImage()
         break;
       default:
     }
@@ -451,13 +451,63 @@ export default class T_ComicsEditorContainer extends React.Component {
         }
       })
       .done(function(data) {
-        // console.log("success: comicItem " + data.figure_id + " created")
-        //
-        // let newComicItems = this.state.comicItems
-        // newComicItems[newComicItems.length - 1]['id'] = data.figure_id
-        // this.setState({
-        //   comicItems: newComicItems
-        // })
+        console.log("success: comicItem " + data.speech_id + " created")
+
+        let newComicItems = this.state.comicItems
+        newComicItems[newComicItems.length - 1]['id'] = data.speech_id
+        this.setState({
+          comicItems: newComicItems
+        })
+      })
+      .fail(function() {
+        console.log("error")
+      })
+      .always(function() {
+        console.log("complete")
+    })
+  }
+
+  createNewImage() {
+    let newComicItems = this.state.comicItems
+    let newComicItem = {
+      type: 'image',
+      active: true,
+      comic_id: this.props.comic_id,
+      image: '',
+      height: 300,
+      width: 300,
+      x: 300,
+      y: 300,
+      z_index: 100
+    }
+    newComicItems.push(newComicItem)
+    this.setState({
+      activeComicItem: this.state.comicItems.length - 1,
+      comicItems: newComicItems
+    })
+
+    let comicItem = this.state.comicItems[this.state.comicItems.length - 1]
+
+    console.log(comicItem)
+
+    $.ajax( {
+        dataType: "json",
+        method: "POST",
+        url: "/comics/" + this.props.comic_id + "/images",
+        context: this,
+        data: {
+          comic_id: this.props.comic_id,
+          image: comicItem
+        }
+      })
+      .done(function(data) {
+        console.log("success: comicItem " + data.image_id + " created")
+
+        let newComicItems = this.state.comicItems
+        newComicItems[newComicItems.length - 1]['id'] = data.image_id
+        this.setState({
+          comicItems: newComicItems
+        })
       })
       .fail(function() {
         console.log("error")
@@ -676,7 +726,6 @@ export default class T_ComicsEditorContainer extends React.Component {
   }
 
   updateImage(file) {
-    console.log(file);
     // var formData = new FormData()
     // formData.append('image', file)
     // formData.append('comic_id', this.props.comic_id)
