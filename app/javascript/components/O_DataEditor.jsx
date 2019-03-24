@@ -7,6 +7,8 @@ import M_DataEditorItem from '../components/M_DataEditorItem'
 import M_ColorPicker from '../components/M_ColorPicker'
 import A_Input from '../components/A_Input'
 import A_Button from '../components/A_Button'
+import A_UploadButton from '../components/A_UploadButton'
+
 
 export default class O_DataEditor extends React.Component {
   constructor(props, context) {
@@ -34,6 +36,22 @@ export default class O_DataEditor extends React.Component {
       activeComicItemY = this.props.comicItems[this.props.activeComicItem].y
     }
 
+    let activeComicItemType = ''
+    if (this.props.activeComicItem) {
+      activeComicItemType = this.props.comicItems[this.props.activeComicItem].type
+    }
+
+    let activeComicItemBackgroundColor = '#232537'
+    if (activeComicItemType == 'figure') {
+      activeComicItemBackgroundColor = this.props.comicItems[this.props.activeComicItem].background_color
+    }
+
+    let activeComicItemFont_size = 8
+    let activeComicItemColor = ''
+    if (activeComicItemType == 'speech') {
+      activeComicItemFont_size = this.props.comicItems[this.props.activeComicItem].font_size
+      activeComicItemColor = this.props.comicItems[this.props.activeComicItem].color
+    }
     return(
       <div
         className={'DataEditor'}
@@ -76,19 +94,6 @@ export default class O_DataEditor extends React.Component {
         </M_DataEditorItem>
 
         <M_DataEditorItem
-          dataEditorItemName={'Fill'}
-          changeComicItemData={this.props.changeComicItemData}
-        >
-          <M_ColorPicker
-            activeComicItem={ this.props.activeComicItem }
-            activeComicItemColor={ this.props.activeComicItemColor }
-
-            updateColor={this.props.updateColor}
-            tuneComicItem={ this.props.tuneComicItem }
-          />
-        </M_DataEditorItem>
-
-        <M_DataEditorItem
           dataEditorItemName={'Layer'}
           changeComicItemData={this.props.changeComicItemData}
         >
@@ -123,6 +128,55 @@ export default class O_DataEditor extends React.Component {
             function={this.props.deleteComicItem}
           />
         </M_DataEditorItem>
+
+        {
+          activeComicItemType == 'figure' &&
+          <M_DataEditorItem
+            dataEditorItemName={'Fill'}
+            changeComicItemData={this.props.changeComicItemData}
+          >
+            <M_ColorPicker
+              activeComicItem={ this.props.activeComicItem }
+              activeComicItemColor={ activeComicItemBackgroundColor }
+
+              updateColor={this.props.updateColor}
+              tuneComicItem={ this.props.tuneComicItem }
+            />
+          </M_DataEditorItem>
+        }
+
+        {
+          activeComicItemType == 'speech' &&
+          <M_DataEditorItem
+            dataEditorItemName={'Font'}
+            changeComicItemData={this.props.changeComicItemData}
+          >
+            <A_Input
+              value={activeComicItemFont_size}
+              inputType={'S'}
+              paramName={ 'font_size' }
+              changeComicItemData={this.props.changeComicItemData}
+            />
+            <M_ColorPicker
+              activeComicItem={ this.props.activeComicItem }
+              activeComicItemColor={ activeComicItemColor }
+
+              updateColor={this.props.updateColor}
+              tuneComicItem={ this.props.tuneComicItem }
+            />
+          </M_DataEditorItem>
+        }
+        {
+          activeComicItemType == 'image' &&
+          <M_DataEditorItem
+            dataEditorItemName={'Image'}
+            changeComicItemData={this.props.changeComicItemData}
+          >
+            <A_UploadButton
+              updateImage={ this.props.updateImage }
+            />
+          </M_DataEditorItem>
+        }
       </div>
     )
   }

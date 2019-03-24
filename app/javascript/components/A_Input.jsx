@@ -14,8 +14,7 @@ export default class A_Input extends React.Component {
       this,
       'handleFocus',
       'handleBlur',
-      'handleChange',
-      'handleSubmit'
+      'handleChange'
     )
   }
 
@@ -33,16 +32,7 @@ export default class A_Input extends React.Component {
   }
 
   handleChange(event) {
-    // this.setState({
-    //   value: event.target.value
-    // })
-    // console.log('handleChange')
     this.props.changeComicItemData(this.props.paramName, Number(event.target.value))
-  }
-
-  handleSubmit(event) {
-    // event.preventDefault()
-    // this.props.changeComicItemData(this.props.paramName, Number(event.target.value))
   }
 
   render() {
@@ -68,7 +58,6 @@ export default class A_Input extends React.Component {
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
           onChange={this.handleChange}
-          onSubmit={this.handleSubmit}
         />
         <div className={'inputType'}>
           {this.props.inputType}

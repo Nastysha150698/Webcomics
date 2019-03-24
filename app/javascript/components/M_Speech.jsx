@@ -14,7 +14,10 @@ export default class M_Speech extends React.Component {
       this,
       'handleMouseDown',
       'handleMouseUp',
-      'handleClick'
+      'handleClick',
+      'handleFocus',
+      'handleBlur',
+      'handleChange'
     )
   }
 
@@ -30,6 +33,23 @@ export default class M_Speech extends React.Component {
     e.stopPropagation()
   }
 
+  handleFocus(e) {
+    e.preventDefault()
+    this.setState({
+      active: true
+    })
+  }
+
+  handleBlur() {
+    this.setState({
+      active: false
+    })
+  }
+
+  handleChange(event) {
+    this.props.changeComicItemData('text', String(event.target.value))
+  }
+
   render() {
     var focusFrame
     if (this.props.comicItem['active']) {
@@ -42,15 +62,17 @@ export default class M_Speech extends React.Component {
       left: this.props.comicItem['x'],
       width: this.props.comicItem['width'],
       height: this.props.comicItem['height'],
-
-      fontSize: this.props.comicItem.font_size,
-
       zIndex: this.props.comicItem['layer_index'],
       outline: focusFrame,
     }
 
-    if (this.props.comicItem.image) {
-      styles.backgroundImage = "url(" + this.props.comicItem.image.url + ")"
+    const textareaStyles = {
+      fontSize: this.props.comicItem.font_size,
+      color: this.props.comicItem.color
+    }
+
+    this.state = {
+      text: this.props.comicItem.text
     }
 
     return(
@@ -61,8 +83,15 @@ export default class M_Speech extends React.Component {
         className="M_Speech"
         style={ styles }
       >
-        { this.props.comicItem.id }<br/>
-        { this.props.comicItem.text }
+        <textarea
+          type="text"
+          value={this.state.text}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
+          onChange={this.handleChange}
+
+          style={ textareaStyles }
+        />
         { this.props.comicItem['active'] &&
           <A_ResizeHandlers
             setResizingComicItem={this.props.setResizingComicItem}

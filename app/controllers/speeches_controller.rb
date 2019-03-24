@@ -34,11 +34,12 @@ class SpeechesController < ApplicationController
 
     respond_to do |format|
       if @speech.save
-        format.html { redirect_to @comic, notice: 'Speech was successfully created.' }
-        format.json { render :show, status: :created, location: @speech }
+        format.json { render json: {speech_id: @speech.id},  status: :ok }
+        # format.html { redirect_to @comic, notice: 'Speech was successfully created.' }
+        # format.json { render :show, status: :created, location: @speech }
       else
-        format.html { render :new }
-        format.json { render json: @speech.errors, status: :unprocessable_entity }
+        # format.html { render :new }
+        # format.json { render json: @speech.errors, status: :unprocessable_entity }
       end
     end
   end

@@ -29,12 +29,13 @@ class ComicsOnReactController < ApplicationController
     x = params[:x]
     y = params[:y]
     text = params[:text]
+    font_size = params[:font_size]
 
     comic = Comic.find(comic_id)
     speech = comic.speeches.find(speech_id)
 
     respond_to do |format|
-      speech.update_attributes(:width => width, :height => height, :x => x, :y => y, :text => text)
+      speech.update_attributes(:width => width, :height => height, :x => x, :y => y, :text => text, :font_size => font_size)
       format.json { render json: {},  status: :ok }
     end
   end
@@ -53,6 +54,30 @@ class ComicsOnReactController < ApplicationController
     respond_to do |format|
       image.update_attributes(:width => width, :height => height, :x => x, :y => y)
       format.json { render json: {},  status: :ok }
+    end
+  end
+
+  def updateImage
+    comic_id = params[:comic_id]
+    image_id = params[:image_id]
+    file = params[:file]
+
+    fileArray = file.split(',')
+
+    tempfile = Tempfile.new("fileupload")
+    tempfile.binmode
+    tempfile.write(Base64.decode64(fileArray[1]))
+    tempfile.rewind()
+
+    mime_type = Mime::Type.lookup_by_extension(File.extname('filename.jpg')[1..-1]).to_s
+    newFile = ActionDispatch::Http::UploadedFile.new(tempfile: tempfile, filename: 'filename.jpg', type: mime_type)
+
+    comic = Comic.find(comic_id)
+    image = comic.images.find(image_id)
+
+    respond_to do |format|
+      image.update_attributes(:image => newFile)
+      format.json { render json: {image: image.image},  status: :ok }
     end
   end
 
@@ -77,7 +102,7 @@ class ComicsOnReactController < ApplicationController
         image = comic.images.find(id)
         image.update_attributes(:z_index => z_index)
       end
-      
+
       format.json { render json: {},  status: :ok }
     end
   end
@@ -92,7 +117,7 @@ class ComicsOnReactController < ApplicationController
     end
   end
 
-  def destroy
+  def destroyFigure
     comic_id = params[:comic_id]
     figure_id = params[:figure_id]
     comic = Comic.find(comic_id)
@@ -104,8 +129,36 @@ class ComicsOnReactController < ApplicationController
     end
   end
 
+  def destroySpeech
+    comic_id = params[:comic_id]
+    speech_id = params[:speech_id]
+    comic = Comic.find(comic_id)
+    speech = comic.speeches.find(speech_id)
+
+    speech.destroy
+    respond_to do |format|
+      format.json { render json: {},  status: :ok }
+    end
+  end
+
+  def destroyImage
+    comic_id = params[:comic_id]
+    image_id = params[:image_id]
+    comic = Comic.find(comic_id)
+    image = comic.images.find(image_id)
+
+    image.destroy
+    respond_to do |format|
+      format.json { render json: {},  status: :ok }
+    end
+  end
+
   def figure_params
     params.require(:figure).permit(:figure, :x, :y, :width, :height, :border_width, :border_radius, :border_color, :background_color, :comic_id, :frame_id, :z_index)
+  end
+
+  def image_params
+    params.require(:image).permit(:image, :x, :y, :width, :height, :comic_id, :frame_id, :z_index)
   end
 
 end

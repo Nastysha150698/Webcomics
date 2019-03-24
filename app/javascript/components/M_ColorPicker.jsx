@@ -86,6 +86,7 @@ export default class M_ColorPicker extends React.Component {
         { this.state.displayColorPicker ? <div style={ styles.popover }>
           <div style={ styles.cover } onClick={ this.handleClose }/>
           <SketchPicker
+            className={'SketchPicker'}
             width={ '220px' }
             color={ this.props.activeComicItemColor}
             onChange={ this.handleChange }

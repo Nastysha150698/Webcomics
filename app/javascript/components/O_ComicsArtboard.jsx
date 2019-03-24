@@ -2,6 +2,7 @@ import _ from 'lodash'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
+import $ from 'jquery'
 
 import M_Figure from '../components/M_Figure'
 import M_Image from '../components/M_Image'
@@ -20,9 +21,10 @@ export default class O_ComicsArtbord extends React.Component {
     )
   }
 
-  handleMouseMove(e) {
-    var coursorX = event.pageX
-    var coursorY = event.pageY
+  handleMouseMove() {
+    var coursorX = event.pageX - $('#O_ComicsArtbordZone').offset().left;
+    var coursorY = event.pageY - $('#O_ComicsArtbordZone').offset().top;
+
     this.props.setCoursorPosition(coursorX, coursorY)
   }
 
@@ -71,6 +73,7 @@ export default class O_ComicsArtbord extends React.Component {
             index={i}
             setDraggingComicItem={this.props.setDraggingComicItem}
             setResizingComicItem={this.props.setResizingComicItem}
+            changeComicItemData={this.props.changeComicItemData}
           />
         )
       }
@@ -81,7 +84,17 @@ export default class O_ComicsArtbord extends React.Component {
       top: '20px',
       left: '260px',
     }
-    const data = [{text: 'figure', function: this.props.createNewComicItem}]
+    const data = [
+      {text: 'Figure', function: this.props.createNewComicItem, type: 'figure'},
+      {text: 'Speech', function: this.props.createNewComicItem, type: 'speech'},
+      {text: 'Image', function: this.props.createNewComicItem, type: 'image'}
+    ]
+
+    let buttonStyles = {
+      position: 'fixed',
+      right: '20px',
+      top: '20px',
+    }
 
     return(
       <div className="O_ComicsArtbord"
@@ -89,12 +102,25 @@ export default class O_ComicsArtbord extends React.Component {
         onMouseUp={ this.handleMouseUp}
         onClick={ this.handleClick}
       >
-        <A_DropdownButton
-          color={"#292c3f"}
-          text={ "Add" }
-          data={ data }
+        {this.props.sidebarOn &&
+          <A_DropdownButton
+            color={"#292c3f"}
+            text={ "Add" }
+            data={ data }
+          />
+        }
+        <A_Button
+          content={'Show'}
+          backgroundColor={'#232537'}
+          color={'white'}
+          width={'50px'}
+          height={'50px'}
+          styles={ buttonStyles }
+          function={this.props.hideSidebar}
         />
-        { elements }
+        <div id="O_ComicsArtbordZone">
+          { elements }
+        </div>
       </div>
     )
   }

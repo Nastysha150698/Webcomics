@@ -2,14 +2,18 @@
   // position: fixed;
   // top: 20px;
   // left: 260px;
-  width: 200px;
-  height: 100px;
-  background-color: red;
+  width: 64px;
+  height: 24px;
+  background-color: #232537;
+  color: white;
   border-radius: 2px;
+  border: none;
+  z-index: 100;
   display: flex;
   justify-content: center;
   align-items: center;
   user-select: none;
+  font-size: 12px;
 
   &:hover {
     cursor: pointer;

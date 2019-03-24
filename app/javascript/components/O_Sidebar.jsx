@@ -100,10 +100,7 @@ export default class O_Sidebar extends React.Component {
     })
     elements.reverse()
 
-    let activeComicItemColor = '#232537'
-    if (this.props.activeComicItem) {
-      activeComicItemColor = this.props.comicItems[this.props.activeComicItem].background_color
-    }
+
 
     return(
       <div
@@ -112,9 +109,11 @@ export default class O_Sidebar extends React.Component {
         <O_DataEditor
           comicItems={ this.props.comicItems }
           activeComicItem={ this.props.activeComicItem }
-          activeComicItemColor={ activeComicItemColor }
+
 
           updateColor={this.props.updateColor}
+          updateImage={ this.props.updateImage }
+          
           changeComicItemData={this.props.changeComicItemData}
           tuneComicItem={ this.props.tuneComicItem }
           putComicItemUp={this.props.putComicItemUp}

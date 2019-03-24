@@ -14,7 +14,7 @@ export default class A_DropdownListItem extends React.Component {
 
   handleClick(e) {
     // e.stopPropagation()
-    this.props.function()
+    this.props.function(this.props.type)
   }
 
 

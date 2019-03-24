@@ -23,6 +23,7 @@ export default class O_Dropdown extends React.Component {
     this.props.data.map((item, i) => {
       elements.push(
         <A_DropdownListItem
+          type={ item.type }
           text={ item.text }
           function={ item.function }
           key={ i }
