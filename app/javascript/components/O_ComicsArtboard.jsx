@@ -93,7 +93,7 @@ export default class O_ComicsArtbord extends React.Component {
     let buttonStyles = {
       position: 'fixed',
       right: '20px',
-      top: '20px'
+      top: '20px',
     }
 
     return(

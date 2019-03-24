@@ -77,7 +77,7 @@ class ComicsOnReactController < ApplicationController
 
     respond_to do |format|
       image.update_attributes(:image => newFile)
-      format.json { render json: {},  status: :ok }
+      format.json { render json: {image: image.image},  status: :ok }
     end
   end
 

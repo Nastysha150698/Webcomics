@@ -734,6 +734,7 @@ export default class T_ComicsEditorContainer extends React.Component {
 
     $.ajax( {
         dataType: "json",
+        context: this,
         // contentType: 'false',
         // processData: false,
         method: "POST",
@@ -744,8 +745,16 @@ export default class T_ComicsEditorContainer extends React.Component {
           file: file
         }
       })
-      .done(function() {
-        console.log("success: updateImage")
+      .done(function(data) {
+        console.log("success: updateImage", data.image)
+
+        let newComicItems = this.state.comicItems
+        // newComicItems[this.state.activeComicItem].image = data.image
+        // var image = data.image + (new Date()).getTime()
+        newComicItems[this.state.activeComicItem].image = data.image
+        this.setState({
+          comicItems: newComicItems
+        })
       })
       .fail(function() {
         console.log("error: updateImage")
